@@ -1,0 +1,96 @@
+body{
+    background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(162,6,122,0.28895308123249297) 0%, rgba(9,9,121,0.3169642857142857) 35%, rgba(189,189,189,0.41220238095238093) 54%, rgba(0,212,255,0.25253851540616246) 100%);
+}
+#todo{
+    position:relative;
+    top:0%;
+    margin: auto;
+    backdrop-filter: blur(20px);
+    border-radius: 10px;
+    width: 65%;
+    height: 70%;
+    max-width: 1140px;
+    min-width: 500px;
+    min-height: 500px;
+    max-height: 640px;
+    left:10%;
+    padding: 7rem 6rem;
+    padding-top: 5%;
+    padding-bottom: 54%;
+    background: rgba(255, 255, 255, 0.375);
+    box-shadow: 0 0.75rem 2rem 0 rgb(0 0 0 / 10%);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.font {
+    font-size: 1.375rem;
+    line-height: 1.15rem;
+    font-weight: 650;
+    letter-spacing: -0.025em;
+    margin-bottom: 1rem;
+}
+.p {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+}
+.in{
+    background-color: rgba(255, 255, 255, 0.226);
+    border-color: #0d6dfd50; 
+}
+.in:hover{
+    background-color: rgba(255,255,255,0.226);
+    border-color: #0d6efd; 
+}
+.boton{
+    position: relative;
+    height: 50px;
+    width: 40%;
+    border: 1px solid;
+    border-radius: 6px;
+    border-color: #0d6efd;
+    background-color: rgba(255, 255, 255, 0.226);
+    border-color: #0d6dfd50; 
+}
+.boton:hover{
+    position: relative;
+    height: 50px;
+    width: 40%;
+    border-radius: 6px;
+    border: 1px solid;
+    border-color: #0d6efd;
+    background-color: rgba(255,255,255,0.226);
+    border-color: #0d6efd; 
+}
+#exampleCheck1{
+    position: relative;
+    right: 100%;
+}
+
+.is {  
+    font-size: 40px;  
+    background: -webkit-linear-gradient(left top, red, yellow);
+    background: linear-gradient(to bottom right, red, yellow);
+    -webkit-background-clip: text;  
+    -webkit-text-fill-color: transparent;
+}
+
+
+#is {  
+    font-size: 40px;  
+    background: -webkit-linear-gradient(left top, red, yellow);
+    background: linear-gradient(to bottom right, red, yellow);
+    -webkit-background-clip: text;  
+    -webkit-text-fill-color: transparent;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+#crear{
+    position: relative;
+    left: 83%;
+    font-size: 17px;
+    font-weight: bold;
+}

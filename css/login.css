@@ -1,0 +1,9 @@
+#todo{
+    position: relative;
+    top: 65%;
+    left: 25%;
+
+    background: rgb(228, 228, 228);
+    padding: 5%;
+    border-radius: 10px;
+}
