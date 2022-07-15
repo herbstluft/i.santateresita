@@ -1,0 +1,43 @@
+Usuarios que son administradores
+----------------------------------
+select datos_pers_user.nombre as Nombre, datos_pers_user.apellido_pat as Apellido_Pat, datos_pers_user.apellido_mat
+as Apellido_Mat from datos_pers_user inner join usuarios on usuarios.id_reg= datos_pers_user.id_registro 
+inner join tipo_usuario on tipo_usuario.id_tipo=usuarios.tipo_usuario where tipo_usuario.tipo='Administrador';
+
+
+Mostrar citas realizadas por doctores, incluyendo el nombre de los clientes atendidos por cita.
+---------------------------------------------------------------
+select todo.Doctor, todo.Cliente, todo.Fecha, todo.Hora from
+(select concat(datos_pers_user.nombre,datos_pers_user.apellido_pat,datos_pers_user.apellido_mat) as Doctor,
+concat(clientes_datos_personales.nombre,clientes_datos_personales.apellido_pat,clientes_datos_personales.apellido_mat) as Cliente,
+citas.fecha as Fecha, citas.hora as Hora
+
+from datos_pers_user inner join usuarios on usuarios.id_reg= datos_pers_user.id_registro 
+inner join tipo_usuario on tipo_usuario.id_tipo=usuarios.tipo_usuario inner join doctores on 
+usuarios.id_usuario=doctores.id_usuarios inner join citas on citas.id_doc=doctores.id_doc inner join clientes on
+clientes.id_client=citas.id_cliente inner join clientes_datos_personales on clientes.id_reg=clientes_datos_personales
+.id_cliente) as todo
+
+
+
+
+Mostrar citas realizadas por determinado doctor, incluyendo el nombre de los clientes atendidos por cita.
+------------------------------------------------------------------------
+select todo.Doctor, todo.Cliente, todo.Fecha, todo.Hora from
+(select concat(datos_pers_user.nombre,datos_pers_user.apellido_pat,datos_pers_user.apellido_mat) as Doctor,
+concat(clientes_datos_personales.nombre,clientes_datos_personales.apellido_pat,clientes_datos_personales.apellido_mat) as Cliente,
+citas.fecha as Fecha, citas.hora as Hora from datos_pers_user inner join usuarios on usuarios.id_reg= datos_pers_user.id_registro 
+inner join tipo_usuario on tipo_usuario.id_tipo=usuarios.tipo_usuario inner join doctores on 
+usuarios.id_usuario=doctores.id_usuarios inner join citas on citas.id_doc=doctores.id_doc inner join clientes on
+clientes.id_client=citas.id_cliente inner join clientes_datos_personales on clientes.id_reg=clientes_datos_personales
+.id_cliente) as todo where todo.Doctor='RicardoCabelloRodriguez'
+
+Mostrar los productos que compro un determinado cliente
+--------------------------------------------------------------------------------------------
+select productos.nom_producto, productos.precio from productos join detalle_orden on productos.id_producto = detalle_orden.id_producto 
+join orden on orden.id_orden = detalle_orden.id_orden 
+join clientes on orden.id_cliente = clientes.id_client join clientes_datos_personales on clientes_datos_personales.id_cliente = clientes.id_client 
+where clientes_datos_personales.nombre = 'Gema';
+
+
+
