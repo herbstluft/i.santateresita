@@ -354,11 +354,11 @@ input[type=text]:placeholder {
           <input style="border-radius:5px; width:85%; height:60px; margin:auto;"
           type="password" id="password" class="form-control  text-center" name="login" placeholder="Contraseña">
           <br>
-          
+
           <b><p>Seleccione su tipo de usuario</p></b>
           <select class="sombras" aria-label="Default select example">
-            <option class="sombras" value="1">Administrador</option>
-            <option class="sombras" value="2">Cliente</option>
+            <option class="sombras" value="1">Cliente</option>
+            <option class="sombras" value="2">Administrador</option>
             <option class="sombras" value="3">Doctor</option>
           </select>
 
