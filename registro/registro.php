@@ -103,6 +103,16 @@
         </div>
 
 
+        <br>
+
+        <form action="">
+            <input type="text" class="form-control" placeholder="Nombre de usuario" name="nom_us">
+            <input type="password" class="form-control" placeholder="Contraseña" name="us_cont">
+            <input type="password" class="form-control" placeholder="Confirmar contraseña" name="conf_cont">
+            
+
+        </form>
+
         <button class="btn btn-success" name="registrar" type="submit">Registrarme</button>
 
     </form>
@@ -110,6 +120,8 @@
 
 </div>
 </main>
+
+
 
     <script src="../bootstrap/js/bootstrap.min.js"></script>
   <script type="module" src="../bootstrap/js/background.js"></script>
@@ -130,17 +142,25 @@
             $genero=$_POST['gen'];
             $tel=$_POST['tel'];
             $rfc=$_POST['rfc'];
-            $consulta="INSERT INTO clientes_datos_personales (nombre, apellido_pat, apellido_mat, correo, edad, genero, telefono, RFC) VALUES ('$nombre', '$ap', '$am', '$correo', '$edad', '$genero', '$tel', '$rfc')";
 
-            $resultado=mysqli_query($conexion,$consulta);
+            $nom_usuario=$_POST['nom_us'];
+            $us_cont=$_POST['us_cont'];
+            $conf_cont=$_POST['conf_cont']; 
+          
+            $insert_clientes="INSERT INTO clientes (user_clien, contrasena) VALUES ('$nom_usuario',$us_cont)";
+            $insert_reg="INSERT INTO clientes_datos_personales (nombre, apellido_pat, apellido_mat, correo, edad, genero, telefono, RFC) VALUES ('$nombre', '$ap', '$am', '$correo', '$edad', '$genero', '$tel', '$rfc')";
+
+            $resultado=mysqli_query($conexion,$insert_reg,$insert_clientes);
 
             if ($resultado) {
-                ?>  
-                <br>
-                <div class="alert alert-success text-center" role="alert">
-                Usuario registrado con exito!
-              </div>
-                <?php
+                if ($us_cont==$conf_cont) {
+                  ?>  
+                   <br>
+                   <div class="alert alert-success text-center" role="alert">
+                   Usuario registrado con exito!
+                   </div>
+                <?php 
+                }
             }
             else{
                 ?> <h3 class="bad"> ¡Ups ha ocurrido un error!</h3>
