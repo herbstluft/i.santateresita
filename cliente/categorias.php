@@ -94,7 +94,7 @@
         <br><br>
         <h2 class="fw-normal">Estomacal</h2> <br>
         <p>Bloquear el ácido y otras secreciones del estómago también puede bloquear la absorción de la vitamina B-12.</p><br>
-        <p><a class="btn sombras" href="#">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" href="productos/estomacal.php">Ver productos &raquo;</a></p>
       </div>
     
       
@@ -104,7 +104,7 @@
         <br><br>
         <h2 class="fw-normal">Dolores</h2> <br>
         <p>Calman el dolor porque cortan la inflamación que lo provoca. </p><br><br>
-        <p><a class="btn sombras" href="#">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" href="">Ver productos &raquo;</a></p>
       </div>
   </div>
 
