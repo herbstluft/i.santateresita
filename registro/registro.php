@@ -18,7 +18,7 @@
 
   <nav class="navbar navbar-expand-lg barra sticky-top" >
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.php"><img src="bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
+      <a class="navbar-brand" href="index.php"><img src="../bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
       
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,9 +27,9 @@
       <div class="navbar-collapse collapse" id="navbarColor03" >
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <center>
-            <b>
+            <b> &ensp; &ensp;
           <li class="nav-item i">
-            <a class="nav-link active fonts" aria-current="page" href="index.php">Inicio</a>
+            <a class="nav-link fonts" aria-current="page" href="index.php">Inicio</a>
           </li>
           <li class="nav-item i">
             <a class="nav-link fonts" href="cliente/categorias.php">Categorias</a>
@@ -60,65 +60,84 @@
  
   
  
-  <br>
+  <br><br>
+
 
 
     <!--Contenido de la pagina-->
-  <main>
-    <div class="row row-cols-1 row-cols-md-12 text-center sombras">
+  <main class="sombras">
+  <br>
+    <center>
+      <h1>Registrarte</h1>
+      <p style="font-size: 18px;">Es rápido y fácil.</p>
+    </center>
     
     <form action="" method="post">
-        <div class="input-group mb-3 sombras">
-            <input type="text" class="form-control col-12" placeholder="Nombre" name="nom" >
-            <input type="text" class="form-control" placeholder="Apellido Paterno" name="ap">
+
+    <br>
+        <div class="input-group mb-3">
+            &ensp; &ensp; &ensp; &ensp;
+            <input type="text" class="sombras_input form-control col-4 " placeholder="Nombre" name="nom" minlength="10" maxlength="25" required > 
+            &ensp; &ensp;
+            <input type="text" class="sombras_input form-control col-4 " placeholder="Apellido Paterno" name="ap"  maxlength="20" required>
+            &ensp; &ensp; &ensp; &ensp;
         </div>
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Apellido Materno" name="am">
-            <input type="email" class="form-control" placeholder="Correo Electronico" name="corr">
+            &ensp; &ensp; &ensp; &ensp;
+            <input type="text" class="sombras_input form-control col-4" placeholder="Apellido Materno" name="am" maxlength="20"  required>
+            &ensp; &ensp;
+            <input type="email" class="sombras_input form-control col-4" placeholder="Correo Electronico" name="corr" required>
+            &ensp; &ensp; &ensp; &ensp;
         </div>
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Edad" name="edad">
-
-                    <div class="form-check">
-        <input class="form-check-input" type="radio" name="gen" value="F" id="flexRadioDefault1">
-        <label class="form-check-label" for="flexRadioDefault1">
-            Femenino
-        </label>
-        </div>
-
-        <div class="form-check">
-        <input class="form-check-input" type="radio" name="gen" id="flexRadioDefault2" value="M"checked>
-        <label class="form-check-label" for="flexRadioDefault2">
-            Masculino
-        </label>
-        </div>
-
+            &ensp; &ensp; &ensp; &ensp;
+            <input type="text" class="sombras_input form-control col-4" placeholder="Edad" name="edad" maxlength="2" required>
+            &ensp;
+            <input type="text" class="sombras_input form-control col-4" placeholder="Telefono" name="tel" minlength="10" maxlength="10">
+    
+                    <div class="col-6 " style="position:relative; left:2%; width:26%;">
+                    
+                      <input class="form-check-input" type="radio" name="gen" value="F" id="flexRadioDefault1">
+                      <label class="form-check-label" for="flexRadioDefault1">
+                          Femenino
+                      </label>
+                      <br>
+                      <input class="form-check-input" type="radio" name="gen" id="flexRadioDefault2" value="M" checked>
+                      <label class="form-check-label" for="flexRadioDefault2">
+                      Masculino
+                      </label>
+                  </div>
         </div>
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Telefono" name="tel">
-            <input type="text" class="form-control" placeholder="RFC" name="rfc">
+             &ensp; &ensp; &ensp; &ensp;
+            <input type="text" class="sombras_input form-control col-4" placeholder="RFC" name="rfc" required>
+            &ensp; &ensp; &ensp; &ensp;
         </div>
 
 
         <br>
 
-        <form action="">
-            <input type="text" class="form-control" placeholder="Nombre de usuario" name="nom_us">
-            <input type="password" class="form-control" placeholder="Contraseña" name="us_cont">
-            <input type="password" class="form-control" placeholder="Confirmar contraseña" name="conf_cont">
-            
+        <div class="input-group mb-3">
+            &ensp; &ensp; &ensp; &ensp;
+            <input type="text" class="sombras_input form-control col-4" placeholder="Nombre de usuario" name="nom_us" minlength="5" maxlength="20" required> &ensp;
+            <input type="password" class="sombras_input form-control col-4" placeholder="Contraseña" name="us_cont" required> &ensp;
+            <input type="password" class="sombras_input form-control col-4" placeholder="Confirmar contraseña" name="conf_cont">
+            &ensp; &ensp; &ensp; &ensp;
+        </div>
+        <br>
 
-        </form>
-
-        <button class="btn btn-success" name="registrar" type="submit">Registrarme</button>
+  
+        <center>
+        <button class="btn sombras registrarme" id="registrarme"name="registrar" type="submit">Registrarme</button>
+        </center>
+        
 
     </form>
 
 
-</div>
 </main>
 
 
@@ -142,33 +161,48 @@
             $genero=$_POST['gen'];
             $tel=$_POST['tel'];
             $rfc=$_POST['rfc'];
+            
 
             $nom_usuario=$_POST['nom_us'];
             $us_cont=$_POST['us_cont'];
             $conf_cont=$_POST['conf_cont']; 
-          
-            $insert_clientes="INSERT INTO clientes (user_clien, contrasena) VALUES ('$nom_usuario',$us_cont)";
-            $insert_reg="INSERT INTO clientes_datos_personales (nombre, apellido_pat, apellido_mat, correo, edad, genero, telefono, RFC) VALUES ('$nombre', '$ap', '$am', '$correo', '$edad', '$genero', '$tel', '$rfc')";
 
-            $resultado=mysqli_query($conexion,$insert_reg,$insert_clientes);
+            if ($edad>=18 && $us_cont==$conf_cont) {
+             
+                  $insert_clientes="INSERT INTO clientes (user_clien, contrasena) VALUES ('$nom_usuario','$us_cont')";
+                  $insert_reg="INSERT INTO clientes_datos_personales (nombre, apellido_pat, apellido_mat, correo, edad, genero, telefono, RFC) VALUES ('$nombre', '$ap', '$am', '$correo', '$edad', '$genero', '$tel', '$rfc')";
 
-            if ($resultado) {
-                if ($us_cont==$conf_cont) {
-                  ?>  
-                   <br>
-                   <div class="alert alert-success text-center" role="alert">
-                   Usuario registrado con exito!
-                   </div>
-                <?php 
-                }
-            }
-            else{
-                ?> <h3 class="bad"> ¡Ups ha ocurrido un error!</h3>
-                <?php
-            } 
-           
+                  $resultado=mysqli_query($conexion,$insert_reg);
+                  $resultado2=mysqli_query($conexion,$insert_clientes);
+
+                
+
+                  if ($resultado&&$resultado2) {
+                    ?>  <div class="alert alert-success" role="alert">
+                        <center> Registro completado correctamente! </center>
+                        </div>
+                    <?php
+                  } 
+                  else{
+                    ?>  <div class="alert alert-danger" role="alert">
+                        Advertencia!
+                        </div>
+                    <?php
+                  }
+          }
+          else{
+            ?>  <div class="alert alert-danger" role="alert">
+                <center> Lo sentimos usted es menor de edad o las contraseñas no coinciden </center>
+            </div>
+        <?php
+          }
+
+          }
+      
+        
             
-         }
+        
+            
 
 
    
