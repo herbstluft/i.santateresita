@@ -11,6 +11,9 @@
 
   </head>
   <body>
+
+   <!--fondo-->
+   <canvas class="orb-canvas" width="313" height="781" style="touch-action: none; cursor: inherit;"></canvas>
   <div class="container py-3">
 
 
@@ -131,7 +134,7 @@
 
   
         <center>
-        <button class="btn sombras registrarme" id="registrarme"name="registrar" type="submit">Registrarme</button>
+        <button class="btn sombras registrarme" id="registrarme" name="registrar" type="submit">Registrarme</button>
         </center>
         
 
