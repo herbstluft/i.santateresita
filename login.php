@@ -347,23 +347,24 @@ input[type=text]:placeholder {
         </div>
     
         <!-- Login Form -->
-        <form>
+        <form action="" method="post">
           
-        <input type="text" class="form-control" placeholder="Correo Electronico" aria-label="Correo Electronico">
+          
+        <input type="text" class="form-control" placeholder="Correo Electronico" aria-label="Correo Electronico" name="correo">
           <br><br>
           <input style="border-radius:5px; width:85%; height:60px; margin:auto;"
-          type="password" id="password" class="form-control  text-center" name="login" placeholder="Contraseña">
+          type="password" id="password" class="form-control  text-center" name="login" placeholder="Contraseña" name="passwd">
           <br>
 
           <b><p>Seleccione su tipo de usuario</p></b>
-          <select class="sombras" aria-label="Default select example">
-            <option class="sombras" value="1">Cliente</option>
-            <option class="sombras" value="2">Administrador</option>
-            <option class="sombras" value="3">Doctor</option>
+          <select class="sombras" aria-label="Default select example" name="select" method="post">
+            <option class="sombras" value="1" name="cliente" method="post">Cliente</option>
+            <option class="sombras" value="2" name="admin" method="post">Administrador</option>
+            <option class="sombras" value="3" name="doc" method="post">Doctor</option>
           </select>
 
           <br><br>
-          <input type="submit" class="fadeIn fourth" value="Iniciar Sesion">
+          <input type="submit" class="fadeIn fourth" value="Iniciar Sesion" name="login">
         </form>
     
         <!-- Remind Passowrd -->
@@ -371,6 +372,7 @@ input[type=text]:placeholder {
           <a class="underlineHover" href="#">Olvide Contraseña?</a>
         </div>
     
+        
         
       </div>
     </div>
@@ -383,5 +385,62 @@ input[type=text]:placeholder {
   </div>    
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <script type="module" src="bootstrap/js/background.js"></script>
+
+  
   </body>
 </html>
+<?php
+if (isset ($_POST['login']))
+{
+include('conexion.php');
+$TIPO1 = $_POST ['cliente'];
+$TIPO2 = $_POST ['admin'];
+$TIPO3 = $_POST ['doc'];
+$USER =$_POST ['correo'];
+$PASSWD = $_POST ['passwd'];
+$SELECT = $_POST ['select'];
+if ($SELECT== $TIPO1 )
+{  
+$consulta="select * from clientes WHERE user_cliente='$USER'and contrasena='$PASSWD'";
+$resultado=mysql_query($conexion, $consulta);
+$filas=mysql_num_rows($resultado);
+if($filas>0)
+{
+  header ("location:index.html");
+}
+else 
+{
+echo "Error en la autentificacion";
+}
+}
+else if($SELECT == $TIPO2)  
+{  
+$consulta="select * from usuarios where usuario='$USER' and contrasena ='$PASSWD'";
+$resultado=mysql_query($conexion, $consulta);
+$filas=mysql_num_rows($resultado);
+if ($filas>0)
+{
+header ("location:admin/index.html");
+}
+else 
+{
+  echo "Error en la autentificacion";
+}
+}
+else if($SELECT == $TIPO3)
+{
+  $consulta="select * from usuarios where usuario='$USER' and contrasena ='$PASSWD'";
+  $resultado=mysql_query($conexion, $consulta);
+  $filas=mysql_num_rows($resultado);
+  if ($filas>0)
+  {
+  header ("location:doctor/doc.html");
+  }
+  else 
+  {
+    echo "Error en la autentificacion";
+  }
+} 
+}
+
+?>
