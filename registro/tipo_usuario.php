@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -159,8 +157,6 @@ input[type=text]:focus {
 input[type=text]:placeholder {
   color: #cccccc;
 }
-
-
 
 /* ANIMATIONS */
 
@@ -334,42 +330,29 @@ input[type=text]:placeholder {
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
-    
     <div class="wrapper fadeInDown">
       <div id="formContent">
         <!-- Tabs Titles -->
     
-        <!-- Registrarme -->
+        <!-- Botones -->
         <div id="formFooter" style="border-radius: 10px 10px 0px 0px;">
-          <a class="underlineHover" href="#">Registrarme</a>
+        <b><p>Seleccione su tipo de Usuario</p></b>
+        <br>
+          <form action="login.php">
+          <input type="submit" class="fadeIn fourth" value="Administrador" name="login">
+          </form>
+          <form action="">
+          <input type="submit" class="fadeIn fourth" value="Doctor" name="doc">
+          </form>
+          <form action="">
+          <input type="submit" class="fadeIn fourth" value="Cliente" name="cliente">
+          </form>
         </div>
 
         <div class="fadeIn first">
-          <img src="https://img.icons8.com/external-kmg-design-flat-kmg-design/344/external-user-back-to-school-kmg-design-flat-kmg-design.png" id="icon" alt="User Icon" />
-        </div>
-    
-        <!-- Login Form -->
-        <form action="validar.php" method="post">
           
-          
-        <input type="text" class="form-control" placeholder="Usuario" aria-label="Usuario" name="nom_user">
-          <br><br>
-          <input style="border-radius:5px; width:85%; height:60px; margin:auto;"
-          type="password" id="password" class="form-control  text-center" placeholder="Contraseña" name="passwd">
-          <br>
-
-          <br><br>
-          <input type="submit" class="fadeIn fourth" value="Iniciar Sesion" name="login">
-        </form>
-    
-        <!-- Remind Passowrd -->
-        <div id="formFooter">
-          <a class="underlineHover" href="#">Olvide Contraseña?</a>
         </div>
-    
-        
-        
-      </div>
+        </div>
     </div>
 
 
@@ -380,7 +363,3 @@ input[type=text]:placeholder {
   </div>    
   <script src="../bootstrap/js/bootstrap.min.js"></script>
   <script type="module" src="../bootstrap/js/background.js"></script>
-
-  
-  </body>
-</html>

@@ -1,7 +1,8 @@
 <?php
 if($_POST){
-$conexion = mysqli_connect("localhost","root","","proyecto");
-
+$conexion = mysqli_connect("localhost","root","admin","proyecto2");
+$user = $_POST['nom_user'];
+$passwd = $_POST ['passwd'];
 $consulta="select * from usuarios where usuario='$user' and contrasena='$passwd'";
 $resultado=mysqli_query($conexion,$consulta);
 
