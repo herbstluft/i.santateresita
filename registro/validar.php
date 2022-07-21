@@ -1,6 +1,6 @@
 <?php
-
-$conexion = mysqli_connect("localhost","root","admin","proyecto2");
+if($_POST){
+$conexion = mysqli_connect("localhost","root","","proyecto");
 
 $consulta="select * from usuarios where usuario='$user' and contrasena='$passwd'";
 $resultado=mysqli_query($conexion,$consulta);
@@ -17,4 +17,5 @@ echo "error en la autenticacion";
 mysqli_free_result($resultado);
 mysqli_close($conexion);
 
+}
 ?>
