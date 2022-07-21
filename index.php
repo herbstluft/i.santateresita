@@ -1,3 +1,10 @@
+<?php 
+include('admin/conexion.php');
+
+$obj= new conexion();
+$productos=$obj->consultar("SELECT * FROM `productos`");
+?>
+
 
 <!doctype html>
 <html lang="en">
@@ -78,155 +85,54 @@
 
     <!--Contenido de la pagina-->
   <main>
-    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-    
+
+  
+
+
+
+  
+  <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+  <?php foreach($productos as $producto) { ?>
       <!--Card-->
-
+<div class="col">
+      <div class="sombras mb-4 rounded-3 shadow-sm">
+        <div class="sombras card-header py-3"">
+          <h4 class="my-0 fw-normal"><?php echo $producto['nom_producto']; ?></h4>
+        </div>
+        <div class="card-body">
+          <img src="admin/imagenes/<?php echo $producto['imagen'];?>" width="60%" class="card-img-top">
+        
+          <p class="br_btn"> <?php echo $producto['descripcion'];?> </p>
     
+    
+          <div class="d-grid gap-2 d-md-block">
+           
+            <button class="btn sombras br_btn" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+              </svg> &ensp; Agregar
+            </button>
+    
+    
+            <button class="btn sombras br_btn" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet-fill" viewBox="0 0 16 16">
+              <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v2h6a.5.5 0 0 1 .5.5c0 .253.08.644.306.958.207.288.557.542 1.194.542.637 0 .987-.254 1.194-.542.226-.314.306-.705.306-.958a.5.5 0 0 1 .5-.5h6v-2A1.5 1.5 0 0 0 14.5 2h-13z"/>
+              <path d="M16 6.5h-5.551a2.678 2.678 0 0 1-.443 1.042C9.613 8.088 8.963 8.5 8 8.5c-.963 0-1.613-.412-2.006-.958A2.679 2.679 0 0 1 5.551 6.5H0v6A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-6z"/>
+            </svg> &ensp; Comprar
+            </button>
       
-
-      <div class="col">
-        <div class="sombras mb-4 rounded-3 shadow-sm">
-          <div class="sombras card-header py-3"">
-            <h4 class="my-0 fw-normal">Pro</h4>
           </div>
-          <div class="card-body">
-            <img src="https://garinetiquetas.com/blog/wp-content/uploads/2020/09/152a0b4c-33d5-43c5-8128-e5290b77ed0d-1024x587.jpg" class=" card-img-top">
-          
-            <p class="br_btn"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis qui, quisquam neque consequuntur molestiae dolorum? Nihil quod exercitationem laboriosam iste ex voluptatibus, sed ea eos, ipsum itaque voluptate? Quam, accusantium!</p>
-      
-      
-            <div class="d-grid gap-2 d-md-block">
-             
-              <button class="btn sombras br_btn" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
-                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                </svg> &ensp; Agregar
-              </button>
-      
-      
-              <button class="btn sombras br_btn" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet-fill" viewBox="0 0 16 16">
-                <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v2h6a.5.5 0 0 1 .5.5c0 .253.08.644.306.958.207.288.557.542 1.194.542.637 0 .987-.254 1.194-.542.226-.314.306-.705.306-.958a.5.5 0 0 1 .5-.5h6v-2A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                <path d="M16 6.5h-5.551a2.678 2.678 0 0 1-.443 1.042C9.613 8.088 8.963 8.5 8 8.5c-.963 0-1.613-.412-2.006-.958A2.679 2.679 0 0 1 5.551 6.5H0v6A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-6z"/>
-              </svg> &ensp; Comprar
-              </button>
-        
-            </div>
-            <br>
-          </div>
-      </div>
-      </div>
-
-
-
-      <div class="col">
-        <div class="sombras mb-4 rounded-3 shadow-sm">
-          <div class="sombras card-header py-3"">
-            <h4 class="my-0 fw-normal">Pro</h4>
-          </div>
-          <div class="card-body">
-            <img src="https://garinetiquetas.com/blog/wp-content/uploads/2020/09/152a0b4c-33d5-43c5-8128-e5290b77ed0d-1024x587.jpg" class=" card-img-top">
-          
-            <p class="br_btn"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis qui, quisquam neque consequuntur molestiae dolorum? Nihil quod exercitationem laboriosam iste ex voluptatibus, sed ea eos, ipsum itaque voluptate? Quam, accusantium!</p>
-      
-      
-            <div class="d-grid gap-2 d-md-block">
-             
-              <button class="btn sombras br_btn" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
-                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                </svg> &ensp; Agregar
-              </button>
-      
-      
-              <button class="btn sombras br_btn" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet-fill" viewBox="0 0 16 16">
-                <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v2h6a.5.5 0 0 1 .5.5c0 .253.08.644.306.958.207.288.557.542 1.194.542.637 0 .987-.254 1.194-.542.226-.314.306-.705.306-.958a.5.5 0 0 1 .5-.5h6v-2A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                <path d="M16 6.5h-5.551a2.678 2.678 0 0 1-.443 1.042C9.613 8.088 8.963 8.5 8 8.5c-.963 0-1.613-.412-2.006-.958A2.679 2.679 0 0 1 5.551 6.5H0v6A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-6z"/>
-              </svg> &ensp; Comprar
-              </button>
-        
-            </div>
-            <br>
-          </div>
-      </div>
-      </div>
-
-
-
-      <div class="col">
-        <div class="sombras mb-4 rounded-3 shadow-sm">
-          <div class="sombras card-header py-3"">
-            <h4 class="my-0 fw-normal">Pro</h4>
-          </div>
-          <div class="card-body">
-            <img src="https://garinetiquetas.com/blog/wp-content/uploads/2020/09/152a0b4c-33d5-43c5-8128-e5290b77ed0d-1024x587.jpg" class=" card-img-top">
-          
-            <p class="br_btn"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis qui, quisquam neque consequuntur molestiae dolorum? Nihil quod exercitationem laboriosam iste ex voluptatibus, sed ea eos, ipsum itaque voluptate? Quam, accusantium!</p>
-      
-      
-            <div class="d-grid gap-2 d-md-block">
-             
-              <button class="btn sombras br_btn" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
-                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                </svg> &ensp; Agregar
-              </button>
-      
-      
-              <button class="btn sombras br_btn" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet-fill" viewBox="0 0 16 16">
-                <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v2h6a.5.5 0 0 1 .5.5c0 .253.08.644.306.958.207.288.557.542 1.194.542.637 0 .987-.254 1.194-.542.226-.314.306-.705.306-.958a.5.5 0 0 1 .5-.5h6v-2A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                <path d="M16 6.5h-5.551a2.678 2.678 0 0 1-.443 1.042C9.613 8.088 8.963 8.5 8 8.5c-.963 0-1.613-.412-2.006-.958A2.679 2.679 0 0 1 5.551 6.5H0v6A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-6z"/>
-              </svg> &ensp; Comprar
-              </button>
-        
-            </div>
-            <br>
-          </div>
-      </div>
-      </div>
-
-
-
-
-      <div class="col">
-        <div class="sombras mb-4 rounded-3 shadow-sm">
-          <div class="sombras card-header py-3"">
-            <h4 class="my-0 fw-normal">Pro</h4>
-          </div>
-          <div class="card-body">
-            <img src="https://garinetiquetas.com/blog/wp-content/uploads/2020/09/152a0b4c-33d5-43c5-8128-e5290b77ed0d-1024x587.jpg" class=" card-img-top">
-          
-            <p class="br_btn"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis qui, quisquam neque consequuntur molestiae dolorum? Nihil quod exercitationem laboriosam iste ex voluptatibus, sed ea eos, ipsum itaque voluptate? Quam, accusantium!</p>
-      
-      
-            <div class="d-grid gap-2 d-md-block">
-             
-              <button class="btn sombras br_btn" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
-                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                </svg> &ensp; Agregar
-              </button>
-      
-      
-              <button class="btn sombras br_btn" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet-fill" viewBox="0 0 16 16">
-                <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v2h6a.5.5 0 0 1 .5.5c0 .253.08.644.306.958.207.288.557.542 1.194.542.637 0 .987-.254 1.194-.542.226-.314.306-.705.306-.958a.5.5 0 0 1 .5-.5h6v-2A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                <path d="M16 6.5h-5.551a2.678 2.678 0 0 1-.443 1.042C9.613 8.088 8.963 8.5 8 8.5c-.963 0-1.613-.412-2.006-.958A2.679 2.679 0 0 1 5.551 6.5H0v6A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-6z"/>
-              </svg> &ensp; Comprar
-              </button>
-        
-            </div>
-            <br>
-          </div>
-      </div>
-      </div>
-
-      
-
+          <br>
+        </div>
+    </div>
+    </div>
+    <?php  } ?>
+    
+    
 </div>
+
+
+
 </main>
 
  
