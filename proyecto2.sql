@@ -1,6 +1,6 @@
 -- MariaDB dump 10.19  Distrib 10.4.24-MariaDB, for Win64 (AMD64)
 --
--- Host: localhost    Database: proyecto2
+-- Host: localhost    Database: proyecto
 -- ------------------------------------------------------
 -- Server version	10.4.24-MariaDB
 
@@ -49,7 +49,7 @@ CREATE TABLE `categoria` (
   `id_cat` int(11) NOT NULL AUTO_INCREMENT,
   `categoria` char(100) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id_cat`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -58,7 +58,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (1,'Dolor'),(2,'Suplementos alimenticios'),(3,'Estomacal');
+INSERT INTO `categoria` VALUES (1,'Estomacal'),(2,'Dolor'),(3,'Fiebre'),(4,'Suplementos alimenticios'),(5,'Gripa y tos'),(6,'Material de curacion'),(7,'Vitaminas y minerales'),(8,'Sueros'),(9,'Bienestar sexual'),(10,'Ginecologia');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,10 +284,11 @@ CREATE TABLE `productos` (
   `formula` varchar(600) CHARACTER SET utf8 DEFAULT NULL,
   `id_cat` int(11) DEFAULT NULL,
   `descripcion` varchar(500) DEFAULT NULL,
+  `imagen` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id_producto`),
   KEY `fk_cat` (`id_cat`),
   CONSTRAINT `fk_cat` FOREIGN KEY (`id_cat`) REFERENCES `categoria` (`id_cat`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -296,7 +297,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'Gomitas tropical punch',250,'2022-02-02','Carbonato de calcio',1,'Gomitas tropicales farmaceuticos'),(2,'Pepto bismol',490,'2022-05-03','Carbonato de calcio',2,'Producto farmaceutico de la farmacia'),(3,'Aspirinas',49,'2022-07-03','Carbonato de calcio',3,'Producto farmaceutico de la farmacia');
+INSERT INTO `productos` VALUES (1,'Gomitas tropical punch',250,'2022-02-02','Carbonato de calcio',1,'Gomitas tropicales farmaceuticos','imagen.jpg'),(2,'Pepto bismol',490,'2022-05-03','Carbonato de calcio',2,'Producto farmaceutico de la farmacia','imagen.jpg'),(3,'Aspirinas',49,'2022-07-03','Carbonato de calcio',3,'Producto farmaceutico de la farmacia','imagen.jpg'),(31,'',0,'0000-00-00','',1,'','1.jpg'),(32,'',0,'0000-00-00','',1,'','1.jpg');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,4 +365,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-14 18:59:07
+-- Dump completed on 2022-07-21  1:19:53
