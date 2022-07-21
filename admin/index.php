@@ -1,3 +1,48 @@
+
+<?php
+include('conexion.php');
+
+
+if($_POST){
+
+  print_r($_POST);
+  $nom=$_POST['nom'];
+  $imagen=$_FILES['imagen']['name'];
+  $precio=$_POST['precio'];
+  $fecha=$_POST['fecha_v'];
+  $formula=$_POST['formula'];
+  $categoria=$_POST['categoria'];
+  $desc=$_POST['desc'];
+
+  //sumar tiempo a imagen
+  $fecha = new DateTime();
+  
+  $imagen=$fecha->getTimestamp()."_".$_FILES['imagen']['name'];
+  /////////
+  $imagen_temporal=$_FILES['imagen']['tmp_name'];
+  move_uploaded_file($imagen_temporal,"imagenes/".$imagen);
+
+  $obj= new conexion();
+  $sql="INSERT INTO `productos` (`nom_producto`,`imagen`,`precio`,`fecha_vencimiento`,`id_cat`,`formula`,`descripcion`) VALUES ('$nom','$imagen','$precio','$fecha','$categoria','$formula','$desc')";
+  $obj->ejecutar($sql);
+}
+
+if($_GET){
+  //borrar producto
+  $obj= new conexion();
+  $sql="DELETE FROM productos WHERE `productos`.`id_producto` =".$_GET['borrar'];
+  $obj->ejecutar($sql);
+
+}
+$obj= new conexion();
+$productos=$obj->consultar("SELECT * FROM `productos`");
+
+
+
+?>
+
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -78,17 +123,20 @@
       Datos del producto
     </div>
     <div class="card-body sombras">
-      <form action="" method="post">
+
+      <form action="index.php" method="post" enctype="multipart/form-data">
         Nombre: 
-        <input class="form-control" type="text" name="nombre">
+        <input class="form-control" type="text" name="nom">
+        Imagen:
+        <input class="form-control" type="file" name="imagen">
         Precio:
         <input class="form-control" type="number" name="precio">
         Fecha Vencimiento;
-        <input class="form-control" type="date" name="nombre">
+        <input class="form-control" type="date" name="fecha_v"> 
         Formula:
         <input class="form-control" type="text" name="formula">
         Categoria:
-        <select class="form-select" aria-label="Default select example" name="selet">
+        <select class="form-select" aria-label="Default select example" name="categoria" required>
           
           <option value="1">Estomacal</option>
           <option value="2">Dolor</option>
@@ -102,38 +150,44 @@
           <option value="10">Ginecologia</option>
         </select>
         Descripcion:
-        <input class="form-control" type="text" name="descripcion">
+        <input class="form-control" type="text" name="desc">
         <br>
-        <button class="btn btn-success" type="submit" name="publicar">Publicar</button>
+        <button class="btn btn-success" type="submit" name="enviar" >Publicar</button>
 
     </form>
     </div>
     
   </div>
   
-    
-  <table class="table">
+    <br><br>
+  <table class="sombras table table-hover table-responsive">
     <thead>
       <tr>
         <th>ID</th>
         <th>Nombre</th>
+        <th>Imagen</th>
         <th>Precio</th>
         <th>Fecha Vencimiento</th>
         <th>Formula</th>
         <th>Categoria</th>
         <th>Descripcion</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
+      <?php foreach($productos as $producto) { ?>
       <tr> 
-        <td>1</td>
-        <td>coca</td>
-        <td>$223.09</td>
-        <td>22/02/02</td>
-        <td>Oxido de carbono</td>
-        <td>Ginecologia</td>
-        <td>Este es un producto</td>
+        <td> <?php echo $producto['id_producto'];?> </td>
+        <td> <?php echo $producto['nom_producto'];?> </td>
+        <td> <?php echo $producto['imagen'];?> </td>
+        <td> <?php echo $producto['precio'];?></td>
+        <td> <?php echo $producto['fecha_vencimiento'];?></td>
+        <td> <?php echo $producto['formula'];?> </td>
+        <td> <?php echo $producto['id_cat'];?></td>
+        <td> <?php echo $producto['descripcion'];?></td>
+        <td> <a class="btn btn-danger" href="?borrar=<?php echo $producto['id_producto']; ?>" >Eliminar</a> </td>
       <tr>
+      <?php  } ?>
     </tbody>
   </table>
   
@@ -148,11 +202,3 @@
 
 </body>
 </html>
-
-<?php
-
-    if ($_POST) {
-      
-    }
-
-?>
