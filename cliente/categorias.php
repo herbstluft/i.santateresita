@@ -104,7 +104,7 @@
         <br><br>
         <h2 class="fw-normal">Dolores</h2> <br>
         <p>Calman el dolor porque cortan la inflamación que lo provoca. </p><br><br>
-        <p><a class="btn sombras" href="">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" href="productos/dolores.php">Ver productos &raquo;</a></p>
       </div>
   </div>
 
@@ -115,7 +115,7 @@
         <br><br>
         <h2 class="fw-normal">Fiebre</h2> <br>
         <p>Estos medicamentos están indicados para combatir y disminuir el nivel de la temperatura corporal.<p><br>
-        <p><a class="btn sombras" href="#">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" href="productos/fiebre.php">Ver productos &raquo;</a></p>
       </div>
     
       
@@ -125,7 +125,7 @@
         <br><br>
         <h2 class="fw-normal">Suplementos Alimenticios</h2> <br>
         <p>Los suplementos alimenticios son productos destinados a cubrir, complementar o incrementar la ingesta de determinados nutrientes en la dieta.</p><br>
-        <p><a class="btn sombras" href="#">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" href="productos/suplementos.php">Ver productos &raquo;</a></p>
       </div>
   </div>
 
@@ -138,7 +138,7 @@
         <h2 class="fw-normal">Gripa y tos</h2> 
         <p>Se utilizan para reducir y aliviar los síntomas de la gripe como garganta irritada, la coriza y/o la tos.<p>
         <br>
-        <p><a class="btn sombras" href="#">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" href="productos/gripa.php">Ver productos &raquo;</a></p>
       </div>
     
       
@@ -148,7 +148,7 @@
         <br><br>
         <h2 class="fw-normal">Material de curación </h2> <br>
         <p>Suele ser desechable pues entra en contacto con bacterias y virus que le impiden ser reutilizado.</p><br>
-        <p><a class="btn sombras" href="#">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" href="productos/material.php">Ver productos &raquo;</a></p>
       </div>
   </div>
 
@@ -161,7 +161,7 @@
         <h2 class="fw-normal">Vitaminas y minerales</h2> <br>
         <p>Estimulan el funcionamiento del sistema inmunitario, y ayudan a las células y a los órganos a desempeñar sus respectivas funciones.<p>
         <br>
-        <p><a class="btn sombras" href="#">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" href="productos/vitaminas.php">Ver productos &raquo;</a></p>
       </div>
     
       
@@ -171,7 +171,7 @@
         <br><br>
         <h2 class="fw-normal">Sueros </h2> <br>
         <p>Ayudan a tratar el acné, el envejecimiento, las manchas, poros abiertos, flacidez cutánea, etc.</p><br>
-        <p><a class="btn sombras" href="#">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" href="productos/sueros.php">Ver productos &raquo;</a></p>
       </div>
   </div>
 
@@ -184,7 +184,7 @@
         <h2 class="fw-normal">Bienestar Sexual</h2> <br>
         <p>estos productos permiten proteger la zona íntima de la mujer ante cualquier fricción no deseada.<p>
         <br>
-        <p><a class="btn sombras" href="#">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" href="productos/bienestar.php">Ver productos &raquo;</a></p>
       </div>
     
       
@@ -194,7 +194,7 @@
         <br><br>
         <h2 class="fw-normal">Ginecologia</h2> <br>
         <p>Estos productos ayudan a un mejor tratamiento para la mujer en el proceso de embarazo</p><br>
-        <p><a class="btn sombras" href="#">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" href="productos/ginecologia.php">Ver productos &raquo;</a></p>
       </div>
   </div>
 
