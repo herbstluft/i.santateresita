@@ -15,9 +15,9 @@ if($_POST){
   $desc=$_POST['desc'];
 
   //sumar tiempo a imagen
-  $fecha = new DateTime();
+
   
-  $imagen=$fecha->getTimestamp()."_".$_FILES['imagen']['name'];
+  $imagen=$_FILES['imagen']['name'];
   /////////
   $imagen_temporal=$_FILES['imagen']['tmp_name'];
   move_uploaded_file($imagen_temporal,"imagenes/".$imagen);
@@ -28,11 +28,16 @@ if($_POST){
 }
 
 if($_GET){
-  //borrar producto
+  $id=$_GET['borrar'];
   $obj= new conexion();
-  $sql="DELETE FROM productos WHERE `productos`.`id_producto` =".$_GET['borrar'];
+ 
+  //borrar_imageen
+  $imagen=$obj->consultar("SELECT imagen FROM `productos` where id_producto=".$id);
+  unlink("imagenes/".$imagen[0]['imagen']);
+  //borrar producto
+  $sql="DELETE FROM productos WHERE `productos`.`id_producto` =".$id;
   $obj->ejecutar($sql);
-
+  
 }
 $obj= new conexion();
 $productos=$obj->consultar("SELECT * FROM `productos`");
@@ -118,19 +123,19 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
   <!--Contenido de la pagina-->
 <div class="container">
 
-  <div class="card">
-    <div class="card-header">
-      Datos del producto
+  <div class="sombras" style="padding:4% ;">
+    <div class="card-header ">
+      <center><h2>Datos del producto</h2></center>
     </div>
-    <div class="card-body sombras">
+    <div class="card-body ">
 
       <form action="index.php" method="post" enctype="multipart/form-data">
         Nombre: 
-        <input class="form-control" type="text" name="nom">
+        <input class="form-control" type="text" name="nom" required>
         Imagen:
-        <input class="form-control" type="file" name="imagen">
+        <input class="form-control" type="file" name="imagen" required>
         Precio:
-        <input class="form-control" type="number" name="precio">
+        <input class="form-control" type="number" name="precio" required>
         Fecha Vencimiento;
         <input class="form-control" type="date" name="fecha_v"> 
         Formula:
@@ -150,7 +155,7 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
           <option value="10">Ginecologia</option>
         </select>
         Descripcion:
-        <input class="form-control" type="text" name="desc">
+        <input class="form-control" type="text" name="desc" required>
         <br>
         <button class="btn btn-success" type="submit" name="enviar" >Publicar</button>
 
@@ -179,7 +184,12 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
       <tr> 
         <td> <?php echo $producto['id_producto'];?> </td>
         <td> <?php echo $producto['nom_producto'];?> </td>
-        <td> <?php echo $producto['imagen'];?> </td>
+
+        <td> 
+        <img src="imagenes/<?php echo $producto['imagen'];?>" width="60%">
+        </td>
+
+
         <td> <?php echo $producto['precio'];?></td>
         <td> <?php echo $producto['fecha_vencimiento'];?></td>
         <td> <?php echo $producto['formula'];?> </td>
