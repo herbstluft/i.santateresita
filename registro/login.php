@@ -291,7 +291,7 @@ input[type=text]:placeholder {
 
   <nav class="navbar navbar-expand-lg barra sticky-top" style="background-color: rgba(255, 255, 255, 0.344);" >
     <div class=" container-fluid">
-      <a class="navbar-brand" href="index.php"><img src="../bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
+      <a class="navbar-brand" href="../index.php"><img src="../bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
       
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -301,16 +301,16 @@ input[type=text]:placeholder {
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <center>
           <li class="nav-item i">
-            <a class="nav-link fonts" aria-current="page" href="index.php">Inicio</a>
+            <a class="nav-link fonts" aria-current="page" href="../index.php">Inicio</a>
           </li>
           <li class="nav-item i">
-            <a class="nav-link fonts" href="cliente/categorias.php">Categorias</a>
+            <a class="nav-link fonts" href="../cliente/categorias.php">Categorias</a>
           </li>
           <li class="nav-item i">
             <a class="nav-link fonts" href="#">Cita</a>
           </li>
           <li class="nav-item i">
-            <a class="nav-link fonts" href="#">Nosotros</a>
+            <a class="nav-link fonts" href="../cliente/nosotros.php">Nosotros</a>
           </li>
         </center> &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; &ensp; 
         </ul>
@@ -341,7 +341,7 @@ input[type=text]:placeholder {
     
         <!-- Registrarme -->
         <div id="formFooter" style="border-radius: 10px 10px 0px 0px;">
-          <a class="underlineHover" href="#">Registrarme</a>
+          <a class="underlineHover" href="registro.php">Registrarme</a>
         </div>
 
         <div class="fadeIn first">

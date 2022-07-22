@@ -88,7 +88,7 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
 
 <nav class="navbar navbar-expand-lg barra sticky-top" >
   <div class="container-fluid">
-    <a class="navbar-brand" href="../index.php"><img src="../bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
+    <a class="navbar-brand" ><img src="../bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
     
     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -114,7 +114,7 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
     </div>
   </div>
 </nav>
-
+  </div>
 
 
 <br>
@@ -155,9 +155,9 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
           <option value="10">Ginecologia</option>
         </select>
         Descripcion:
-        <input class="form-control" type="text" name="desc" required>
+        <input class="form-control" type="text" name="desc" minlength="20" maxlength="50" required>
         <br>
-        <button class="btn btn-success" type="submit" name="enviar" >Publicar</button>
+        <button class="btn sombras registrarme" type="submit" id="registrarme" name="enviar" style="font-size:25px;">Publicar</button>
 
     </form>
     </div>
@@ -190,7 +190,7 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
         </td>
 
 
-        <td> <?php echo $producto['precio'];?></td>
+        <td> <?php echo "$".$producto['precio'];?></td>
         <td> <?php echo $producto['fecha_vencimiento'];?></td>
         <td> <?php echo $producto['formula'];?> </td>
         <td> <?php echo $producto['id_cat'];?></td>

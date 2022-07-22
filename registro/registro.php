@@ -21,7 +21,7 @@
 
   <nav class="navbar navbar-expand-lg barra sticky-top" >
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.php"><img src="../bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
+      <a class="navbar-brand" href="../index.php"><img src="../bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
       
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -32,16 +32,16 @@
           <center>
             <b> &ensp; &ensp;
           <li class="nav-item i">
-            <a class="nav-link fonts" aria-current="page" href="index.php">Inicio</a>
+            <a class="nav-link fonts" aria-current="page" href="../index.php">Inicio</a>
           </li>
           <li class="nav-item i">
-            <a class="nav-link fonts" href="cliente/categorias.php">Categorias</a>
+            <a class="nav-link fonts" href="../cliente/categorias.php">Categorias</a>
           </li>
           <li class="nav-item i">
             <a class="nav-link fonts" href="#">Cita</a>
           </li>
           <li class="nav-item i">
-            <a class="nav-link fonts" href="#">Nosotros</a>
+            <a class="nav-link fonts" href="../cliente/nosotros.php">Nosotros</a>
           </li>
           </b>
         </center> &ensp; &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;
@@ -181,7 +181,7 @@
                 
 
                   if ($resultado&&$resultado2) {
-                    ?>  <div class="alert alert-success" role="alert">
+                    ?> <br> <div class="alert alert-success sombras" role="alert"> 
                         <center> Registro completado correctamente! </center>
                         </div>
                     <?php

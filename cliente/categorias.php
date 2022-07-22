@@ -49,16 +49,16 @@
         <center>
           <b>
         <li class="nav-item i">
-          <a class="nav-link active fonts" aria-current="page" href="index.php">Inicio</a>
+          <a class="nav-link fonts" aria-current="page" href="../index.php">Inicio</a>
         </li>
         <li class="nav-item i">
-          <a class="nav-link fonts" href="cliente/categorias.php">Categorias</a>
+          <a class="nav-link fonts active" href="categorias.php">Categorias</a>
         </li>
         <li class="nav-item i">
           <a class="nav-link fonts" href="#">Cita</a>
         </li>
         <li class="nav-item i">
-          <a class="nav-link fonts" href="#">Nosotros</a>
+          <a class="nav-link fonts" href="nosotros.php">Nosotros</a>
         </li>
         </b>
       </center> &ensp; &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;
@@ -71,8 +71,8 @@
           <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
         </svg>
       </a>  &ensp; &ensp;  &ensp; &ensp;  
-        <button class="btn sombras iniciar" type="submit">
-          <a class="a" href="login.php">  Iniciar Session   </a></button>
+        <button class="btn sombras iniciar" id="registrarme" type="submit">
+          <a class="a" href="../registro/login.php"  >  Iniciar Session   </a></button>
       </form>
     </div>
   </div>
@@ -94,7 +94,7 @@
         <br><br>
         <h2 class="fw-normal">Estomacal</h2> <br>
         <p>Bloquear el ácido y otras secreciones del estómago también puede bloquear la absorción de la vitamina B-12.</p><br>
-        <p><a class="btn sombras" href="productos/estomacal.php">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="productos/estomacal.php">Ver productos &raquo;</a></p>
       </div>
     
       
@@ -104,7 +104,7 @@
         <br><br>
         <h2 class="fw-normal">Dolores</h2> <br>
         <p>Calman el dolor porque cortan la inflamación que lo provoca. </p><br><br>
-        <p><a class="btn sombras" href="productos/dolores.php">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="productos/dolores.php">Ver productos &raquo;</a></p>
       </div>
   </div>
 
@@ -115,7 +115,7 @@
         <br><br>
         <h2 class="fw-normal">Fiebre</h2> <br>
         <p>Estos medicamentos están indicados para combatir y disminuir el nivel de la temperatura corporal.<p><br>
-        <p><a class="btn sombras" href="productos/fiebre.php">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="productos/fiebre.php">Ver productos &raquo;</a></p>
       </div>
     
       
@@ -125,7 +125,7 @@
         <br><br>
         <h2 class="fw-normal">Suplementos Alimenticios</h2> <br>
         <p>Los suplementos alimenticios son productos destinados a cubrir, complementar o incrementar la ingesta de determinados nutrientes en la dieta.</p><br>
-        <p><a class="btn sombras" href="productos/suplementos.php">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="productos/suplementos.php">Ver productos &raquo;</a></p>
       </div>
   </div>
 
@@ -138,7 +138,7 @@
         <h2 class="fw-normal">Gripa y tos</h2> 
         <p>Se utilizan para reducir y aliviar los síntomas de la gripe como garganta irritada, la coriza y/o la tos.<p>
         <br>
-        <p><a class="btn sombras" href="productos/gripa.php">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="productos/gripa.php">Ver productos &raquo;</a></p>
       </div>
     
       
@@ -148,7 +148,7 @@
         <br><br>
         <h2 class="fw-normal">Material de curación </h2> <br>
         <p>Suele ser desechable pues entra en contacto con bacterias y virus que le impiden ser reutilizado.</p><br>
-        <p><a class="btn sombras" href="productos/material.php">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="productos/material.php">Ver productos &raquo;</a></p>
       </div>
   </div>
 
@@ -161,7 +161,7 @@
         <h2 class="fw-normal">Vitaminas y minerales</h2> <br>
         <p>Estimulan el funcionamiento del sistema inmunitario, y ayudan a las células y a los órganos a desempeñar sus respectivas funciones.<p>
         <br>
-        <p><a class="btn sombras" href="productos/vitaminas.php">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="productos/vitaminas.php">Ver productos &raquo;</a></p>
       </div>
     
       
@@ -171,7 +171,7 @@
         <br><br>
         <h2 class="fw-normal">Sueros </h2> <br>
         <p>Ayudan a tratar el acné, el envejecimiento, las manchas, poros abiertos, flacidez cutánea, etc.</p><br>
-        <p><a class="btn sombras" href="productos/sueros.php">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="productos/sueros.php">Ver productos &raquo;</a></p>
       </div>
   </div>
 
@@ -184,7 +184,7 @@
         <h2 class="fw-normal">Bienestar Sexual</h2> <br>
         <p>estos productos permiten proteger la zona íntima de la mujer ante cualquier fricción no deseada.<p>
         <br>
-        <p><a class="btn sombras" href="productos/bienestar.php">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="productos/bienestar.php">Ver productos &raquo;</a></p>
       </div>
     
       
@@ -194,14 +194,31 @@
         <br><br>
         <h2 class="fw-normal">Ginecologia</h2> <br>
         <p>Estos productos ayudan a un mejor tratamiento para la mujer en el proceso de embarazo</p><br>
-        <p><a class="btn sombras" href="productos/ginecologia.php">Ver productos &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="productos/ginecologia.php">Ver productos &raquo;</a></p>
       </div>
   </div>
 
 
 </div>
 </div>
-  
+<!--Boton flotante -->
+<div class="conta">
+    <div class="boton">
+      <input type="checkbox" id="btn-mas">
+      <div class="redes">
+          <a href="#" class="fa fa-facebook"></a>
+          <a href="#" class="fa fa-whatsapp"></a>
+        </div>
+
+        <div class=" btn-mas">
+          <label for="btn-mas" class="fa fa-plus"></label>
+        </div>
+
+
+
+    </div>
+
+<script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
     <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>    
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script type="module" src="../bootstrap/js/background.js"></script>

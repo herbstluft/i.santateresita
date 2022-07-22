@@ -1,3 +1,10 @@
+<?php 
+include('../../admin/conexion.php');
+
+$obj= new conexion();
+$productos=$obj->consultar("select * from  productos inner JOIN categoria on productos.id_cat=categoria.id_cat WHERE categoria.categoria='Bienestar sexual';");
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -37,7 +44,7 @@
 <!--Barra de navegacion -->
 <nav class="navbar navbar-expand-lg barra sticky-top" >
   <div class="container-fluid">
-    <a class="navbar-brand" href="../index.php"><img src="../..//bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
+    <a class="navbar-brand" href="../../index.php"><img src="../..//bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
     
     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -48,16 +55,16 @@
         <center>
           <b>
         <li class="nav-item i">
-          <a class="nav-link active fonts" aria-current="page" href="index.php">Inicio</a>
+          <a class="nav-link fonts" aria-current="page" href="../../index.php">Inicio</a>
         </li>
         <li class="nav-item i">
-          <a class="nav-link fonts" href="cliente/categorias.php">Categorias</a>
+          <a class="nav-link fonts" href="../../cliente/categorias.php">Categorias</a>
         </li>
         <li class="nav-item i">
           <a class="nav-link fonts" href="#">Cita</a>
         </li>
         <li class="nav-item i">
-          <a class="nav-link fonts" href="#">Nosotros</a>
+          <a class="nav-link fonts" href="../nosotros.php">Nosotros</a>
         </li>
         </b>
       </center> &ensp; &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;
@@ -71,12 +78,12 @@
         </svg>
       </a>  &ensp; &ensp;  &ensp; &ensp;  
         <button class="btn sombras iniciar" type="submit">
-          <a class="a" href="login.php">  Iniciar Session   </a></button>
+          <a class="a" href="../../registro/login.php">  Iniciar Session   </a></button>
       </form>
     </div>
   </div>
 </nav>
-
+  </div>
 
 
 
@@ -86,13 +93,12 @@
   <!--Contenido de la pagina-->
 <div class="container">
 
-
   
-
-
+    <?php include('card_producto.php') ?>
 
 </div>
   
+<?php include('boton_flotante.php') ?>
     <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>    
     <script src="../../bootstrap/js/bootstrap.min.js"></script>
     <script type="module" src="../../bootstrap/js/background.js"></script>

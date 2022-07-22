@@ -49,16 +49,16 @@
         <center>
           <b>
         <li class="nav-item i">
-          <a class="nav-link active fonts" aria-current="page" href="index.php">Inicio</a>
+          <a class="nav-link fonts" aria-current="page" href="../index.php">Inicio</a>
         </li>
         <li class="nav-item i">
-          <a class="nav-link fonts" href="cliente/categorias.php">Categorias</a>
+          <a class="nav-link fonts" href="categorias.php">Categorias</a>
         </li>
         <li class="nav-item i">
           <a class="nav-link fonts" href="#">Cita</a>
         </li>
         <li class="nav-item i">
-          <a class="nav-link fonts" href="#">Nosotros</a>
+          <a class="nav-link active fonts" href="nosotros.php">Nosotros</a>
         </li>
         </b>
       </center> &ensp; &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;
@@ -72,7 +72,7 @@
         </svg>
       </a>  &ensp; &ensp;  &ensp; &ensp;  
         <button class="btn sombras iniciar" type="submit">
-          <a class="a" href="login.php">  Iniciar Session   </a></button>
+          <a class="a" href="../registro/login.php">  Iniciar Session   </a></button>
       </form>
     </div>
   </div>
@@ -84,7 +84,7 @@
 
   <div class="sombras">
     <br>
-    <center><h1>Nosotros</h1></center>
+    
     <br>
     
     
@@ -99,6 +99,8 @@
         </div>
 
         <div class="col-5">
+        <h1>Nosotros</h1>
+        <br>
         <p class="col -5 nosotros"> 
            Iniciamos con nuestras operaciones en 1990 en Tlahualilo, Durango. Con el mismo compromiso de hace 32 años seguimos ofreciendo un gran 
            servicio a nuestros clientes.  Contamos con un catalago de diferentes productos de marcas comerciales y propias enfocados a ayudar a la salud y bienestar de nuestros clientes.
@@ -117,8 +119,11 @@
     </div>
 
 
+
+</div>
+
     <!--Boton flotante -->
-  <div class="conta">
+    <div class="conta">
     <div class="boton">
       <input type="checkbox" id="btn-mas">
       <div class="redes">
@@ -126,7 +131,7 @@
           <a href="#" class="fa fa-whatsapp"></a>
         </div>
 
-        <div class="btn-mas">
+        <div class=" btn-mas">
           <label for="btn-mas" class="fa fa-plus"></label>
         </div>
 
@@ -134,9 +139,6 @@
 
     </div>
   </div>
-
-</div>
-  
     <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>    
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script type="module" src="../bootstrap/js/background.js"></script>

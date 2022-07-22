@@ -23,7 +23,7 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
       .fonts{
     font-size: 17px;
   }
-  
+    
     </style>
 
   </head>
@@ -58,7 +58,7 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
             <a class="nav-link fonts" href="#">Cita</a>
           </li>
           <li class="nav-item i">
-            <a class="nav-link fonts" href="#">Nosotros</a>
+            <a class="nav-link fonts" href="cliente/nosotros.php">Nosotros</a>
           </li>
           </b>
         </center> &ensp; &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;
@@ -66,18 +66,41 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
         <form class="d-flex" role="search">
           <br><br>
           
-          <a href="">
+
+
+          
+          <a href=""  data-bs-toggle="modal" data-bs-target="#modal_cart">
           <svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
             <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
           </svg>
-        </a>  &ensp; &ensp;  &ensp; &ensp;  
-          <button class="btn sombras iniciar" type="submit">
-            <a class="a" href="login.php">  Iniciar Session   </a></button>
+        </a> 
+
+           &ensp; &ensp;  &ensp; &ensp;  
+           <button class="btn sombras iniciar" id="registrarme" type="submit">
+          <a class="a" href="registro/login.php"  >  Iniciar Session   </a></button>
         </form>
       </div>
     </div>
   </nav>
  
+<!-- Modal -->
+<div class="modal fade" id="modal_cart" tabindex="-1" aria-labelledby="modal_cart" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal_cart">Modal title</h5>
+        
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Vaciar Carrito</button>
+      </div>
+    </div>
+  </div>
+</div>
   
  
   <br>
@@ -91,7 +114,7 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
 
 
   
-  <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+  <div class="row row-cols-1 row-cols-md-12 row-cols-lg-3 mb-3 text-center">
   <?php foreach($productos as $producto) { ?>
       <!--Card-->
 <div class="col">
@@ -100,26 +123,23 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
           <h4 class="my-0 fw-normal"><?php echo $producto['nom_producto']; ?></h4>
         </div>
         <div class="card-body">
-          <img src="admin/imagenes/<?php echo $producto['imagen'];?>" width="60%" class="card-img-top">
-        
+          <img src="admin/imagenes/<?php echo $producto['imagen'];?>" class="im card-img-top">
+          <br><br>
+          <h5>Descripcion</h5>
           <p class="br_btn"> <?php echo $producto['descripcion'];?> </p>
+
+        <b> Precio: </b> <?php echo "$".$producto['precio'];?> &ensp; &ensp; &ensp;  <b> Cantidad: </b> &ensp; <input class="sombras" type="number" name="cantidad" style="width: 15%;" >
     
-    
+        <br><br>
           <div class="d-grid gap-2 d-md-block">
            
-            <button class="btn sombras br_btn" type="button">
+            <button class="btn sombras br_btn" id="registrarme" type="button">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
                 <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
               </svg> &ensp; Agregar
             </button>
-    
-    
-            <button class="btn sombras br_btn" type="button">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet-fill" viewBox="0 0 16 16">
-              <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v2h6a.5.5 0 0 1 .5.5c0 .253.08.644.306.958.207.288.557.542 1.194.542.637 0 .987-.254 1.194-.542.226-.314.306-.705.306-.958a.5.5 0 0 1 .5-.5h6v-2A1.5 1.5 0 0 0 14.5 2h-13z"/>
-              <path d="M16 6.5h-5.551a2.678 2.678 0 0 1-.443 1.042C9.613 8.088 8.963 8.5 8 8.5c-.963 0-1.613-.412-2.006-.958A2.679 2.679 0 0 1 5.551 6.5H0v6A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-6z"/>
-            </svg> &ensp; Comprar
-            </button>
+  
+        
       
           </div>
           <br>
@@ -135,8 +155,8 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
 
 </main>
 
- 
-  </div>    
+<?php include('cliente/productos/boton_flotante.php') ?>
+
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <script type="module" src="bootstrap/js/background.js"></script>
   </body>

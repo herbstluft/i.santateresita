@@ -16,7 +16,7 @@ try {
     }
 }
 
-public function ejecutar($sql){
+public function ejecutar($sql){ //delete, update, insert
   $this->conexion->exec($sql);
   return $this->conexion->lastInsertId();
 }
