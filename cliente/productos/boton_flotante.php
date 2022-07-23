@@ -4,8 +4,9 @@
     <div class="boton">
       <input type="checkbox" id="btn-mas">
       <div class="redes">
-          <a href="#" class="fa fa-facebook"></a>
-          <a href="#" class="fa fa-whatsapp"></a>
+          <a href="#"><img src="https://img.icons8.com/material-outlined/25/FFFFFF/facebook-new.png"/></a>
+          <a href="#"><img src="https://img.icons8.com/material-outlined/25/FFFFFF/whatsapp--v1.png"/></a>
+          <a href="#" ><img src="https://img.icons8.com/ios-glyphs/25/FFFFFF/search--v1.png"/></a>
         </div>
 
         <div class=" btn-mas">
