@@ -22,7 +22,37 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
      
       .fonts{
     font-size: 17px;
+    color:white;
   }
+
+  .fullscreen-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+.fullscreen-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+@media (min-aspect-ratio: 16/9) {
+  .fullscreen-video {
+    width: 100%;
+    height: auto;
+  }
+}
+@media (max-aspect-ratio: 16/9) {
+  .fullscreen-video {
+    width: auto;
+    height: 100%;
+  }
+}
     
     </style>
 
@@ -102,6 +132,13 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
   </div>
 </div>
   
+<div class="fullscreen-container">
+    <video loop muted autoplay poster="dist/img/office.jpg" class="fullscreen-video">
+        <source src="https://player.vimeo.com/external/641767478.hd.mp4?s=d1e3f6e09192708d3ac42cc85979c361242f11f5&profile_id=174&oauth_token_id=1027659655" type="video/mp4">
+
+    </video>
+</div>
+
  
   <br>
 
@@ -178,6 +215,8 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
     </div>
  
   </div>    
+<!-- Fin del boton flotante -->
+
 
   <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
