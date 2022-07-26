@@ -1,18 +1,40 @@
 <?php
 include('../conexion.php');
 
+if($_GET){
+switch ($_GET['select']) {
+  case '1':
+  
+      $user = $_GET['nom_user'];
+      $passwd = $_GET ['passwd'];
+      $consulta="select * from usuarios where usuario='$user' and contrasena='$passwd'";
+      $resultado=mysqli_query($conexion,$consulta);
 
-if(isset($_GET['login']) && $_GET['admin']){
-  echo "admin";
-}
-else if(isset($_GET['login']) && $_GET['doctor']){
-  echo "doctor";
+      $filas=mysqli_num_rows($resultado);
+
+      if($filas>0)
+      {
+        header("location:../index.php");
+      } else 
+      {
+      echo "error en la autenticacion";
+      }
+  
+    break;
+  
+  case '2':
+    echo "doc";
+    break;
+
+  case '3';
+    echo "cliente";
+    
+  default:
+    # code...
+    break;
 }
 
-else if(isset($_GET['login']) && $_GET['cliente']){
-  echo "cliente";
 }
-
 
 
 ?>
@@ -380,14 +402,12 @@ input[type=text]:placeholder {
           
           <br><br>
         
-          <input type="radio" class="btn-check" name="admin" id="option1" autocomplete="off" >
-<label class="btn btn-secondary" for="option1">Admin</label>
-
-<input type="radio" class="btn-check" name="doctor" id="option2" autocomplete="off">
-<label class="btn btn-secondary" for="option2">Doctor</label>
-
-<input type="radio" class="btn-check" name="cliente" id="option4" autocomplete="off">
-<label class="btn btn-secondary" for="option4">Cliente</label>
+          <select class="form-select" aria-label="Default select example" name="select">
+          
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
 
           <input type="submit" class="fadeIn fourth" value="Iniciar Sesion" name="login">
         </form>
