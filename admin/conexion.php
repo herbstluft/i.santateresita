@@ -4,7 +4,7 @@
 class conexion{
 public $servidor="localhost";
 private $usuario="root";
-private $contrasena="";
+private $contrasena="1234";
 private $conexion;
 
 public function __construct(){

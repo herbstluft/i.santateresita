@@ -86,7 +86,7 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
 
 
   <?php
-$conexion=mysqli_connect("localhost","root","","proyecto"); 
+$conexion=mysqli_connect("localhost","root","1234","proyecto"); 
 $where="";
 
 if(isset($_GET['enviar'])){
@@ -121,7 +121,7 @@ if(isset($_GET['enviar'])){
 
 <?php
 
-$conexion=mysqli_connect("localhost","root","","proyecto");               
+$conexion=mysqli_connect("localhost","root","1234","proyecto");               
 $SQL="SELECT nom_producto,imagen,descripcion,precio,formula from productos $where";
 $dato = mysqli_query($conexion, $SQL);
 

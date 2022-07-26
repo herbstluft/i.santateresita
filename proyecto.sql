@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-07-2022 a las 19:29:55
+-- Tiempo de generación: 26-07-2022 a las 19:52:02
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -167,7 +167,6 @@ INSERT INTO `datos_pers_user` (`id_registro`, `nombre`, `apellido_pat`, `apellid
 (1, 'Samantha', 'Alcantara', 'Garcia', 'sammy@gmail.com', 20, 'F', '8712657890'),
 (2, 'Ricardo', 'Cabello', 'Rodriguez', 'rick@gmail.com', 20, 'M', '1234567008'),
 (3, 'Nicole', 'Cabello', 'Rodriguez', 'nicole@gmail.com', 22, 'F', '0987654321'),
-(4, 'Natalia', 'Cabello', 'Rodriguez', 'nataly@gmail', 19, 'F', '1234567891'),
 (5, 'Eduardo ', 'Tapia', 'Marquez', 'tapia@gmail.com', 19, 'M', '8719896677');
 
 -- --------------------------------------------------------
@@ -286,8 +285,7 @@ CREATE TABLE `tipo_usuario` (
 
 INSERT INTO `tipo_usuario` (`id_tipo`, `tipo`) VALUES
 (1, 'administrador'),
-(2, 'doctor'),
-(3, 'cliente');
+(2, 'doctor');
 
 -- --------------------------------------------------------
 
@@ -311,7 +309,6 @@ INSERT INTO `usuarios` (`id_usuario`, `usuario`, `contrasena`, `tipo_usuario`, `
 (1, 'sami', 'abc', 1, 1),
 (2, 'jose', 'abc', 2, 2),
 (3, 'fabian', 'abc', 2, 3),
-(4, 'nati', 'abc', 3, 4),
 (5, 'tapia', 'abc', 2, 5);
 
 --
