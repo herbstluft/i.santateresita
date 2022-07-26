@@ -45,8 +45,20 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
 
 
 ?>
+<?php
+if(isset($_SESSION['usuario'])){
+  echo "Hola".$_SESSION['usuario'];
+}
 
+?>
 
+<?php
+if(isset($_POST['cerrar_session'])){
+  session_destroy();
+  header("location: ../registro/login.php");
+}
+
+?>
 
 <!doctype html>
 <html lang="en">
@@ -108,8 +120,9 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
         <br><br>
         
         &ensp; &ensp;  &ensp; &ensp; &ensp; &ensp;  
-        <button class="btn sombras iniciar col-8 " type="submit" style="height: 50%; position: relative; top: 25px;">
-          <a class="a" href="login.php">  Cerrar Session   </a></button>
+        <button class="btn sombras iniciar col-8 " type="submit" style="height: 50%; position: relative; top: 25px;" name="cerrar_session">
+          <a class="a" href="../registro/login.php">  Cerrar Session   </a><?php session_abort(); ?> </button>
+          
       </form>
     </div>
   </div>

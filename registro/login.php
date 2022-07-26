@@ -14,8 +14,7 @@ switch ($_GET['select']) {
 
       if($filas>0)
       {
-        $_SESSION['usuario']=$_GET['usuario'];
-        $_SESSION['nivel']=$fila['nivel'];
+        $_SESSION['usuario']=$_GET['nom_user'];
         header("location:../index.php");
       } else 
       {
@@ -34,6 +33,7 @@ switch ($_GET['select']) {
 
     if($filas>0)
     {
+      $_SESSION['usuario']=$_GET['nom_user'];
       header("location:../admin/index.php");
     } else 
     {
@@ -51,6 +51,7 @@ switch ($_GET['select']) {
 
   if($filas>0)
   {
+    $_SESSION['usuario']=$_GET['nom_user'];
     header("location:../index.php");
   } else 
   {
@@ -430,11 +431,11 @@ input[type=text]:placeholder {
           
           <br><br>
         
-          <select class="form-select" aria-label="Default select example" name="select">
+          <select class="form-select" aria-label="Default select example" name="select" style="margin-left:5%; margin-rigth:5%;">
           
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          <option value="1">Doctor</option>
+          <option value="2">Administrador</option>
+          <option value="3">Cliente</option>
         </select>
 
           <input type="submit" class="fadeIn fourth" value="Iniciar Sesion" name="login">

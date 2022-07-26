@@ -1,9 +1,19 @@
 <?php 
+session_start();
 include('admin/conexion.php');
 
 $obj= new conexion();
 $productos=$obj->consultar("SELECT * FROM `productos`");
 ?>
+
+  
+<?php
+if(isset($_SESSION['usuario'])){
+  echo "Hola".$_SESSION['usuario'];
+}
+
+?>
+
 
 
 <!doctype html>
@@ -57,6 +67,8 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
     </style>
 
   </head>
+
+
   <body>
     <!--fondo-->
     <canvas class="orb-canvas" width="313" height="781" style="touch-action: none; cursor: inherit;"></canvas>
