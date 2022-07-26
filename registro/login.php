@@ -7,7 +7,7 @@ switch ($_GET['select']) {
   
       $user = $_GET['nom_user'];
       $passwd = $_GET ['passwd'];
-      $consulta="select * from usuarios where usuario='$user' and contrasena='$passwd'";
+      $consulta="SELECT * from usuarios INNER JOIN tipo_usuario on tipo_usuario.id_tipo=usuarios.tipo_usuario where usuarios.usuario='$user' and usuarios.contrasena='$passwd' and tipo_usuario.tipo='doctor'";
       $resultado=mysqli_query($conexion,$consulta);
 
       $filas=mysqli_num_rows($resultado);
@@ -23,11 +23,37 @@ switch ($_GET['select']) {
     break;
   
   case '2':
-    echo "doc";
+    $user = $_GET['nom_user'];
+    $passwd = $_GET ['passwd'];
+    $consulta="SELECT * from usuarios INNER JOIN tipo_usuario on tipo_usuario.id_tipo=usuarios.tipo_usuario where usuarios.usuario='$user' and usuarios.contrasena='$passwd' and tipo_usuario.tipo='administrador'";
+    $resultado=mysqli_query($conexion,$consulta);
+
+    $filas=mysqli_num_rows($resultado);
+
+    if($filas>0)
+    {
+      header("location:../admin/index.php");
+    } else 
+    {
+    echo "error en la autenticacion";
+    }
     break;
 
   case '3';
-    echo "cliente";
+  $user = $_GET['nom_user'];
+  $passwd = $_GET ['passwd'];
+  $consulta="SELECT * from clientes where clientes.user_clien='$user' and clientes.contrasena='$passwd'";
+  $resultado=mysqli_query($conexion,$consulta);
+
+  $filas=mysqli_num_rows($resultado);
+
+  if($filas>0)
+  {
+    header("location:../index.php");
+  } else 
+  {
+  echo "error en la autenticacion";
+  }
     
   default:
     # code...
