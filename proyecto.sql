@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
-<<<<<<< HEAD
--- Tiempo de generación: 26-07-2022 a las 20:22:24
-=======
--- Tiempo de generación: 26-07-2022 a las 19:52:02
->>>>>>> a92faa992b8b0aea7fb3c8ab249be61014dc93aa
+-- Tiempo de generación: 26-07-2022 a las 23:23:20
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -32,17 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `carrito` (
-  `id_carrito` int(11) NOT NULL
+  `id_carrito` int(11) NOT NULL,
+  `id_producto` int(11) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `cliente` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `carrito`
---
-
-INSERT INTO `carrito` (`id_carrito`) VALUES
-(1),
-(2),
-(3);
 
 -- --------------------------------------------------------
 
@@ -269,8 +259,7 @@ INSERT INTO `productos` (`id_producto`, `nom_producto`, `precio`, `fecha_vencimi
 (1, 'Gomitas tropical punch', 250, '2022-02-02', 'Carbonato de calcio', 1, 'Gomitas tropicales farmaceuticos', 'imagen.jpg'),
 (2, 'Pepto bismol', 490, '2022-05-03', 'Carbonato de calcio', 2, 'Producto farmaceutico de la farmacia', 'imagen.jpg'),
 (3, 'Aspirinas', 49, '2022-07-03', 'Carbonato de calcio', 3, 'Producto farmaceutico de la farmacia', 'imagen.jpg'),
-(31, '', 0, '0000-00-00', '', 1, '', '1.jpg'),
-(32, '', 0, '0000-00-00', '', 1, '', '1.jpg');
+(31, '', 0, '0000-00-00', '', 1, '', '1.jpg');
 
 -- --------------------------------------------------------
 
@@ -408,7 +397,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `carrito`
 --
 ALTER TABLE `carrito`
-  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -451,73 +440,6 @@ ALTER TABLE `doctores`
 --
 ALTER TABLE `orden`
   MODIFY `id_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `productos`
---
-ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-
---
--- AUTO_INCREMENT de la tabla `tipo_usuario`
---
-ALTER TABLE `tipo_usuario`
-  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `citas`
---
-ALTER TABLE `citas`
-  ADD CONSTRAINT `fk_citdoc` FOREIGN KEY (`id_doc`) REFERENCES `doctores` (`id_doc`),
-  ADD CONSTRAINT `fk_cituse` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_client`);
-
---
--- Filtros para la tabla `clientes`
---
-ALTER TABLE `clientes`
-  ADD CONSTRAINT `fk_cliente` FOREIGN KEY (`id_reg`) REFERENCES `clientes_datos_personales` (`id_cliente`);
-
---
--- Filtros para la tabla `detalle_orden`
---
-ALTER TABLE `detalle_orden`
-  ADD CONSTRAINT `fk_ord` FOREIGN KEY (`id_orden`) REFERENCES `orden` (`id_orden`),
-  ADD CONSTRAINT `fk_prod` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`);
-
---
--- Filtros para la tabla `doctores`
---
-ALTER TABLE `doctores`
-  ADD CONSTRAINT `fk_usu` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id_usuario`);
-
---
--- Filtros para la tabla `orden`
---
-ALTER TABLE `orden`
-  ADD CONSTRAINT `fk_clienord` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_client`);
-
---
--- Filtros para la tabla `productos`
---
-ALTER TABLE `productos`
-  ADD CONSTRAINT `fk_cat` FOREIGN KEY (`id_cat`) REFERENCES `categoria` (`id_cat`);
-
---
--- Filtros para la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD CONSTRAINT `fk_tu` FOREIGN KEY (`tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipo`),
-  ADD CONSTRAINT `fk_us` FOREIGN KEY (`id_reg`) REFERENCES `datos_pers_user` (`id_registro`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
