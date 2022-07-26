@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -338,15 +340,10 @@ input[type=text]:placeholder {
         <div id="formFooter" style="border-radius: 10px 10px 0px 0px;">
         <b><p>Seleccione su tipo de Usuario</p></b>
         <br>
-          <form action="login.php">
-          <input type="submit" class="fadeIn fourth" value="Administrador" name="login">
-          </form>
-          <form action="">
-          <input type="submit" class="fadeIn fourth" value="Doctor" name="doc">
-          </form>
-          <form action="">
-          <input type="submit" class="fadeIn fourth" value="Cliente" name="cliente">
-          </form>
+          <form action="login.php" method="post">
+          <button class="sombras" name="admin" type="submit" value="Administrador">Administrador</button>
+          <button class="sombras" name="doctor" type="submit" value="Doctor">Doctor</button>
+          <button class="sombras" name="cliente" value="Cliente">Cliente</button>
         </div>
 
         <div class="fadeIn first">

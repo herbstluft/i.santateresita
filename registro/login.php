@@ -1,4 +1,21 @@
+<?php
+include('../conexion.php');
 
+
+if(isset($_GET['login']) && $_GET['admin']){
+  echo "admin";
+}
+else if(isset($_GET['login']) && $_GET['doctor']){
+  echo "doctor";
+}
+
+else if(isset($_GET['login']) && $_GET['cliente']){
+  echo "cliente";
+}
+
+
+
+?>
 
 <!doctype html>
 <html lang="en">
@@ -281,6 +298,8 @@ input[type=text]:placeholder {
 
   </head>
   <body>
+
+  
     <!--fondo-->
     <canvas class="orb-canvas" width="313" height="781" style="touch-action: none; cursor: inherit;"></canvas>
      
@@ -349,7 +368,7 @@ input[type=text]:placeholder {
         </div>
     
         <!-- Login Form -->
-        <form action="validar.php" method="post">
+        <form action="login.php" method="get">
           
           
         <input type="text" class="form-control" placeholder="Usuario" aria-label="Usuario" name="nom_user">
@@ -358,7 +377,18 @@ input[type=text]:placeholder {
           type="password" id="password" class="form-control  text-center" placeholder="Contraseña" name="passwd">
           <br>
 
+          
           <br><br>
+        
+          <input type="radio" class="btn-check" name="admin" id="option1" autocomplete="off" >
+<label class="btn btn-secondary" for="option1">Admin</label>
+
+<input type="radio" class="btn-check" name="doctor" id="option2" autocomplete="off">
+<label class="btn btn-secondary" for="option2">Doctor</label>
+
+<input type="radio" class="btn-check" name="cliente" id="option4" autocomplete="off">
+<label class="btn btn-secondary" for="option4">Cliente</label>
+
           <input type="submit" class="fadeIn fourth" value="Iniciar Sesion" name="login">
         </form>
     
