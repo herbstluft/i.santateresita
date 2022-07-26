@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 21-07-2022 a las 20:05:30
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 26-07-2022 a las 19:29:55
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -129,7 +129,7 @@ CREATE TABLE `clientes_datos_personales` (
   `genero` char(1) DEFAULT NULL,
   `telefono` char(10) DEFAULT NULL,
   `RFC` char(10) DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `clientes_datos_personales`
@@ -157,7 +157,7 @@ CREATE TABLE `datos_pers_user` (
   `edad` int(11) DEFAULT NULL,
   `genero` char(1) DEFAULT NULL,
   `telefono` char(10) DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `datos_pers_user`
@@ -287,7 +287,7 @@ CREATE TABLE `tipo_usuario` (
 INSERT INTO `tipo_usuario` (`id_tipo`, `tipo`) VALUES
 (1, 'administrador'),
 (2, 'doctor'),
-(3, 'cajero');
+(3, 'cliente');
 
 -- --------------------------------------------------------
 
@@ -431,13 +431,13 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `clientes_datos_personales`
 --
 ALTER TABLE `clientes_datos_personales`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `datos_pers_user`
 --
 ALTER TABLE `datos_pers_user`
-  MODIFY `id_registro` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_registro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `doctores`
