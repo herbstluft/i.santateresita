@@ -14,6 +14,8 @@ switch ($_GET['select']) {
 
       if($filas>0)
       {
+        $_SESSION['usuario']=$_GET['usuario'];
+        $_SESSION['nivel']=$fila['nivel'];
         header("location:../index.php");
       } else 
       {
