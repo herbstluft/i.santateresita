@@ -15,10 +15,14 @@ switch ($_GET['select']) {
       if($filas>0)
       {
         $_SESSION['usuario']=$_GET['nom_user'];
-        header("location:../index.php");
+        session_start();
+        header("location:../doctor/index_doctor.php");
       } else 
       {
-      echo "error en la autenticacion";
+        ?> <div class="alert alert-danger text-center" role="alert">
+            Contraseña o usuario incorrecto!
+            </div>
+        <?php
       }
   
     break;
@@ -34,10 +38,14 @@ switch ($_GET['select']) {
     if($filas>0)
     {
       $_SESSION['usuario']=$_GET['nom_user'];
+      session_start();
       header("location:../admin/index.php");
     } else 
     {
-    echo "error en la autenticacion";
+      ?> <div class="alert alert-danger text-center" role="alert">
+          Contraseña o usuario incorrecto!
+          </div>
+      <?php
     }
     break;
 
@@ -55,8 +63,12 @@ switch ($_GET['select']) {
     header("location:../index.php");
   } else 
   {
-  echo "error en la autenticacion";
-  }
+    ?> <div class="alert alert-danger text-center" role="alert">
+    Contraseña o usuario incorrecto!
+    </div>
+    <?php
+}
+  break;
     
   default:
     # code...
@@ -351,9 +363,7 @@ input[type=text]:placeholder {
   <body>
 
   
-    <!--fondo-->
-    <canvas class="orb-canvas" width="313" height="781" style="touch-action: none; cursor: inherit;"></canvas>
-     
+
 <div class="container py-3">
 
 
@@ -419,7 +429,7 @@ input[type=text]:placeholder {
         </div>
     
         <!-- Login Form -->
-        <form action="login.php" method="get">
+        <form action="login.php" action="../cliente/nosotros.php" action="../cliente/categorias.php" method="get">
           
           
         <input type="text" class="form-control" placeholder="Usuario" aria-label="Usuario" name="nom_user">
@@ -429,14 +439,17 @@ input[type=text]:placeholder {
           <br>
 
           
-          <br><br>
-        
-          <select class="form-select" aria-label="Default select example" name="select" style="margin-left:5%; margin-rigth:5%;">
+          
+          <p><b>Seleccione su tipo de usuario:</b></p>
+        <center>
+          <select class="sombras" aria-label="Default select example" name="select" style="width:30%;">
           
           <option value="1">Doctor</option>
           <option value="2">Administrador</option>
           <option value="3">Cliente</option>
         </select>
+        </center>
+        <br>
 
           <input type="submit" class="fadeIn fourth" value="Iniciar Sesion" name="login">
         </form>

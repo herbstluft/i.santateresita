@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if(isset($_POST['cerrar_session'])){
+  session_destroy();
+}
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -27,8 +35,12 @@
   <body>
     
 
-    <!--fondo-->
-    <canvas class="orb-canvas" width="313" height="781" style="touch-action: none; cursor: inherit;"></canvas>
+  <div class="fullscreen-container">
+    <video loop muted autoplay poster="dist/img/office.jpg" class="fullscreen-video">
+        <source src="https://player.vimeo.com/external/641767478.hd.mp4?s=d1e3f6e09192708d3ac42cc85979c361242f11f5&profile_id=174&oauth_token_id=1027659655" type="video/mp4">
+
+    </video>
+</div>
 
 
 <div class="container py-3">
@@ -63,7 +75,7 @@
         </b>
       </center> &ensp; &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;
       </ul>
-      <form class="d-flex" role="search">
+      <form class="d-flex" method="POST" action="nosotros.php" role="search">
         <br><br>
         
         <a href="">
@@ -71,8 +83,20 @@
           <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
         </svg>
       </a>  &ensp; &ensp;  &ensp; &ensp;  
-        <button class="btn sombras iniciar" type="submit">
-          <a class="a" href="../registro/login.php">  Iniciar Session   </a></button>
+      <?php
+           if($_SESSION['usuario']){
+            ?>
+              <button class="btn sombras iniciar col-8 " type="submit" style="height: 50%; position: relative;" name="cerrar_session">
+          <a class="a" href="../registro/login.php">  Cerrar Session   </a> </button>
+            <?php
+            } 
+            else{
+              ?>
+               <button class="btn sombras iniciar" id="registrarme" type="submit">
+              <a class="a" href="../registro/login.php"  >  Iniciar Session   </a></button>
+              <?php
+            }
+            ?>
       </form>
     </div>
   </div>
