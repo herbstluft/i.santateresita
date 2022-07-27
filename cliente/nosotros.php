@@ -1,9 +1,5 @@
 <?php
 session_start();
-
-if(isset($_POST['cerrar_session'])){
-  session_destroy();
-}
 ?>
 
 <!doctype html>
@@ -86,8 +82,7 @@ if(isset($_POST['cerrar_session'])){
       <?php
            if($_SESSION['usuario']){
             ?>
-              <button class="btn sombras iniciar col-8 " type="submit" style="height: 50%; position: relative;" name="cerrar_session">
-          <a class="a" href="../registro/login.php">  Cerrar Session   </a> </button>
+         
             <?php
             } 
             else{

@@ -180,7 +180,7 @@
 
                 
 
-                  if ($resultado&&$resultado2) {
+                  if ($resultado && $resultado2) {
                     ?> <br> <div class="alert alert-success sombras" role="alert"> 
                         <center> Registro completado correctamente! </center>
                         </div>

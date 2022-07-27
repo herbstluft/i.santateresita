@@ -1,3 +1,8 @@
+<?php
+session_start();
+if($_SESSION['usuario']){ 
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -23,36 +28,32 @@
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
+      
       <div class="navbar-collapse collapse" id="navbarColor03" >
+    
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <center>
+       
+    
             <b>
           <li class="nav-item i">
-            <a class="nav-link active fonts" aria-current="page" href="index.php">Inicio</a>
+            <a class="nav-link active fonts" aria-current="page" href="../index.php">Inicio</a>
           </li>
           <li class="nav-item i">
-            <a class="nav-link fonts" href="cliente/categorias.php">Categorias</a>
+            <a class="nav-link fonts" href="../cliente/categorias.php">Categorias</a>
           </li>
           <li class="nav-item i">
-            <a class="nav-link fonts" href="#">Cita</a>
+            <a class="nav-link fonts" href="index_citas.php">Cita</a>
           </li>
           <li class="nav-item i">
-            <a class="nav-link fonts" href="#">Nosotros</a>
+            <a class="nav-link fonts" href="../cliente/nosotros.php">Nosotros</a>
           </li>
           </b>
-        </center> &ensp; &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;
+       
         </ul>
         <form class="d-flex" role="search">
           <br><br>
           
-          <a href="">
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-          </svg>
-        </a>  &ensp; &ensp;  &ensp; &ensp;  
-          <button class="btn sombras iniciar" type="submit">
-            <a class="a" href="login.php">  Iniciar Session   </a></button>
+ 
         </form>
       </div>
     </div>
@@ -123,3 +124,13 @@
   <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<?php
+}
+else{
+
+
+  header('location:../index.php');
+
+}
+?>

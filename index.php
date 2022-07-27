@@ -8,9 +8,7 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
 
 
 <?php
-if(isset($_POST['cerrar_session'])){
-  session_destroy();
-}
+session_start();
 //ocultar warnings
 error_reporting(E_ERROR | E_PARSE);
 
@@ -72,8 +70,7 @@ error_reporting(E_ERROR | E_PARSE);
 
 
   <body>
-    <!--fondo-->
-    <canvas class="orb-canvas" width="313" height="781" style="touch-action: none; cursor: inherit;"></canvas>
+
      
 <div class="container py-3">
 
@@ -99,7 +96,7 @@ error_reporting(E_ERROR | E_PARSE);
             <a class="nav-link fonts" href="cliente/categorias.php">Categorias</a>
           </li>
           <li class="nav-item i">
-            <a class="nav-link fonts" href="#">Cita</a>
+            <a class="nav-link fonts" href="citas/index_citas.php">Cita</a>
           </li>
           <li class="nav-item i">
             <a class="nav-link fonts" href="cliente/nosotros.php">Nosotros</a>
@@ -124,7 +121,7 @@ error_reporting(E_ERROR | E_PARSE);
            if(isset($_SESSION['usuario'])){
             ?>
               <button class="btn sombras iniciar col-8 " type="submit" style="height: 50%; position: relative;" name="cerrar_session">
-          <a class="a" href="registro/login.php">  Cerrar Session   </a><?php session_destroy(); ?> </button>
+          <a class="a" href="registro/logout.php">  <?php echo "Cerrar Session".$_SESSION['usuario']; ?> </a></button>
             <?php
             } 
             else{
