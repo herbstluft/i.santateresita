@@ -1,7 +1,7 @@
 
 <?php
 include('../admin/conexion.php');
-
+session_start();
 
 $obj= new conexion();
 $citas=$obj->consultar("SELECT todo.Nombre, todo.Ap_Pat, todo.Ap_Mat, todo.Correo, todo.Edad, todo.Genero, todo.Telefono, todo.RFC from 
@@ -11,6 +11,10 @@ inner JOIN clientes_datos_personales on clientes_datos_personales.id_cliente=cli
 ?>
 
 
+
+<?php
+if(isset($_SESSION['doctor'])){ 
+  ?>
 
 <!doctype html>
 <html lang="en">
@@ -41,8 +45,6 @@ inner JOIN clientes_datos_personales on clientes_datos_personales.id_cliente=cli
   <body>
     
 
-    <!--fondo-->
-    <canvas class="orb-canvas" width="313" height="781" style="touch-action: none; cursor: inherit;"></canvas>
 
 
 <div class="container py-3">
@@ -72,8 +74,14 @@ inner JOIN clientes_datos_personales on clientes_datos_personales.id_cliente=cli
         <br><br>
         
         &ensp; &ensp;  &ensp; &ensp; &ensp; &ensp;  
-        <button class="btn sombras iniciar col-8 " type="submit" style="height: 50%; position: relative; top: 25px;">
-          <a class="a" href="login.php">  Cerrar Session   </a></button>
+        <?php
+        if(isset($_SESSION['doctor'])){
+            ?>
+              <button class="btn sombras iniciar col-8 " type="submit" style="height: 50px; position: relative; top:30px" name="cerrar_session">
+          <a class="a" href="../registro/logout.php">  <?php echo "Cerrar Session" ?> </a></button>
+            <?php
+            } 
+            ?>
       </form>
     </div>
   </div>
@@ -137,3 +145,10 @@ inner JOIN clientes_datos_personales on clientes_datos_personales.id_cliente=cli
 
 </body>
 </html>
+
+<?php
+}
+else{
+  echo "no hay session de doctor";
+}
+?>

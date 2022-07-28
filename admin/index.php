@@ -1,4 +1,5 @@
 
+
 <?php
 include('conexion.php');
 session_start();
@@ -45,21 +46,14 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
 
 
 ?>
-<?php
-if(isset($_SESSION['usuario'])){
-  echo "Hola".$_SESSION['usuario'];
-}
 
-?>
+
+
 
 <?php
-if(isset($_POST['cerrar_session'])){
-  session_destroy();
-  header("location: ../registro/login.php");
-}
-
-?>
-
+if(isset($_SESSION['admin'])){
+  
+  ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -120,7 +114,7 @@ if(isset($_POST['cerrar_session'])){
         
         &ensp; &ensp;  &ensp; &ensp; &ensp; &ensp;  
         <?php
-        if(isset($_SESSION['usuario'])){
+        if(isset($_SESSION['admin'])){
             ?>
               <button class="btn sombras iniciar col-8 " type="submit" style="height: 50px; position: relative; top:30px" name="cerrar_session">
           <a class="a" href="../registro/logout.php">  <?php echo "Cerrar Session" ?> </a></button>
@@ -238,3 +232,10 @@ if(isset($_POST['cerrar_session'])){
 
 </body>
 </html>
+
+<?php
+}
+else{
+  echo "no hay session";
+}
+?>
