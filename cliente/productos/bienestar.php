@@ -73,7 +73,7 @@ $productos=$obj->consultar("select * from  productos inner JOIN categoria on pro
       <form class="d-flex" role="search">
         <br><br>
         <?php 
-        if($_SESSION['usuario']){
+        if($_SESSION['cliente']){
           ?>
         <a href="">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
@@ -84,7 +84,7 @@ $productos=$obj->consultar("select * from  productos inner JOIN categoria on pro
       ?>
       &ensp; &ensp;  &ensp; &ensp;  
       <?php
-           if(isset($_SESSION['usuario'])){
+           if(isset($_SESSION['cliente'])){
             ?>
               <button class="btn sombras iniciar col-8 " type="submit" style="height: 50%; position: relative;" name="cerrar_session">
           <a class="a" href="../../registro/logout.php">  <?php echo "Cerrar Session"?> </a></button>

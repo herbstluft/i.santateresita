@@ -76,7 +76,7 @@ session_start();
         
        &ensp; &ensp;  &ensp; &ensp;  
       <?php
-           if($_SESSION['usuario']){
+           if($_SESSION['cliente']){
             ?>
          
             <?php

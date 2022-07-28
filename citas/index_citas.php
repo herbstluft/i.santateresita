@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION['usuario']){ 
+if($_SESSION['cliente']){ 
 ?>
 
 <!doctype html>
@@ -53,7 +53,7 @@ if($_SESSION['usuario']){
       <form class="d-flex" method="POST" action="nosotros.php" role="search">
 
       <?php
-           if($_SESSION['usuario']){
+           if($_SESSION['cliente']){
             ?>
          
             <?php

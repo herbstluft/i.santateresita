@@ -52,7 +52,7 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
       &ensp; &ensp;  &ensp; &ensp;  
     <div>
     <?php 
-          if(isset($_SESSION['usuario'])){
+          if(isset($_SESSION['cliente'])){
             ?>
           <a href=""  data-bs-toggle="modal" data-bs-target="#modal_cart" >
           <svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" fill="currentColor" style="top:10px; position:relative;" class="bi bi-cart4" viewBox="0 0 16 16">
@@ -66,7 +66,7 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
 
            &ensp; 
            <?php
-           if(isset($_SESSION['usuario'])){
+           if(isset($_SESSION['cliente'])){
             ?>
             
             <?php

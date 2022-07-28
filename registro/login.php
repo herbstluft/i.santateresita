@@ -14,7 +14,7 @@ switch ($_GET['select']) {
 
       if($filas>0)
       {
-        $_SESSION['usuario']=$_GET['nom_user'];
+        $_SESSION['doctor']=$_GET['nom_user'];
         session_start();
         header("location:../doctor/index_doctor.php");
       } else 
@@ -37,7 +37,7 @@ switch ($_GET['select']) {
 
     if($filas>0)
     {
-      $_SESSION['usuario']=$_GET['nom_user'];
+      $_SESSION['admin']=$_GET['nom_user'];
       session_start();
       header("location:../admin/index.php");
     } else 
@@ -59,7 +59,7 @@ switch ($_GET['select']) {
 
   if($filas>0)
   {
-    $_SESSION['usuario']=$_GET['nom_user'];
+    $_SESSION['cliente']=$_GET['nom_user'];
     header("location:../index.php");
   } else 
   {
