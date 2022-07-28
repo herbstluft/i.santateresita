@@ -1,6 +1,6 @@
 <?php 
 include('../../admin/conexion.php');
-
+session_start();
 $obj= new conexion();
 $productos=$obj->consultar("SELECT * FROM `productos`");
 ?>
@@ -26,12 +26,11 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
   #tabla{
     min-width: 1000px;
   }    
+
     </style>
 
   </head>
   <body>
-    <!--fondo-->
-    <canvas class="orb-canvas" width="313" height="781" style="touch-action: none; cursor: inherit;"></canvas>
      
 <div class="container py-3">
 
@@ -42,36 +41,58 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
     <div class="container-fluid">
       <a class="navbar-brand" href="../../index.php"><img src="../../bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
       
-      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      
       <br><br>
       <form class="d-flex primary" role="search" style="width:100%; position:relative;">
       <!--Buscar-->
 
-      <input class="sombras light-table-filter" data-table="table_id" type="text" 
+      <input class="sombras light-table-filter " data-table="table_id" type="text" 
       placeholder="Buscar" style="width:90%; padding-left:2%;">
 
       &ensp; &ensp;  &ensp; &ensp;  
     <div>
-      <a href=""  data-bs-toggle="modal" data-bs-target="#modal_cart">
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+    <?php 
+          if(isset($_SESSION['usuario'])){
+            ?>
+          <a href=""  data-bs-toggle="modal" data-bs-target="#modal_cart" >
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" fill="currentColor" style="top:10px; position:relative;" class="bi bi-cart4" viewBox="0 0 16 16">
             <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
           </svg> 
           </a> 
-    </div>
-     &ensp; &ensp;  &ensp; &ensp;  
+          <?php
+          }
+          ?>
+   
+
+           &ensp; 
+           <?php
+           if(isset($_SESSION['usuario'])){
+            ?>
+            
+            <?php
+            } 
+            else{
+              ?>
+               <button class="btn sombras iniciar" id="registrarme" type="submit">
+              <a class="a" href="../../registro/login.php"  >  Iniciar Session   </a></button>
+              <?php
+            }
+            ?>
 
 
-           <button class="btn sombras iniciar" id="registrarme" type="submit" style="width:auto; height:50px; ">
-          <a class="a" href="../../registro/login.php" style="position:relative; top: -5px;;" >  Iniciar Session   </a></button>
-        
         </form>
       </div>
       </nav>
     </div>
  
- 
+ <!-- Fondo de video -->
+<div class="fullscreen-container">
+    <video loop muted autoplay poster="dist/img/office.jpg" class="fullscreen-video">
+        <source src="https://player.vimeo.com/external/641767478.hd.mp4?s=d1e3f6e09192708d3ac42cc85979c361242f11f5&profile_id=174&oauth_token_id=1027659655" type="video/mp4">
+
+    </video>
+</div>
+<!-- fin de video -->
 
  
   <br>
@@ -165,8 +186,7 @@ while($fila=mysqli_fetch_array($dato)){
 
 <script src="buscador.js"></script>
   <script src="../../bootstrap/js/bootstrap.min.js"></script>
-  <script type="module" src="../../bootstrap/js/background.js"></script>
-  
+
 
 </body>
 </html>

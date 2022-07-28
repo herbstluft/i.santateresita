@@ -22,42 +22,54 @@ if($_SESSION['usuario']){
   <!--Barra de navegacion -->
 
   <nav class="navbar navbar-expand-lg barra sticky-top" >
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.php"><img src="../bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
-      
-      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <div class="navbar-collapse collapse" id="navbarColor03" >
+  <div class="container-fluid">
+    <a class="navbar-brand" href="../index.php"><img src="../bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
     
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-       
-    
-            <b>
-          <li class="nav-item i">
-            <a class="nav-link active fonts" aria-current="page" href="../index.php">Inicio</a>
-          </li>
-          <li class="nav-item i">
-            <a class="nav-link fonts" href="../cliente/categorias.php">Categorias</a>
-          </li>
-          <li class="nav-item i">
-            <a class="nav-link fonts" href="index_citas.php">Cita</a>
-          </li>
-          <li class="nav-item i">
-            <a class="nav-link fonts" href="../cliente/nosotros.php">Nosotros</a>
-          </li>
-          </b>
-       
-        </ul>
-        <form class="d-flex" role="search">
-          <br><br>
-          
- 
-        </form>
-      </div>
+    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse collapse" id="navbarColor03" >
+  
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+          <b>
+          &ensp;  &ensp;
+        <li class="nav-item i">
+          <a class="nav-link fonts" aria-current="page" href="../index.php">Inicio</a>
+        </li>
+        <li class="nav-item i">
+          <a class="nav-link fonts" href="../cliente/categorias.php">Categorias</a>
+        </li>
+        <li class="nav-item i">
+          <a class="nav-link fonts" href="../citas/index_citas.php">Cita</a>
+        </li>
+        <li class="nav-item i">
+          <a class="nav-link active fonts" href="../cliente/nosotros.php">Nosotros</a>
+        </li>
+        </b>
+      &ensp; &ensp; 
+      </ul>
+      <form class="d-flex" method="POST" action="nosotros.php" role="search">
+
+      <?php
+           if($_SESSION['usuario']){
+            ?>
+         
+            <?php
+            } 
+            else{
+              ?>
+               <button class="btn sombras iniciar" id="registrarme" type="submit">
+              <a class="a" href="../registro/login.php"  >  Iniciar Session   </a></button>
+              <?php
+            }
+            ?>
+      </form>
     </div>
-  </nav>
+  </div>
+</nav>
+
  
   
  

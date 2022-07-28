@@ -63,7 +63,7 @@ session_start();
           <a class="nav-link fonts" href="categorias.php">Categorias</a>
         </li>
         <li class="nav-item i">
-          <a class="nav-link fonts" href="#">Cita</a>
+          <a class="nav-link fonts" href="../citas/index_citas.php">Cita</a>
         </li>
         <li class="nav-item i">
           <a class="nav-link active fonts" href="nosotros.php">Nosotros</a>
@@ -74,11 +74,7 @@ session_start();
       <form class="d-flex" method="POST" action="nosotros.php" role="search">
         <br><br>
         
-        <a href="">
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-          <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-        </svg>
-      </a>  &ensp; &ensp;  &ensp; &ensp;  
+       &ensp; &ensp;  &ensp; &ensp;  
       <?php
            if($_SESSION['usuario']){
             ?>
@@ -117,10 +113,10 @@ session_start();
           <img  src="../bootstrap/img/farmacianosotros.jpg" alt="" style="width:100%; border-radius: 60px 0px; position: relative;top: 5%; left: 10%;">
         </div>
 
-        <div class="col-5">
+        <div class="col-5" >
         <h1>Nosotros</h1>
         <br>
-        <p class="col -5 nosotros"> 
+        <p class="col -5 nosotros" > 
            Iniciamos con nuestras operaciones en 1990 en Tlahualilo, Durango. Con el mismo compromiso de hace 32 años seguimos ofreciendo un gran 
            servicio a nuestros clientes.  Contamos con un catalago de diferentes productos de marcas comerciales y propias enfocados a ayudar a la salud y bienestar de nuestros clientes.
         </p> 

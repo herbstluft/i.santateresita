@@ -1,7 +1,7 @@
 
 <?php
 include('conexion.php');
-
+session_start();
 
 if($_POST){
 
@@ -14,7 +14,7 @@ if($_POST){
   $categoria=$_POST['categoria'];
   $desc=$_POST['desc'];
 
-  //sumar tiempo a imagen
+
 
   
   $imagen=$_FILES['imagen']['name'];
@@ -89,8 +89,7 @@ if(isset($_POST['cerrar_session'])){
   <body>
     
 
-    <!--fondo-->
-    <canvas class="orb-canvas" width="313" height="781" style="touch-action: none; cursor: inherit;"></canvas>
+  
 
 
 <div class="container py-3">
@@ -120,15 +119,29 @@ if(isset($_POST['cerrar_session'])){
         <br><br>
         
         &ensp; &ensp;  &ensp; &ensp; &ensp; &ensp;  
-        <button class="btn sombras iniciar col-8 " type="submit" style="height: 50%; position: relative; top: 25px;" name="cerrar_session">
-          <a class="a" href="../registro/login.php">  Cerrar Session   </a><?php session_abort(); ?> </button>
+        <?php
+        if(isset($_SESSION['usuario'])){
+            ?>
+              <button class="btn sombras iniciar col-8 " type="submit" style="height: 50px; position: relative; top:30px" name="cerrar_session">
+          <a class="a" href="../registro/logout.php">  <?php echo "Cerrar Session" ?> </a></button>
+            <?php
+            } 
+            ?>
           
       </form>
     </div>
   </div>
 </nav>
   </div>
+  
+<!-- Fondo de video -->
+<div class="fullscreen-container">
+    <video loop muted autoplay poster="dist/img/office.jpg" class="fullscreen-video">
+        <source src="https://player.vimeo.com/external/641767478.hd.mp4?s=d1e3f6e09192708d3ac42cc85979c361242f11f5&profile_id=174&oauth_token_id=1027659655" type="video/mp4">
 
+    </video>
+</div>
+<!-- fin de video -->
 
 <br>
 
@@ -144,7 +157,7 @@ if(isset($_POST['cerrar_session'])){
 
       <form action="index.php" method="post" enctype="multipart/form-data">
         Nombre: 
-        <input class="form-control" type="text" name="nom" required>
+        <input class="form-control" type="text" name="nom" required><br>
         Imagen:
         <input class="form-control" type="file" name="imagen" required>
         Precio:
