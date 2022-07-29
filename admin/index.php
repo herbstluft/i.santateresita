@@ -236,6 +236,6 @@ if(isset($_SESSION['admin'])){
 <?php
 }
 else{
-  echo "no hay session";
+  header ("../error.php");
 }
 ?>
