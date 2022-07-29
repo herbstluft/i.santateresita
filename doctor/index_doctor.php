@@ -149,6 +149,6 @@ if(isset($_SESSION['doctor'])){
 <?php
 }
 else{
-  echo "no hay session de doctor";
+  header ("../error.php");
 }
 ?>
