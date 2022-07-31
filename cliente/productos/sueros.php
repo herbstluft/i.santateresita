@@ -1,4 +1,6 @@
 <?php 
+//ocultar warnings
+error_reporting(E_ERROR | E_PARSE);
 include('../../admin/conexion.php');
 session_start();
 $obj= new conexion();
@@ -32,10 +34,17 @@ $productos=$obj->consultar("select * from  productos inner JOIN categoria on pro
     
   </head>
   <body>
+          <!-- Fondo de video -->
+<div class="fullscreen-container">
+    <video loop muted autoplay poster="dist/img/office.jpg" class="fullscreen-video">
+        <source src="https://player.vimeo.com/external/641767478.hd.mp4?s=d1e3f6e09192708d3ac42cc85979c361242f11f5&profile_id=174&oauth_token_id=1027659655" type="video/mp4">
+
+    </video>
+</div>
+<!-- fin de video -->
     
 
-    <!--fondo-->
-    <canvas class="orb-canvas" width="313" height="781" style="touch-action: none; cursor: inherit;"></canvas>
+
 
 
 <div class="container py-3">
