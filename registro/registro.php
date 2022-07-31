@@ -12,8 +12,7 @@
   </head>
   <body>
 
-   <!--fondo-->
-   <canvas class="orb-canvas" width="313" height="781" style="touch-action: none; cursor: inherit;"></canvas>
+
   <div class="container py-3">
 
 
@@ -49,11 +48,7 @@
         <form class="d-flex" role="search">
           <br><br>
           
-          <a href="">
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-          </svg>
-        </a>  &ensp; &ensp;  &ensp; &ensp;  
+           &ensp; &ensp;  &ensp; &ensp;  
           <button class="btn sombras iniciar" type="submit">
             <a class="a" href="login.php">  Iniciar Session   </a></button>
         </form>
@@ -152,7 +147,8 @@
 
 
 <?php
-
+//ocultar warnings
+error_reporting(E_ERROR | E_PARSE);
     include('../conexion.php');
     if (isset($_POST['registrar'])) {
         
@@ -171,12 +167,35 @@
             $conf_cont=$_POST['conf_cont']; 
 
             if ($edad>=18 && $us_cont==$conf_cont) {
-             
+
                   $insert_clientes="INSERT INTO clientes (user_clien, contrasena) VALUES ('$nom_usuario','$us_cont')";
                   $insert_reg="INSERT INTO clientes_datos_personales (nombre, apellido_pat, apellido_mat, correo, edad, genero, telefono, RFC) VALUES ('$nombre', '$ap', '$am', '$correo', '$edad', '$genero', '$tel', '$rfc')";
 
                   $resultado=mysqli_query($conexion,$insert_reg);
                   $resultado2=mysqli_query($conexion,$insert_clientes);
+
+                  //obtener llave foranea de id_reg en tabla clientes
+                  $obtener_id="SELECT 
+                  clientes_datos_personales.id_cliente
+                  from  clientes_datos_personales, clientes 
+                  
+                  WHERE clientes.id_client=clientes_datos_personales.id_cliente and clientes.user_clien='$nom_usuario'";
+                  $resultado3=mysqli_query($conexion,$obtener_id);
+
+    
+                  if (mysqli_num_rows($resultado3) > 0) {
+                    while($id_fk = mysqli_fetch_array($resultado3)){
+                        $id = $id_fk['id_cliente'];
+                        
+                        //sql de inserccion añadiendo la llave que sera foranea
+                        $insert_fk="UPDATE clientes
+                        SET id_reg = $id
+                        WHERE id_client = $id;";
+
+                        $insert=mysqli_query($conexion,$insert_fk);
+                     }
+                   }
+                  
 
                 
 
@@ -201,12 +220,6 @@
           }
 
           }
-      
-        
-            
-        
-            
-
 
    
-?>  
+?>

@@ -57,7 +57,7 @@ session_start();
 
     <div class="navbar-collapse collapse" id="navbarColor03" >
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <center>
+   
           <b>
         <li class="nav-item i">
           <a class="nav-link fonts" aria-current="page" href="../index.php">Inicio</a>
@@ -72,7 +72,7 @@ session_start();
           <a class="nav-link fonts" href="nosotros.php">Nosotros</a>
         </li>
         </b>
-      </center> &ensp; &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;
+      &ensp; &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp; 
       </ul>
       <form class="d-flex" action="categorias.php" method="POST" role="search">
         <br><br>

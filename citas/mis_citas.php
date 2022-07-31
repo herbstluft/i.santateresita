@@ -4,20 +4,25 @@ include('../admin/conexion.php');
 session_start();
 
 $obj= new conexion();
-$citas=$obj->consultar("SELECT todo.Nombre, todo.Ap_Pat, todo.Ap_Mat, todo.Correo, todo.Edad, todo.Genero, todo.Telefono, 
-todo.RFC,todo.hora, todo.fecha, todo.id_cita from (select clientes_datos_personales.nombre as Nombre,clientes_datos_personales.apellido_pat as Ap_Pat,
-clientes_datos_personales.apellido_mat as Ap_Mat, clientes_datos_personales.correo as Correo, clientes_datos_personales.edad as Edad,
-clientes_datos_personales.genero as Genero, clientes_datos_personales.telefono as Telefono, clientes_datos_personales.RFC as RFC,
-usuarios.usuario as usuario, citas.hora as hora, citas.fecha as fecha,citas.id_cita as id_cita from citas inner JOIN clientes on clientes.id_client=citas.id_cliente
-inner JOIN clientes_datos_personales on clientes_datos_personales.id_cliente=clientes.id_reg inner join doctores on
-citas.id_doc=doctores.id_doc inner JOIN usuarios on doctores.id_usuarios=usuarios.id_usuario) as todo
-where todo.usuario='$_SESSION[doctor]';");
+$citas=$obj->consultar("SELECT todo.nombre, todo.app, todo.apm, todo.genero, todo.edad, todo.especialidad,todo.cedula, todo.universidad, todo.telefono, todo.correo, todo.id_cita, todo.hora, todo.fecha from
+(SELECT citas.id_cita as id_cita, citas.id_doc, citas.hora as hora, citas.fecha as fecha,
+datos_pers_user.nombre as nombre, datos_pers_user.apellido_pat as app, datos_pers_user.apellido_mat as apm, datos_pers_user.correo as correo,
+datos_pers_user.edad as edad, datos_pers_user.telefono as telefono, datos_pers_user.genero as genero,
+doctores.especialidad as especialidad, doctores.cedula as cedula, doctores.universidad as universidad,
+clientes.user_clien as cliente
+
+FROM citas 
+
+inner  join clientes on clientes.id_client=citas.id_cliente
+inner join doctores on citas.id_doc=doctores.id_doc
+inner join usuarios on usuarios.id_usuario=doctores.id_usuarios
+inner JOIN datos_pers_user on datos_pers_user.id_registro=usuarios.id_reg) as todo WHERE todo.cliente='$_SESSION[cliente]'");
 ?>
 
 
 
 <?php
-if(isset($_SESSION['doctor'])){ 
+if(isset($_SESSION['cliente'])){ 
   ?>
 
 <!doctype html>
@@ -66,23 +71,17 @@ if(isset($_SESSION['doctor'])){
 
     <div class="navbar-collapse collapse" id="navbarColor03" >
       <ul class="navbar-nav me-auto mb-2 mb-lg-0  col-2 offset-6 col-md-2 offset-md-5" >
-        <center>
-          <b>
-        <li class="nav-item i text-center">
-          <a class="nav-link active fonts" aria-current="page" href="index.php">Inicio</a>
-        </li>
-        </b>
-      </center>
+     
       </ul>
       <form class="d-flex" role="search">
         <br><br>
         
         &ensp; &ensp;  &ensp; &ensp; &ensp; &ensp;  
         <?php
-        if(isset($_SESSION['doctor'])){
+        if(isset($_SESSION['cliente'])){
             ?>
               <button class="btn sombras iniciar col-8 " type="submit" style="height: 50px; position: relative; top:30px" name="cerrar_session">
-          <a class="a" href="../registro/logout.php">  <?php echo "Cerrar Session" ?> </a></button>
+          <a class="a" href="index_citas.php">  <?php echo "Regresar" ?> </a></button>
             <?php
             } 
             ?>
@@ -96,8 +95,10 @@ if(isset($_SESSION['doctor'])){
 <br>
 
 
+
   <!--Contenido de la pagina-->
 <div class="container">
+    
 
 <div class="row row-cols-1 row-cols-md-12 row-cols-lg-3 mb-3 text-center">
   <?php foreach($citas as $cita) { ?>
@@ -106,28 +107,29 @@ if(isset($_SESSION['doctor'])){
 <div class="col">
       <div class="sombras mb-4 rounded-3 shadow-sm">
         <div class="sombras card-header py-3"">
-          <h4 class="my-0 fw-normal"><?php echo $cita['Nombre']?>  <?php echo $cita['Ap_Pat'] ?></h4>
+          <h4 class="my-0 fw-normal"><?php echo "Doc."." ". $cita['nombre']?>  <?php echo $cita['app'] ?></h4>
         </div>
         <div class="card-body">
         <br>
-        <h6>Edad:  <?php echo $cita['Edad']?> </h6>
-        <h6>Genero:  <?php echo $cita['Genero']?> </h6>
-        <h6>Telefono:  <?php echo $cita['Telefono']?> </h6>
-        <h6>RFC:  <?php echo $cita['RFC']?> </h6>
-        <h6>Correo:  <?php echo $cita['Correo']?> </h6>
-
+        <h6>Edad:  <?php echo $cita['edad']?> </h6>
+        <h6>Genero:  <?php echo $cita['genero']?> </h6>
+        <h6>Especialidad:  <?php echo $cita['especialidad']?> </h6>
+        <h6>Cedula:  <?php echo $cita['cedula']?> </h6>
+        <h6>Universidad:  <?php echo $cita['universidad']?> </h6>
+        <h6>Telefono:  <?php echo $cita['telefono']?> </h6>
+        <h6>Correo:  <?php echo $cita['correo']?> </h6>
         <hr>
-        <h6>ID:  <?php echo $cita['id_cita']?> </h6>
-        <h6>Fecha:  <?php echo $cita['fecha']?> </h6>
+        <h6>Cita:  <?php echo $cita['id_cita']?> </h6>
         <h6>Hora:  <?php echo $cita['hora']?> </h6>
-      
+        <h6>Fecha:  <?php echo $cita['fecha']?> </h6>
+
 
           <div class="d-grid gap-2 d-md-block">
-           <form action="index_doctor.php" method="POST">
+           <form action="mis_citas.php" method="POST">
            
            <a href="?borrar=<?php echo $cita['id_cita']; ?>">
-            <button class="btn sombras br_btn" id="registrarme" type="button" name="realizada">
-              Realizada
+            <button class="btn sombras br_btn" id="registrarme" type="button" name="cancelar">
+              Cancelar cita
             </button>
             </a>
 
@@ -140,7 +142,7 @@ if(isset($_SESSION['doctor'])){
               //borrar registro de cita
               $sql="DELETE FROM citas WHERE `citas`.`id_cita` =".$id;
               $obj->ejecutar($sql);
-              header('location:index_doctor.php');
+              header('location:mis_citas.php');
              
             }
             ?>

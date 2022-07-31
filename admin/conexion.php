@@ -29,4 +29,5 @@ public function consultar($sql){
 
 }
 
+
 ?>

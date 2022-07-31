@@ -1,4 +1,8 @@
 <?php
+include('../conexion.php');
+//ocultar warnings
+error_reporting(E_ERROR | E_PARSE);
+
 session_start();
 if($_SESSION['cliente']){ 
 ?>
@@ -80,55 +84,68 @@ if($_SESSION['cliente']){
 
     <div class="sombras"> <!--Inicio-->
       <br>
-      <center><h1>Citas</h1></center>
+      <center><h1>Citas </h1> </center> 
       <br>
 
-      <form class="form1">
+      <form class="form1" method="get" action="index_citas.php">
         Nombre:
-        <select class="form-select sombras" aria-label="Disabled select example"  id="nom">
-          <option selected>Escribe tu nombre</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select><br>
+        <select class="form-select" aria-label="Disabled select example" disabled name="nombre_cliente">
+          <option selected> 
+          <?php 
+            if(isset($_SESSION['cliente'])){
+              $consulta="SELECT clientes_datos_personales.nombre as nombre,clientes_datos_personales.apellido_pat as app,
+              clientes_datos_personales.apellido_mat as apm
+               from clientes_datos_personales inner join clientes on clientes.id_reg=clientes_datos_personales.id_cliente
+               where clientes.user_clien='$_SESSION[cliente]'";
+              $resultado=mysqli_query($conexion,$consulta);
+     
+              foreach($resultado as $res)
+
+              $nombre_cliente= $res['nombre'] ." ". $res['app'] ." ". $res['apm'];
+              echo $nombre_cliente;
+              
+            }
+          ?>
+          
+          </option>
+        </select>
     
         Doctor:
         <br>
-       <select class="form-select sombras" aria-label="Disabled select example"  id="doc">
-          <option selected>Selecciona el Doctor</option>
-          <option value="1">Ricardo Cabello Rodriguez</option>
-          <option value="2">Eduardo Tapia Marquez</option>
-          <option value="3">Nicole Cabello Rodriguez</option>
+       <select class="form-select sombras" aria-label="Disabled select example"  name="doctor" >
+          <option value="1" >Ricardo Cabello Rodriguez (Default)</option>
+          <option value="2">Nicole Cabello Rodriguez</option>
+          <option value="3">Eduardo Tapia Marquez</option>
         </select><br>
 
     
         <center>  Hora:
-        <input type="time" class="sombras" ><br><br> </center>
+        <input type="time" class="sombras" name="hora" required ><br><br> </center>
           <center> Fecha:
-          <input type="date" class="sombras" id="fecha"><br><br></center>
+          <input type="date" class="sombras" name="fecha" required><br><br></center>
         
           <!--BOTON DE CITA-->
-          <center> <input type="submit" class="fadeIn fourth" value="Generar cita" name="cita"></center>
-        
+          <center> <input type="submit" class="fadeIn fourth" value="Generar cita" name="generar"></center>
+          <a href="mis_citas.php"><button type="button" class="btn" style="background-color: #CC7272; color:white">Ver mis citas</button>
+          <br><br>
+          <?php 
+            if(isset($_GET['generar'])){
+              ?>
+               <div class="alert alert-success" role="alert">
+                <center> Su cita ha sido generada con exito! </center>
+              </div>
+              <?php
+            }
+          ?>
+
+          
       </form>
     </div> <!--Fin-->
 
-        <!--Boton flotante -->
-  <div class="conta" id="d">
-    <div class="boton">
-      <input type="checkbox" id="btn-mas">
-      <div class="redes">
-          <a href="#" class="fa fa-facebook"></a>
-          <a href="#" class="fa fa-whatsapp"></a>
-        </div>
-
-        <div class="btn-mas">
-          <label for="btn-mas" class="fa fa-plus"></label>
-        </div>
-    </div>
-  </div>
 
 </div>
+
+ 
 
   <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>   
   <script src="../bootstrap/js/bootstrap.min.js"></script>
@@ -145,4 +162,31 @@ else{
   header('location:../index.php');
 
 }
+?>
+
+
+<?php
+if(isset($_GET['generar'])){
+
+  $doctor=$_GET['doctor'];
+  $hora=$_GET['hora'];
+
+  $fecha=$_GET['fecha'];
+  
+  //obtener id del cliente
+  $cliente_id="SELECT clientes.id_client from clientes where clientes.user_clien='$_SESSION[cliente]'";
+  $id1=mysqli_query($conexion,$cliente_id);
+  //convertir resultado a entero
+  if (mysqli_num_rows($id1) > 0) {
+    while($id_cliente = mysqli_fetch_array($id1)){
+        echo $id_cliente['id_client'];
+        
+        $insert_cita="INSERT INTO `citas` (`id_cliente`,`id_doc`,`hora`,`fecha`) VALUES ($id_cliente[id_client],'$doctor','$hora','$fecha')";
+        $cita=mysqli_query($conexion,$insert_cita);
+        header('location:index_citas.php');
+    }
+  }
+
+  }
+          
 ?>

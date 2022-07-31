@@ -60,6 +60,7 @@ switch ($_GET['select']) {
   if($filas>0)
   {
     $_SESSION['cliente']=$_GET['nom_user'];
+    session_start();
     header("location:../index.php");
   } else 
   {

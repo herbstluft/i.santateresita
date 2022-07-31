@@ -236,6 +236,6 @@ if(isset($_SESSION['admin'])){
 <?php
 }
 else{
-  header ("../error.php");
+  header ("Location:../error.php");
 }
 ?>
