@@ -87,7 +87,7 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
   <!-- Fondo de video -->
   <div class="fullscreen-container">
     <video loop muted autoplay poster="" class="fullscreen-video">
-        <source src="../bootstrap/img/back.mp4" type="video/mp4">
+        <source src="../../bootstrap/img/back.mp4" type="video/mp4">
 
     </video>
 </div>
