@@ -363,7 +363,14 @@ input[type=text]:placeholder {
   </head>
   <body>
 
-  
+  <!-- Fondo de video -->
+<div class="fullscreen-container">
+    <video loop muted autoplay poster="" class="fullscreen-video">
+        <source src="../bootstrap/img/back.mp4" type="video/mp4">
+
+    </video>
+</div>
+<!-- fin de video -->
 
 <div class="container py-3">
 
