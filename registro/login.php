@@ -1,14 +1,15 @@
 <?php
-include('../conexion.php');
+include('../admin/conexion.php');
+$obj=new sistema();
 
 if($_GET){
 switch ($_GET['select']) {
   case '1':
-  
+     
       $user = $_GET['nom_user'];
       $passwd = $_GET ['passwd'];
-      $consulta="SELECT * from usuarios INNER JOIN tipo_usuario on tipo_usuario.id_tipo=usuarios.tipo_usuario where usuarios.usuario='$user' and usuarios.contrasena='$passwd' and tipo_usuario.tipo='doctor'";
-      $resultado=mysqli_query($conexion,$consulta);
+      $sql="SELECT * from usuarios INNER JOIN tipo_usuario on tipo_usuario.id_tipo=usuarios.tipo_usuario where usuarios.usuario='$user' and usuarios.contrasena='$passwd' and tipo_usuario.tipo='doctor'";
+      $resultado=$obj->ejecutar($sql);
 
       $filas=mysqli_num_rows($resultado);
 
@@ -30,8 +31,8 @@ switch ($_GET['select']) {
   case '2':
     $user = $_GET['nom_user'];
     $passwd = $_GET ['passwd'];
-    $consulta="SELECT * from usuarios INNER JOIN tipo_usuario on tipo_usuario.id_tipo=usuarios.tipo_usuario where usuarios.usuario='$user' and usuarios.contrasena='$passwd' and tipo_usuario.tipo='administrador'";
-    $resultado=mysqli_query($conexion,$consulta);
+    $sql="SELECT * from usuarios INNER JOIN tipo_usuario on tipo_usuario.id_tipo=usuarios.tipo_usuario where usuarios.usuario='$user' and usuarios.contrasena='$passwd' and tipo_usuario.tipo='administrador'";
+    $resultado=$obj->ejecutar($sql);
 
     $filas=mysqli_num_rows($resultado);
 
@@ -52,8 +53,8 @@ switch ($_GET['select']) {
   case '3';
   $user = $_GET['nom_user'];
   $passwd = $_GET ['passwd'];
-  $consulta="SELECT * from clientes where clientes.user_clien='$user' and clientes.contrasena='$passwd'";
-  $resultado=mysqli_query($conexion,$consulta);
+  $sql="SELECT * from clientes where clientes.user_clien='$user' and clientes.contrasena='$passwd'";
+  $resultado=$obj->ejecutar($sql);
 
   $filas=mysqli_num_rows($resultado);
 

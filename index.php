@@ -1,7 +1,7 @@
 <?php 
 include('admin/conexion.php');
 
-$obj= new conexion();
+$obj= new sistema();
 $productos=$obj->consultar("SELECT * FROM `productos`");
 ?>
 

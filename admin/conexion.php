@@ -1,7 +1,7 @@
 <?php
 
 
-class conexion{
+class sistema{
 public $servidor="localhost";
 private $usuario="root";
 private $contrasena="1234";
@@ -26,6 +26,7 @@ public function consultar($sql){
   $sentencia->execute();
   return $sentencia->fetchAll();
 }
+
 
 }
 

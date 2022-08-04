@@ -23,14 +23,14 @@ if($_POST){
   $imagen_temporal=$_FILES['imagen']['tmp_name'];
   move_uploaded_file($imagen_temporal,"imagenes/".$imagen);
 
-  $obj= new conexion();
+  $obj= new sistema();
   $sql="INSERT INTO `productos` (`nom_producto`,`imagen`,`precio`,`fecha_vencimiento`,`id_cat`,`formula`,`descripcion`) VALUES ('$nom','$imagen','$precio','$fecha','$categoria','$formula','$desc')";
   $obj->ejecutar($sql);
 }
 
 if($_GET){
   $id=$_GET['borrar'];
-  $obj= new conexion();
+  $obj= new sistema();
  
   //borrar_imageen
   $imagen=$obj->consultar("SELECT imagen FROM `productos` where id_producto=".$id);
@@ -40,7 +40,7 @@ if($_GET){
   $obj->ejecutar($sql);
   
 }
-$obj= new conexion();
+$obj= new sistema();
 $productos=$obj->consultar("SELECT * FROM `productos`");
 
 
