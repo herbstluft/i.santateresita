@@ -141,26 +141,32 @@ if(isset($_SESSION['admin'])){
 
 
   <!--Contenido de la pagina-->
+  <link rel="stylesheet" href="/i.santateresita/bootstrap/css/index.css">
 <div class="container">
 
   <div class="sombras" style="padding:4% ;">
     <div class="card-header ">
       <center><h2>Datos del producto</h2></center>
     </div>
-    <div class="card-body ">
+    <div class="card-body">
 
       <form action="index.php" method="post" enctype="multipart/form-data">
-        Nombre: 
-        <input class="form-control" type="text" name="nom" required><br>
+        Nombre: <br>
+        <input class="form-control" type="text" name="nom" required>
+        <br><br>
         Imagen:
         <input class="form-control" type="file" name="imagen" required>
+        <br>
         Precio:
         <input class="form-control" type="number" name="precio" required>
+        <br>
         Fecha Vencimiento;
-        <input class="form-control" type="date" name="fecha_v"> 
-        Formula:
+        <input class="form-control" type="date" name="fecha_v">
+        <br> 
+        Formula: <br>
         <input class="form-control" type="text" name="formula">
-        Categoria:
+        <br><br>
+        Categoria: <br>
         <select class="form-select" aria-label="Default select example" name="categoria" required>
           
           <option value="1">Estomacal</option>
@@ -174,9 +180,10 @@ if(isset($_SESSION['admin'])){
           <option value="9">Bienestar sexual</option>
           <option value="10">Ginecologia</option>
         </select>
-        Descripcion:
-        <input class="form-control" type="text" name="desc" minlength="20" maxlength="50" required>
         <br>
+        Descripcion: <br>
+        <input class="form-control" type="text" name="desc" minlength="20" maxlength="50" required>
+        <br> <br>
         <button class="btn sombras registrarme" type="submit" id="registrarme" name="enviar" style="font-size:25px;">Publicar</button>
 
     </form>
