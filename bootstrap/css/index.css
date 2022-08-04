@@ -1,0 +1,14 @@
+.card-body
+{
+    columns: 2;
+}
+.form-control
+{
+    height: 35px;
+    width: 50%;
+}
+.form-select
+{
+    height: 35px;
+    width: 50%;
+}
