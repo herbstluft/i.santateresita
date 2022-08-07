@@ -1,447 +1,333 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
+-- MariaDB dump 10.19  Distrib 10.4.24-MariaDB, for Win64 (AMD64)
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 26-07-2022 a las 23:23:20
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: proyecto
+-- ------------------------------------------------------
+-- Server version	10.4.24-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Base de datos: `proyecto`
+-- Table structure for table `categoria`
 --
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `carrito`
---
-
-CREATE TABLE `carrito` (
-  `id_carrito` int(11) NOT NULL,
-  `id_producto` int(11) DEFAULT NULL,
-  `cantidad` int(11) DEFAULT NULL,
-  `cliente` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `categoria`
---
-
+DROP TABLE IF EXISTS `categoria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categoria` (
-  `id_cat` int(11) NOT NULL,
-  `categoria` char(100) CHARACTER SET utf8 DEFAULT NULL
+  `id_cat` int(11) NOT NULL AUTO_INCREMENT,
+  `categoria` char(100) DEFAULT NULL,
+  PRIMARY KEY (`id_cat`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `categoria`
+-- Dumping data for table `categoria`
 --
 
-INSERT INTO `categoria` (`id_cat`, `categoria`) VALUES
-(1, 'Estomacal'),
-(2, 'Dolor'),
-(3, 'Fiebre'),
-(4, 'Suplementos alimenticios'),
-(5, 'Gripa y tos'),
-(6, 'Material de curacion'),
-(7, 'Vitaminas y minerales'),
-(8, 'Sueros'),
-(9, 'Bienestar sexual'),
-(10, 'Ginecologia');
-
--- --------------------------------------------------------
+LOCK TABLES `categoria` WRITE;
+/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `citas`
+-- Table structure for table `citas`
 --
 
+DROP TABLE IF EXISTS `citas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `citas` (
-  `id_cita` int(11) NOT NULL,
+  `id_cita` int(11) NOT NULL AUTO_INCREMENT,
   `id_cliente` int(11) DEFAULT NULL,
   `id_doc` int(11) DEFAULT NULL,
   `hora` time DEFAULT NULL,
-  `fecha` date DEFAULT NULL
+  `fecha` date DEFAULT NULL,
+  PRIMARY KEY (`id_cita`),
+  KEY `fk_cli` (`id_cliente`),
+  KEY `fk_doct` (`id_doc`),
+  CONSTRAINT `fk_cli` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_client`),
+  CONSTRAINT `fk_doct` FOREIGN KEY (`id_doc`) REFERENCES `doctores` (`id_doc`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `citas`
+-- Dumping data for table `citas`
 --
 
-INSERT INTO `citas` (`id_cita`, `id_cliente`, `id_doc`, `hora`, `fecha`) VALUES
-(1, 5, 1, '13:00:00', '2021-04-02'),
-(2, 2, 2, '11:00:00', '2022-03-04');
-
--- --------------------------------------------------------
+LOCK TABLES `citas` WRITE;
+/*!40000 ALTER TABLE `citas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `citas` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `clientes`
+-- Table structure for table `clientes`
 --
 
+DROP TABLE IF EXISTS `clientes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `clientes` (
-  `id_client` int(11) NOT NULL,
-  `user_clien` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
-  `contrasena` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
-  `id_reg` int(11) DEFAULT NULL
+  `id_client` int(11) NOT NULL AUTO_INCREMENT,
+  `user_clien` varchar(500) DEFAULT NULL,
+  `contrasena` varchar(500) DEFAULT NULL,
+  `id_reg` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_client`),
+  KEY `fk_usclien` (`id_reg`),
+  CONSTRAINT `fk_usclien` FOREIGN KEY (`id_reg`) REFERENCES `clientes_datos_personales` (`id_cliente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `clientes`
+-- Dumping data for table `clientes`
 --
 
-INSERT INTO `clientes` (`id_client`, `user_clien`, `contrasena`, `id_reg`) VALUES
-(1, 'Manu22', 'sami', 1),
-(2, 'Juanii', 'juanitoo', 2),
-(3, 'gemaaa', 'gemita', 3),
-(4, 'viktor', 'vik', 4),
-(5, 'dylan1', 'dyl', 5);
-
--- --------------------------------------------------------
+LOCK TABLES `clientes` WRITE;
+/*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `clientes_datos_personales`
+-- Table structure for table `clientes_datos_personales`
 --
 
+DROP TABLE IF EXISTS `clientes_datos_personales`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `clientes_datos_personales` (
-  `id_cliente` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(500) DEFAULT NULL,
   `apellido_pat` varchar(500) DEFAULT NULL,
   `apellido_mat` varchar(500) DEFAULT NULL,
-  `correo` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
+  `correo` varchar(500) DEFAULT NULL,
   `edad` int(11) DEFAULT NULL,
   `genero` char(1) DEFAULT NULL,
   `telefono` char(10) DEFAULT NULL,
-  `RFC` char(10) DEFAULT NULL
+  `RFC` char(10) DEFAULT NULL,
+  PRIMARY KEY (`id_cliente`),
+  CONSTRAINT `chk_gene` CHECK (`genero` = 'M' and `genero` = 'F')
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `clientes_datos_personales`
+-- Dumping data for table `clientes_datos_personales`
 --
 
-INSERT INTO `clientes_datos_personales` (`id_cliente`, `nombre`, `apellido_pat`, `apellido_mat`, `correo`, `edad`, `genero`, `telefono`, `RFC`) VALUES
-(1, 'Manuel David', 'Hernandez', 'Morales', 'manuel@gmail.com', 21, 'M', '8715038326', NULL),
-(2, 'Juan Angel', 'Castaneda', 'Chavez', 'juanl@gmail.com', 21, 'M', '8715810980', NULL),
-(3, 'Gema', 'Castaneda', 'Barraza', 'gema@gmail.com', 24, 'F', '8736457897', NULL),
-(4, 'Victor', 'Cabello', 'Rodriguez', 'victor@gmail.com', 20, 'M', '8712647536', NULL),
-(5, 'Dylan', 'Gonzales', 'Flores', 'dylan@gmail.com', 23, 'M', '8714628710', NULL);
-
--- --------------------------------------------------------
+LOCK TABLES `clientes_datos_personales` WRITE;
+/*!40000 ALTER TABLE `clientes_datos_personales` DISABLE KEYS */;
+/*!40000 ALTER TABLE `clientes_datos_personales` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `datos_pers_user`
+-- Table structure for table `datos_pers_user`
 --
 
+DROP TABLE IF EXISTS `datos_pers_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `datos_pers_user` (
-  `id_registro` int(11) NOT NULL,
+  `id_registro` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(500) DEFAULT NULL,
   `apellido_pat` varchar(500) DEFAULT NULL,
   `apellido_mat` varchar(500) DEFAULT NULL,
-  `correo` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
+  `correo` varchar(500) DEFAULT NULL,
   `edad` int(11) DEFAULT NULL,
   `genero` char(1) DEFAULT NULL,
-  `telefono` char(10) DEFAULT NULL
+  `telefono` char(10) DEFAULT NULL,
+  PRIMARY KEY (`id_registro`),
+  CONSTRAINT `chk_gen` CHECK (`genero` = 'M' and `genero` = 'F')
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `datos_pers_user`
+-- Dumping data for table `datos_pers_user`
 --
 
-INSERT INTO `datos_pers_user` (`id_registro`, `nombre`, `apellido_pat`, `apellido_mat`, `correo`, `edad`, `genero`, `telefono`) VALUES
-(1, 'Samantha', 'Alcantara', 'Garcia', 'sammy@gmail.com', 20, 'F', '8712657890'),
-(2, 'Ricardo', 'Cabello', 'Rodriguez', 'rick@gmail.com', 20, 'M', '1234567008'),
-(3, 'Nicole', 'Cabello', 'Rodriguez', 'nicole@gmail.com', 22, 'F', '0987654321'),
-(5, 'Eduardo ', 'Tapia', 'Marquez', 'tapia@gmail.com', 19, 'M', '8719896677');
-
--- --------------------------------------------------------
+LOCK TABLES `datos_pers_user` WRITE;
+/*!40000 ALTER TABLE `datos_pers_user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `datos_pers_user` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `detalle_orden`
+-- Table structure for table `detalle_orden`
 --
 
+DROP TABLE IF EXISTS `detalle_orden`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `detalle_orden` (
   `id_orden` int(11) DEFAULT NULL,
   `id_producto` int(11) DEFAULT NULL,
-  `cantidad_prod` int(11) DEFAULT NULL
+  `cantidad_prod` int(11) DEFAULT NULL,
+  KEY `fk_orden` (`id_orden`),
+  KEY `fk_prod` (`id_producto`),
+  CONSTRAINT `fk_orden` FOREIGN KEY (`id_orden`) REFERENCES `orden` (`id_orden`),
+  CONSTRAINT `fk_prod` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `detalle_orden`
+-- Dumping data for table `detalle_orden`
 --
 
-INSERT INTO `detalle_orden` (`id_orden`, `id_producto`, `cantidad_prod`) VALUES
-(1, 2, 4),
-(1, 1, 1),
-(2, 3, 5),
-(2, 1, 4),
-(2, 2, 1),
-(3, 2, 1),
-(3, 3, 5),
-(3, 1, 2);
-
--- --------------------------------------------------------
+LOCK TABLES `detalle_orden` WRITE;
+/*!40000 ALTER TABLE `detalle_orden` DISABLE KEYS */;
+/*!40000 ALTER TABLE `detalle_orden` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `doctores`
+-- Table structure for table `doctores`
 --
 
+DROP TABLE IF EXISTS `doctores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `doctores` (
-  `id_doc` int(11) NOT NULL,
+  `id_doc` int(11) NOT NULL AUTO_INCREMENT,
   `id_usuarios` int(11) DEFAULT NULL,
   `cedula` char(10) DEFAULT NULL,
   `especialidad` varchar(500) DEFAULT NULL,
-  `universidad` varchar(500) DEFAULT NULL
+  `universidad` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id_doc`),
+  KEY `fk_docuser` (`id_usuarios`),
+  CONSTRAINT `fk_docuser` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `doctores`
+-- Dumping data for table `doctores`
 --
 
-INSERT INTO `doctores` (`id_doc`, `id_usuarios`, `cedula`, `especialidad`, `universidad`) VALUES
-(1, 2, 'a1a1a1', NULL, NULL),
-(2, 3, 'b1b1b1', NULL, NULL),
-(3, 5, 'c1c1c1', NULL, NULL);
-
--- --------------------------------------------------------
+LOCK TABLES `doctores` WRITE;
+/*!40000 ALTER TABLE `doctores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `doctores` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `orden`
+-- Table structure for table `orden`
 --
 
+DROP TABLE IF EXISTS `orden`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orden` (
-  `id_orden` int(11) NOT NULL,
+  `id_orden` int(11) NOT NULL AUTO_INCREMENT,
   `id_cliente` int(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
-  `direccion` varchar(600) CHARACTER SET utf8 DEFAULT NULL
+  `direccion` varchar(600) DEFAULT NULL,
+  PRIMARY KEY (`id_orden`),
+  KEY `fk_cliente` (`id_cliente`),
+  CONSTRAINT `fk_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_client`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `orden`
+-- Dumping data for table `orden`
 --
 
-INSERT INTO `orden` (`id_orden`, `id_cliente`, `fecha`, `direccion`) VALUES
-(1, 2, '0000-00-00', 'CALZ. DE LA CANDELA'),
-(2, 4, '2022-02-05', 'Valle Verde'),
-(3, 3, '2022-03-12', 'SAN SALVADOR');
-
--- --------------------------------------------------------
+LOCK TABLES `orden` WRITE;
+/*!40000 ALTER TABLE `orden` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orden` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `productos`
+-- Table structure for table `productos`
 --
 
+DROP TABLE IF EXISTS `productos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `productos` (
-  `id_producto` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL AUTO_INCREMENT,
   `nom_producto` varchar(500) DEFAULT NULL,
   `precio` double DEFAULT NULL,
   `fecha_vencimiento` date DEFAULT NULL,
-  `formula` varchar(600) CHARACTER SET utf8 DEFAULT NULL,
+  `formula` varchar(600) DEFAULT NULL,
   `id_cat` int(11) DEFAULT NULL,
   `descripcion` varchar(500) DEFAULT NULL,
-  `imagen` varchar(500) DEFAULT NULL
+  PRIMARY KEY (`id_producto`),
+  KEY `fk_cat` (`id_cat`),
+  CONSTRAINT `fk_cat` FOREIGN KEY (`id_cat`) REFERENCES `categoria` (`id_cat`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `productos`
+-- Dumping data for table `productos`
 --
 
-INSERT INTO `productos` (`id_producto`, `nom_producto`, `precio`, `fecha_vencimiento`, `formula`, `id_cat`, `descripcion`, `imagen`) VALUES
-(1, 'Gomitas tropical punch', 250, '2022-02-02', 'Carbonato de calcio', 1, 'Gomitas tropicales farmaceuticos', 'imagen.jpg'),
-(2, 'Pepto bismol', 490, '2022-05-03', 'Carbonato de calcio', 2, 'Producto farmaceutico de la farmacia', 'imagen.jpg'),
-(3, 'Aspirinas', 49, '2022-07-03', 'Carbonato de calcio', 3, 'Producto farmaceutico de la farmacia', 'imagen.jpg'),
-(31, '', 0, '0000-00-00', '', 1, '', '1.jpg');
-
--- --------------------------------------------------------
+LOCK TABLES `productos` WRITE;
+/*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `productos` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `tipo_usuario`
+-- Table structure for table `tipo_usuario`
 --
 
+DROP TABLE IF EXISTS `tipo_usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tipo_usuario` (
-  `id_tipo` int(11) NOT NULL,
-  `tipo` varchar(50) DEFAULT NULL
+  `id_tipo` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_tipo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `tipo_usuario`
+-- Dumping data for table `tipo_usuario`
 --
 
-INSERT INTO `tipo_usuario` (`id_tipo`, `tipo`) VALUES
-(1, 'administrador'),
-(2, 'doctor');
-
--- --------------------------------------------------------
+LOCK TABLES `tipo_usuario` WRITE;
+/*!40000 ALTER TABLE `tipo_usuario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tipo_usuario` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Table structure for table `usuarios`
 --
 
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuarios` (
-  `id_usuario` int(11) NOT NULL,
-  `usuario` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
-  `contrasena` varchar(12) CHARACTER SET utf8 DEFAULT NULL,
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(500) DEFAULT NULL,
+  `contrasena` varchar(500) DEFAULT NULL,
   `tipo_usuario` int(11) DEFAULT NULL,
-  `id_reg` int(11) DEFAULT NULL
+  `id_reg` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_usuario`),
+  KEY `fk_tipo` (`tipo_usuario`),
+  KEY `fk_dtuser` (`id_reg`),
+  CONSTRAINT `fk_dtuser` FOREIGN KEY (`id_reg`) REFERENCES `datos_pers_user` (`id_registro`),
+  CONSTRAINT `fk_tipo` FOREIGN KEY (`tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `usuario`, `contrasena`, `tipo_usuario`, `id_reg`) VALUES
-(1, 'sami', 'abc', 1, 1),
-(2, 'jose', 'abc', 2, 2),
-(3, 'fabian', 'abc', 2, 3),
-(5, 'tapia', 'abc', 2, 5);
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `carrito`
---
-ALTER TABLE `carrito`
-  ADD PRIMARY KEY (`id_carrito`);
-
---
--- Indices de la tabla `categoria`
---
-ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`id_cat`);
-
---
--- Indices de la tabla `citas`
---
-ALTER TABLE `citas`
-  ADD PRIMARY KEY (`id_cita`),
-  ADD KEY `fk_cituse` (`id_cliente`),
-  ADD KEY `fk_citdoc` (`id_doc`);
-
---
--- Indices de la tabla `clientes`
---
-ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`id_client`),
-  ADD KEY `fk_cliente` (`id_reg`);
-
---
--- Indices de la tabla `clientes_datos_personales`
---
-ALTER TABLE `clientes_datos_personales`
-  ADD PRIMARY KEY (`id_cliente`);
-
---
--- Indices de la tabla `datos_pers_user`
---
-ALTER TABLE `datos_pers_user`
-  ADD PRIMARY KEY (`id_registro`);
-
---
--- Indices de la tabla `detalle_orden`
---
-ALTER TABLE `detalle_orden`
-  ADD KEY `fk_ord` (`id_orden`),
-  ADD KEY `fk_prod` (`id_producto`);
-
---
--- Indices de la tabla `doctores`
---
-ALTER TABLE `doctores`
-  ADD PRIMARY KEY (`id_doc`),
-  ADD KEY `fk_usu` (`id_usuarios`);
-
---
--- Indices de la tabla `orden`
---
-ALTER TABLE `orden`
-  ADD PRIMARY KEY (`id_orden`),
-  ADD KEY `fk_clienord` (`id_cliente`);
-
---
--- Indices de la tabla `productos`
---
-ALTER TABLE `productos`
-  ADD PRIMARY KEY (`id_producto`),
-  ADD KEY `fk_cat` (`id_cat`);
-
---
--- Indices de la tabla `tipo_usuario`
---
-ALTER TABLE `tipo_usuario`
-  ADD PRIMARY KEY (`id_tipo`);
-
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_usuario`),
-  ADD KEY `fk_tu` (`tipo_usuario`),
-  ADD KEY `fk_us` (`id_reg`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `carrito`
---
-ALTER TABLE `carrito`
-  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `categoria`
---
-ALTER TABLE `categoria`
-  MODIFY `id_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT de la tabla `citas`
---
-ALTER TABLE `citas`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `clientes`
---
-ALTER TABLE `clientes`
-  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `clientes_datos_personales`
---
-ALTER TABLE `clientes_datos_personales`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `datos_pers_user`
---
-ALTER TABLE `datos_pers_user`
-  MODIFY `id_registro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `doctores`
---
-ALTER TABLE `doctores`
-  MODIFY `id_doc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `orden`
---
-ALTER TABLE `orden`
-  MODIFY `id_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-COMMIT;
-
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-08-07 17:22:50
