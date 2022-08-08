@@ -26,7 +26,7 @@ CREATE TABLE `categoria` (
   `id_cat` int(11) NOT NULL AUTO_INCREMENT,
   `categoria` char(100) DEFAULT NULL,
   PRIMARY KEY (`id_cat`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,6 +35,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+INSERT INTO `categoria` VALUES (1,'Estomacal'),(2,'Dolor'),(3,'Fiebre'),(4,'Suplementos alimenticios'),(5,'Gripa y tos'),(6,'Material de curacion'),(7,'Vitaminas y minerales'),(8,'Sueros'),(9,'Bienestar sexual'),(10,'Ginecologia');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,12 +52,14 @@ CREATE TABLE `citas` (
   `id_doc` int(11) DEFAULT NULL,
   `hora` time DEFAULT NULL,
   `fecha` date DEFAULT NULL,
+  `realizadas` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_cita`),
   KEY `fk_cli` (`id_cliente`),
   KEY `fk_doct` (`id_doc`),
   CONSTRAINT `fk_cli` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_client`),
-  CONSTRAINT `fk_doct` FOREIGN KEY (`id_doc`) REFERENCES `doctores` (`id_doc`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `fk_doct` FOREIGN KEY (`id_doc`) REFERENCES `doctores` (`id_doc`),
+  CONSTRAINT `chk_rel` CHECK (`realizadas` = 0 or `realizadas` = 1)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,6 +68,7 @@ CREATE TABLE `citas` (
 
 LOCK TABLES `citas` WRITE;
 /*!40000 ALTER TABLE `citas` DISABLE KEYS */;
+INSERT INTO `citas` VALUES (1,5,1,'13:00:00','2021-04-02',NULL),(2,2,2,'11:00:00','2022-03-04',NULL);
 /*!40000 ALTER TABLE `citas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,7 +87,7 @@ CREATE TABLE `clientes` (
   PRIMARY KEY (`id_client`),
   KEY `fk_usclien` (`id_reg`),
   CONSTRAINT `fk_usclien` FOREIGN KEY (`id_reg`) REFERENCES `clientes_datos_personales` (`id_cliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,6 +96,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+INSERT INTO `clientes` VALUES (1,'Manu22','sami',1),(2,'Juanii','juanitoo',2),(3,'gemaaa','gemita',3),(4,'viktor','vik',4),(5,'dylan1','dyl',5);
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,9 +117,8 @@ CREATE TABLE `clientes_datos_personales` (
   `genero` char(1) DEFAULT NULL,
   `telefono` char(10) DEFAULT NULL,
   `RFC` char(10) DEFAULT NULL,
-  PRIMARY KEY (`id_cliente`),
-  CONSTRAINT `chk_gene` CHECK (`genero` = 'M' and `genero` = 'F')
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id_cliente`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,6 +127,7 @@ CREATE TABLE `clientes_datos_personales` (
 
 LOCK TABLES `clientes_datos_personales` WRITE;
 /*!40000 ALTER TABLE `clientes_datos_personales` DISABLE KEYS */;
+INSERT INTO `clientes_datos_personales` VALUES (1,'Manuel David','Hernandez','Morales','manuel@gmail.com',21,'M','8715038326',NULL),(2,'Juan Angel','Castaneda','Chavez','juanl@gmail.com',21,'M','8715810980',NULL),(3,'Gema','Castaneda','Barraza','gema@gmail.com',24,'F','8736457897',NULL),(4,'Victor','Cabello','Rodriguez','victor@gmail.com',20,'M','8712647536',NULL),(5,'Dylan','Gonzales','Flores','dylan@gmail.com',23,'M','8714628710',NULL);
 /*!40000 ALTER TABLE `clientes_datos_personales` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,9 +147,8 @@ CREATE TABLE `datos_pers_user` (
   `edad` int(11) DEFAULT NULL,
   `genero` char(1) DEFAULT NULL,
   `telefono` char(10) DEFAULT NULL,
-  PRIMARY KEY (`id_registro`),
-  CONSTRAINT `chk_gen` CHECK (`genero` = 'M' and `genero` = 'F')
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id_registro`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,6 +157,7 @@ CREATE TABLE `datos_pers_user` (
 
 LOCK TABLES `datos_pers_user` WRITE;
 /*!40000 ALTER TABLE `datos_pers_user` DISABLE KEYS */;
+INSERT INTO `datos_pers_user` VALUES (1,'Samantha','Alcantara','Garcia','sammy@gmail.com',20,'F','8712657890'),(2,'Ricardo','Cabello','Rodriguez','rick@gmail.com',20,'M','1234567008'),(3,'Nicole','Cabello','Rodriguez','nicole@gmail.com',22,'F','0987654321'),(5,'Eduardo ','Tapia','Marquez','tapia@gmail.com',19,'M','8719896677');
 /*!40000 ALTER TABLE `datos_pers_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,6 +185,7 @@ CREATE TABLE `detalle_orden` (
 
 LOCK TABLES `detalle_orden` WRITE;
 /*!40000 ALTER TABLE `detalle_orden` DISABLE KEYS */;
+INSERT INTO `detalle_orden` VALUES (1,2,4),(1,1,1),(2,3,5),(2,1,4),(2,2,1),(3,2,1),(3,3,5),(3,1,2);
 /*!40000 ALTER TABLE `detalle_orden` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,7 +205,7 @@ CREATE TABLE `doctores` (
   PRIMARY KEY (`id_doc`),
   KEY `fk_docuser` (`id_usuarios`),
   CONSTRAINT `fk_docuser` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,6 +214,7 @@ CREATE TABLE `doctores` (
 
 LOCK TABLES `doctores` WRITE;
 /*!40000 ALTER TABLE `doctores` DISABLE KEYS */;
+INSERT INTO `doctores` VALUES (1,2,'a1a1a1','Cirugano','Facultad De Medicina Ua De C'),(2,3,'b1b1b1','Cardiologo','Facultad De Medicina UAC'),(3,5,'c1c1c1','Pediadra','Universidad Autonoma De Coahuila');
 /*!40000 ALTER TABLE `doctores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,7 +233,7 @@ CREATE TABLE `orden` (
   PRIMARY KEY (`id_orden`),
   KEY `fk_cliente` (`id_cliente`),
   CONSTRAINT `fk_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_client`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,6 +242,7 @@ CREATE TABLE `orden` (
 
 LOCK TABLES `orden` WRITE;
 /*!40000 ALTER TABLE `orden` DISABLE KEYS */;
+INSERT INTO `orden` VALUES (1,2,'0000-00-00','CALZ. DE LA CANDELA'),(2,4,'2022-02-05','Valle Verde'),(3,3,'2022-03-12','SAN SALVADOR');
 /*!40000 ALTER TABLE `orden` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -253,10 +261,11 @@ CREATE TABLE `productos` (
   `formula` varchar(600) DEFAULT NULL,
   `id_cat` int(11) DEFAULT NULL,
   `descripcion` varchar(500) DEFAULT NULL,
+  `IMAGEN` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id_producto`),
   KEY `fk_cat` (`id_cat`),
   CONSTRAINT `fk_cat` FOREIGN KEY (`id_cat`) REFERENCES `categoria` (`id_cat`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -265,6 +274,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+INSERT INTO `productos` VALUES (1,'Gomitas tropical punch',250,'2022-02-02','Carbonato de calcio',1,'Gomitas tropicales farmaceuticos','imagen.jpg'),(2,'Pepto bismol',490,'2022-05-03','Carbonato de calcio',2,'Producto farmaceutico de la farmacia','imagen.jpg'),(3,'Aspirinas',49,'2022-07-03','Carbonato de calcio',3,'Producto farmaceutico de la farmacia','imagen.jpg');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,7 +289,7 @@ CREATE TABLE `tipo_usuario` (
   `id_tipo` int(11) NOT NULL AUTO_INCREMENT,
   `tipo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_tipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -288,6 +298,7 @@ CREATE TABLE `tipo_usuario` (
 
 LOCK TABLES `tipo_usuario` WRITE;
 /*!40000 ALTER TABLE `tipo_usuario` DISABLE KEYS */;
+INSERT INTO `tipo_usuario` VALUES (1,'administrador'),(2,'doctor');
 /*!40000 ALTER TABLE `tipo_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,7 +320,7 @@ CREATE TABLE `usuarios` (
   KEY `fk_dtuser` (`id_reg`),
   CONSTRAINT `fk_dtuser` FOREIGN KEY (`id_reg`) REFERENCES `datos_pers_user` (`id_registro`),
   CONSTRAINT `fk_tipo` FOREIGN KEY (`tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -318,6 +329,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'sami','abc',1,1),(2,'jose','abc',2,2),(3,'fabian','abc',2,3),(5,'tapia','abc',2,5);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -330,4 +342,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-07 17:22:50
+-- Dump completed on 2022-08-07 21:03:52
