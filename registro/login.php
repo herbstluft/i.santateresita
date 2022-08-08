@@ -1,86 +1,34 @@
 <?php
-include('../admin/conexion.php');
-$obj=new sistema();
 
-if($_GET){
-switch ($_GET['select']) {
-  case '1':
-     
-      $user = $_GET['nom_user'];
-      $passwd = $_GET ['passwd'];
-      $sql="SELECT * from usuarios INNER JOIN tipo_usuario on tipo_usuario.id_tipo=usuarios.tipo_usuario where usuarios.usuario='$user' and usuarios.contrasena='$passwd' and tipo_usuario.tipo='doctor'";
-      $resultado=$obj->ejecutar($sql);
+     use MyApp\query\Select;
+     use MyApp\data\Database;
 
-      $filas=mysqli_num_rows($resultado);
+     require("../vendor/autoload.php");
 
-      if($filas>0)
-      {
-        $_SESSION['doctor']=$_GET['nom_user'];
-        session_start();
-        header("location:../doctor/index_doctor.php");
-      } else 
-      {
-        ?> <div class="alert alert-danger text-center" role="alert">
-            Contraseña o usuario incorrecto!
-            </div>
-        <?php
-      }
-  
-    break;
-  
-  case '2':
-    $user = $_GET['nom_user'];
-    $passwd = $_GET ['passwd'];
-    $sql="SELECT * from usuarios INNER JOIN tipo_usuario on tipo_usuario.id_tipo=usuarios.tipo_usuario where usuarios.usuario='$user' and usuarios.contrasena='$passwd' and tipo_usuario.tipo='administrador'";
-    $resultado=$obj->ejecutar($sql);
+if($_POST){
 
-    $filas=mysqli_num_rows($resultado);
+          extract($_POST);
 
-    if($filas>0)
-    {
-      $_SESSION['admin']=$_GET['nom_user'];
-      session_start();
-      header("location:../admin/index.php");
-    } else 
-    {
-      ?> <div class="alert alert-danger text-center" role="alert">
-          Contraseña o usuario incorrecto!
-          </div>
-      <?php
-    }
-    break;
+        
 
-  case '3';
-  $user = $_GET['nom_user'];
-  $passwd = $_GET ['passwd'];
-  $sql="SELECT * from clientes where clientes.user_clien='$user' and clientes.contrasena='$passwd'";
-  $resultado=$obj->ejecutar($sql);
+          $query = new Select();
 
-  $filas=mysqli_num_rows($resultado);
+          extract($_POST);
 
-  if($filas>0)
-  {
-    $_SESSION['cliente']=$_GET['nom_user'];
-    session_start();
-    header("location:../index.php");
-  } else 
-  {
-    ?> <div class="alert alert-danger text-center" role="alert">
-    Contraseña o usuario incorrecto!
-    </div>
-    <?php
-}
-  break;
-    
-  default:
-    # code...
-    break;
-}
+          $cadena = "Select * from usuarios where usuario=$nom_user and password=$passwd";
+
+          $datos = $query-> ejecuta($cadena);
+
+          echo "<div class='alert alert-success'> Cliente Registrado </div>";
+          /*Registro exitoso y despues se dirige a la pagina principal*/
+          header("refresh:3; ../../index.php");
+
+
 
 }
-
 
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -449,16 +397,7 @@ input[type=text]:placeholder {
 
           
           
-          <p><b>Seleccione su tipo de usuario:</b></p>
-        <center>
-          <select class="sombras" aria-label="Default select example" name="select" style="width:30%;">
-          
-          <option value="1">Doctor</option>
-          <option value="2">Administrador</option>
-          <option value="3">Cliente</option>
-        </select>
-        </center>
-        <br>
+       
 
           <input type="submit" class="fadeIn fourth" value="Iniciar Sesion" name="login">
         </form>

@@ -1,5 +1,9 @@
 <?php
-include('../conexion.php');
+use MyApp\data\Database;
+use MyApp\query\ejecuta;
+use MyApp\query\Select;
+
+require("../vendor/autoload.php");
 //ocultar warnings
 error_reporting(E_ERROR | E_PARSE);
 session_start();

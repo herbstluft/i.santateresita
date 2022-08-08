@@ -75,7 +75,7 @@
       <p style="font-size: 18px;">Es rápido y fácil.</p>
     </center>
     
-    <form action="" method="post">
+    <form action="../src/scripts/registrar.php" method="post">
 
     <br>
         <div class="input-group mb-3">
@@ -150,81 +150,3 @@
 </body>
 </html>
 
-
-<?php
-//ocultar warnings
-error_reporting(E_ERROR | E_PARSE);
-    include('../conexion.php');
-    if (isset($_POST['registrar'])) {
-        
-            $nombre=$_POST['nom'];
-            $ap=$_POST['ap'];
-            $am=$_POST['am'];
-            $correo=$_POST['corr'];
-            $edad=$_POST['edad'];
-            $genero=$_POST['gen'];
-            $tel=$_POST['tel'];
-            $rfc=$_POST['rfc'];
-            
-
-            $nom_usuario=$_POST['nom_us'];
-            $us_cont=$_POST['us_cont'];
-            $conf_cont=$_POST['conf_cont']; 
-
-            if ($edad>=18 && $us_cont==$conf_cont) {
-
-                  $insert_clientes="INSERT INTO clientes (user_clien, contrasena) VALUES ('$nom_usuario','$us_cont')";
-                  $insert_reg="INSERT INTO clientes_datos_personales (nombre, apellido_pat, apellido_mat, correo, edad, genero, telefono, RFC) VALUES ('$nombre', '$ap', '$am', '$correo', '$edad', '$genero', '$tel', '$rfc')";
-
-                  $resultado=mysqli_query($conexion,$insert_reg);
-                  $resultado2=mysqli_query($conexion,$insert_clientes);
-
-                  //obtener llave foranea de id_reg en tabla clientes
-                  $obtener_id="SELECT 
-                  clientes_datos_personales.id_cliente
-                  from  clientes_datos_personales, clientes 
-                  
-                  WHERE clientes.id_client=clientes_datos_personales.id_cliente and clientes.user_clien='$nom_usuario'";
-                  $resultado3=mysqli_query($conexion,$obtener_id);
-
-    
-                  if (mysqli_num_rows($resultado3) > 0) {
-                    while($id_fk = mysqli_fetch_array($resultado3)){
-                        $id = $id_fk['id_cliente'];
-                        
-                        //sql de inserccion añadiendo la llave que sera foranea
-                        $insert_fk="UPDATE clientes
-                        SET id_reg = $id
-                        WHERE id_client = $id;";
-
-                        $insert=mysqli_query($conexion,$insert_fk);
-                     }
-                   }
-                  
-
-                
-
-                  if ($resultado && $resultado2) {
-                    ?> <br> <div class="alert alert-success sombras" role="alert"> 
-                        <center> Registro completado correctamente! </center>
-                        </div>
-                    <?php
-                  } 
-                  else{
-                    ?>  <div class="alert alert-danger" role="alert">
-                        Advertencia!
-                        </div>
-                    <?php
-                  }
-          }
-          else{
-            ?>  <div class="alert alert-danger" role="alert">
-                <center> Lo sentimos usted es menor de edad o las contraseñas no coinciden </center>
-            </div>
-        <?php
-          }
-
-          }
-
-   
-?>
