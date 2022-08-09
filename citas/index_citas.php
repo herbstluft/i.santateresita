@@ -1,5 +1,14 @@
 <?php
-include('../conexion.php');
+
+use MyApp\data\Database;
+use MyApp\query\ejecuta;
+use MyApp\query\Select;
+
+require("../vendor/autoload.php");
+
+$query = new Select();
+$insert = new ejecuta();
+
 //ocultar warnings
 error_reporting(E_ERROR | E_PARSE);
 
@@ -106,11 +115,11 @@ if($_SESSION['cliente']){
               clientes_datos_personales.apellido_mat as apm
                from clientes_datos_personales inner join clientes on clientes.id_reg=clientes_datos_personales.id_cliente
                where clientes.user_clien='$_SESSION[cliente]'";
-              $resultado=mysqli_query($conexion,$consulta);
+              $id=$query -> seleccionar($consulta);
      
               foreach($resultado as $res)
 
-              $nombre_cliente= $res['nombre'] ." ". $res['app'] ." ". $res['apm'];
+              $nombre_cliente= $res->nombre ." ". $res->app ." ". $res->apm;
               echo $nombre_cliente;
               
             }
@@ -184,14 +193,14 @@ if(isset($_GET['generar'])){
   
   //obtener id del cliente
   $cliente_id="SELECT clientes.id_client from clientes where clientes.user_clien='$_SESSION[cliente]'";
-  $id1=mysqli_query($conexion,$cliente_id);
+  $id=$query -> seleccionar($cliente_id);
   //convertir resultado a entero
   if (mysqli_num_rows($id1) > 0) {
     while($id_cliente = mysqli_fetch_array($id1)){
         echo $id_cliente['id_client'];
         
         $insert_cita="INSERT INTO `citas` (`id_cliente`,`id_doc`,`hora`,`fecha`) VALUES ($id_cliente[id_client],'$doctor','$hora','$fecha')";
-        $cita=mysqli_query($conexion,$insert_cita);
+        $cita=$query -> seleccionar($insert_cita);
         header('location:index_citas.php');
     }
   }

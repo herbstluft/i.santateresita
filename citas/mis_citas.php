@@ -1,10 +1,19 @@
 
 <?php
-include('../admin/conexion.php');
+
+use MyApp\data\Database;
+use MyApp\query\ejecuta;
+use MyApp\query\Select;
+
+require("../vendor/autoload.php");
+
+$query = new Select();
+$insert = new ejecuta();
+
 session_start();
 
-$obj= new conexion();
-$citas=$obj->consultar("SELECT todo.nombre, todo.app, todo.apm, todo.genero, todo.edad, todo.especialidad,todo.cedula, todo.universidad, todo.telefono, todo.correo, todo.id_cita, todo.hora, todo.fecha from
+
+$citas=$query->seleccionar("SELECT todo.nombre, todo.app, todo.apm, todo.genero, todo.edad, todo.especialidad,todo.cedula, todo.universidad, todo.telefono, todo.correo, todo.id_cita, todo.hora, todo.fecha from
 (SELECT citas.id_cita as id_cita, citas.id_doc, citas.hora as hora, citas.fecha as fecha,
 datos_pers_user.nombre as nombre, datos_pers_user.apellido_pat as app, datos_pers_user.apellido_mat as apm, datos_pers_user.correo as correo,
 datos_pers_user.edad as edad, datos_pers_user.telefono as telefono, datos_pers_user.genero as genero,
@@ -120,23 +129,23 @@ if(isset($_SESSION['cliente'])){
         </div>
         <div class="card-body">
         <br>
-        <h6>Edad:  <?php echo $cita['edad']?> </h6>
-        <h6>Genero:  <?php echo $cita['genero']?> </h6>
-        <h6>Especialidad:  <?php echo $cita['especialidad']?> </h6>
-        <h6>Cedula:  <?php echo $cita['cedula']?> </h6>
-        <h6>Universidad:  <?php echo $cita['universidad']?> </h6>
-        <h6>Telefono:  <?php echo $cita['telefono']?> </h6>
-        <h6>Correo:  <?php echo $cita['correo']?> </h6>
+        <h6>Edad:  <?php echo $cita->edad?> </h6>
+        <h6>Genero:  <?php echo $cita->genero?> </h6>
+        <h6>Especialidad:  <?php echo $cita->especialidad?> </h6>
+        <h6>Cedula:  <?php echo $cita->cedula?> </h6>
+        <h6>Universidad:  <?php echo $cita->universidad?> </h6>
+        <h6>Telefono:  <?php echo $cita->telefono?> </h6>
+        <h6>Correo:  <?php echo $cita->correo?> </h6>
         <hr>
-        <h6>Cita:  <?php echo $cita['id_cita']?> </h6>
-        <h6>Hora:  <?php echo $cita['hora']?> </h6>
-        <h6>Fecha:  <?php echo $cita['fecha']?> </h6>
+        <h6>Cita:  <?php echo $cita->id_cita?> </h6>
+        <h6>Hora:  <?php echo $cita->hora?> </h6>
+        <h6>Fecha:  <?php echo $cita->fecha?> </h6>
 
 
           <div class="d-grid gap-2 d-md-block">
            <form action="mis_citas.php" method="POST">
            
-           <a href="?borrar=<?php echo $cita['id_cita']; ?>">
+           <a href="?borrar=<?php echo $cita->id_cita; ?>">
             <button class="btn sombras br_btn" id="registrarme" type="button" name="cancelar">
               Cancelar cita
             </button>
@@ -150,7 +159,7 @@ if(isset($_SESSION['cliente'])){
               $id=$_GET['borrar'];
               //borrar registro de cita
               $sql="DELETE FROM citas WHERE `citas`.`id_cita` =".$id;
-              $obj->ejecutar($sql);
+              $insert->ejecutar($sql);
               header('location:mis_citas.php');
              
             }
