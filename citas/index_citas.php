@@ -13,7 +13,7 @@ $insert = new ejecuta();
 error_reporting(E_ERROR | E_PARSE);
 
 session_start();
-if($_SESSION['cliente']){ 
+
 ?>
 
 <!doctype html>
@@ -172,15 +172,7 @@ if($_SESSION['cliente']){
 </body>
 </html>
 
-<?php
-}
-else{
 
-
-  header('location:../index.php');
-
-}
-?>
 
 
 <?php

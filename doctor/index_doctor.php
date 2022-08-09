@@ -1,24 +1,29 @@
 
 <?php
-include('../admin/conexion.php');
+
+use MyApp\data\Database;
+use MyApp\query\ejecuta;
+use MyApp\query\Select;
+
+
+require("../vendor/autoload.php");
+
+$query = new Select();
+$obj = new ejecuta();
 session_start();
 
-$obj= new conexion();
-$citas=$obj->consultar("SELECT todo.Nombre, todo.Ap_Pat, todo.Ap_Mat, todo.Correo, todo.Edad, todo.Genero, todo.Telefono, 
-todo.RFC,todo.hora, todo.fecha, todo.id_cita from (select clientes_datos_personales.nombre as Nombre,clientes_datos_personales.apellido_pat as Ap_Pat,
+$citas=$query->seleccionar("SELECT todo.Nombre, todo.Ap_Pat, todo.Ap_Mat, todo.Correo, todo.Edad, todo.Genero, todo.Telefono, 
+todo.RFC,todo.hora, todo.fecha from (select clientes_datos_personales.nombre as Nombre,clientes_datos_personales.apellido_pat as Ap_Pat,
 clientes_datos_personales.apellido_mat as Ap_Mat, clientes_datos_personales.correo as Correo, clientes_datos_personales.edad as Edad,
 clientes_datos_personales.genero as Genero, clientes_datos_personales.telefono as Telefono, clientes_datos_personales.RFC as RFC,
 usuarios.usuario as usuario, citas.hora as hora, citas.fecha as fecha,citas.id_cita as id_cita from citas inner JOIN clientes on clientes.id_client=citas.id_cliente
 inner JOIN clientes_datos_personales on clientes_datos_personales.id_cliente=clientes.id_reg inner join doctores on
 citas.id_doc=doctores.id_doc inner JOIN usuarios on doctores.id_usuarios=usuarios.id_usuario) as todo
-where todo.usuario='$_SESSION[doctor]';");
+where todo.usuario='fabian';");
 ?>
 
 
 
-<?php
-if(isset($_SESSION['doctor'])){ 
-  ?>
 
 <!doctype html>
 <html lang="en">
@@ -42,6 +47,42 @@ if(isset($_SESSION['doctor'])){
     font-size: 17px;
     }
   
+    
+.button{
+position:relative;
+width: 130px;
+height:50px;
+font-size: 15px;
+color: #000000;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+transition: width .15s,
+border-radius .5,
+}
+
+.button * {
+position:absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+transition: opacity  .10s;
+}
+.icon{
+opacity: 0;
+}
+.button:focus{
+width: 50px;
+background-color: #44c08a;
+border-radius: 50%;
+}
+.button:focus .text{
+opacity: 0;
+}
+.button:focus .icon{
+opacity:1;
+transition-delay: .20s;
+}
     </style>
 
     
@@ -114,56 +155,48 @@ if(isset($_SESSION['doctor'])){
 <div class="col">
       <div class="sombras mb-4 rounded-3 shadow-sm">
         <div class="sombras card-header py-3"">
-          <h4 class="my-0 fw-normal"><?php echo $cita['Nombre']?>  <?php echo $cita['Ap_Pat'] ?></h4>
+          <h4 class="my-0 fw-normal"><?php echo $cita->Nombre?>  <?php echo $cita->Ap_Pat?></h4>
         </div>
         <div class="card-body">
         <br>
-        <h6>Edad:  <?php echo $cita['Edad']?> </h6>
-        <h6>Genero:  <?php echo $cita['Genero']?> </h6>
-        <h6>Telefono:  <?php echo $cita['Telefono']?> </h6>
-        <h6>RFC:  <?php echo $cita['RFC']?> </h6>
-        <h6>Correo:  <?php echo $cita['Correo']?> </h6>
+        <h6>Edad:  <?php echo $cita->Edad?> </h6>
+        <h6>Genero:  <?php echo $cita->Genero?> </h6>
+        <h6>Telefono:  <?php echo $cita->Telefono?> </h6>
+        <h6>RFC:  <?php echo $cita->RFC?> </h6>
+        <h6>Correo:  <?php echo $cita->Correo?> </h6>
 
         <hr>
-        <h6>ID:  <?php echo $cita['id_cita']?> </h6>
-        <h6>Fecha:  <?php echo $cita['fecha']?> </h6>
-        <h6>Hora:  <?php echo $cita['hora']?> </h6>
+   
+        <h6>Fecha:  <?php echo $cita->fecha?> </h6>
+        <h6>Hora:  <?php echo $cita->hora?> </h6>
       
 
           <div class="d-grid gap-2 d-md-block">
            <form action="index_doctor.php" method="POST">
-           
-           <a href="?borrar=<?php echo $cita['id_cita']; ?>">
-            <button class="btn sombras br_btn" id="registrarme" type="button" name="realizada">
-              Realizada
-            </button>
-            </a>
+           <br>
+           <!-- boton check animacion -->
+           <a href="?borrar=<?php echo $cita->id_cita; ?>">
+           <button class="sombras button">
+	        <span class="text"> Realizada </span>
+	        <i class="ri-check-line icon"><img src="https://img.icons8.com/ios-glyphs/30/000000/checkmark--v1.png"/> </i>
+          </button>
+          </a>
+         <!-- Fin boton check animacion -->
+
+ 
+
 
    
           </form>
-            <?php
-            if($_GET){
-
-              $id=$_GET['borrar'];
-              //borrar registro de cita
-              $sql="DELETE FROM citas WHERE `citas`.`id_cita` =".$id;
-              $obj->ejecutar($sql);
-              header('location:index_doctor.php');
-             
-            }
-            ?>
-  
-        
-      
           </div>
           <br>
         </div>
     </div>
     </form>
 
+
+
     </div>
-    <?php  } ?>
-    
     
 </div>
 
@@ -179,8 +212,27 @@ if(isset($_SESSION['doctor'])){
 </html>
 
 <?php
-}
-else{
-  header ("Location:../error.php");
-}
-?>
+            if($_GET){
+
+              $id=$_GET['borrar'];
+              //borrar registro de cita
+              $sql="DELETE FROM citas WHERE `citas`.`id_cita` =".$id;
+              $obj->ejecutar($sql);
+              header('refresh:6s');
+              header('location:index_doctor.php');
+             
+            }
+            ?>
+     <?php
+            if($_GET){
+
+              $id=$_GET['borrar'];
+              //borrar registro de cita
+              $sql="DELETE FROM citas WHERE `citas`.`id_cita` =".$id;
+              $obj->ejecutar($sql);
+              header('location:index_doctor.php');
+             
+            }
+          }
+            ?>
+  

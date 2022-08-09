@@ -25,14 +25,11 @@ FROM citas
 inner  join clientes on clientes.id_client=citas.id_cliente
 inner join doctores on citas.id_doc=doctores.id_doc
 inner join usuarios on usuarios.id_usuario=doctores.id_usuarios
-inner JOIN datos_pers_user on datos_pers_user.id_registro=usuarios.id_reg) as todo WHERE todo.cliente='$_SESSION[cliente]'");
+inner JOIN datos_pers_user on datos_pers_user.id_registro=usuarios.id_reg) as todo WHERE todo.cliente='juanii'");
 ?>
 
 
 
-<?php
-if(isset($_SESSION['cliente'])){ 
-  ?>
 
 <!doctype html>
 <html lang="en">
@@ -125,7 +122,7 @@ if(isset($_SESSION['cliente'])){
 <div class="col">
       <div class="sombras mb-4 rounded-3 shadow-sm">
         <div class="sombras card-header py-3"">
-          <h4 class="my-0 fw-normal"><?php echo "Doc."." ". $cita['nombre']?>  <?php echo $cita['app'] ?></h4>
+          <h4 class="my-0 fw-normal"><?php echo "Doc."." ". $cita->nombre?>  <?php echo $cita->app ?></h4>
         </div>
         <div class="card-body">
         <br>
@@ -190,9 +187,3 @@ if(isset($_SESSION['cliente'])){
 </body>
 </html>
 
-<?php
-}
-else{
-  header ("Location:../error.php");
-}
-?>
