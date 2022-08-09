@@ -35,6 +35,6 @@
 
           echo "<div class='alert alert-success'> Cliente Registrado </div>";
           /*Registro exitoso y despues se dirige a la pagina principal*/
-          header("refresh:3; ../../index.php");
+          header("refresh:3; ../../registro/login.php");
           }
         ?>

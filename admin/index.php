@@ -1,7 +1,15 @@
-
-
 <?php
-include('conexion.php');
+
+use MyApp\data\Database;
+use MyApp\query\ejecuta;
+use MyApp\query\Select;
+
+
+require("../vendor/autoload.php");
+
+$query = new Select();
+$obj = new ejecuta();
+
 session_start();
 
 if($_POST){
@@ -17,44 +25,44 @@ if($_POST){
 
 
 
-  
+  // Guardar imagen
   $imagen=$_FILES['imagen']['name'];
-  /////////
+  /////////  Crear imagenes temporales
   $imagen_temporal=$_FILES['imagen']['tmp_name'];
   move_uploaded_file($imagen_temporal,"imagenes/".$imagen);
 
-  $obj= new sistema();
-  $sql="INSERT INTO `productos` (`nom_producto`,`imagen`,`precio`,`fecha_vencimiento`,`id_cat`,`formula`,`descripcion`) VALUES ('$nom','$imagen','$precio','$fecha','$categoria','$formula','$desc')";
-  $obj->ejecutar($sql);
+
+  $insert="INSERT INTO `productos` (`nom_producto`,`imagen`,`precio`,`fecha_vencimiento`,`id_cat`,`formula`,`descripcion`) VALUES ('$nom','$imagen','$precio','$fecha','$categoria','$formula','$desc')";
+  $obj->ejecutar($insert);
 }
+
+
+//Seleccionar datos de los productos
+$productos=$query->seleccionar("SELECT todo.id, todo.nombre, todo.precio, todo.fecha, todo.formula, todo.descripcion, todo.imagen, todo.categoria from
+(SELECT productos.id_producto as id, productos.nom_producto as nombre, productos.precio as precio, productos.fecha_vencimiento as fecha, productos.formula as formula,
+productos.id_cat as id_cat, productos.descripcion as descripcion, productos.IMAGEN as imagen, categoria.categoria as categoria from productos 
+inner join categoria on categoria.id_cat=productos.id_cat) as todo");
+
+
 
 if($_GET){
   $id=$_GET['borrar'];
-  $obj= new sistema();
  
   //borrar_imageen
-  $imagen=$obj->consultar("SELECT imagen FROM `productos` where id_producto=".$id);
+  $imagen=$query->seleccionar("SELECT imagen FROM `productos` where id_producto=".$id);
   unlink("imagenes/".$imagen[0]['imagen']);
   //borrar producto
   $sql="DELETE FROM productos WHERE `productos`.`id_producto` =".$id;
   $obj->ejecutar($sql);
   
 }
-$obj= new sistema();
-$productos=$obj->consultar("SELECT * FROM `productos`");
-
 
 
 ?>
 
 
 
-
-<?php
-if(isset($_SESSION['admin'])){
-  
-  ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -194,12 +202,12 @@ if(isset($_SESSION['admin'])){
     <br><br>
   <table class="sombras table table-hover table-responsive">
     <thead>
-      <tr>
-        <th>ID</th>
+      <tr class="text-center">
+   
         <th>Nombre</th>
         <th>Imagen</th>
         <th>Precio</th>
-        <th>Fecha Vencimiento</th>
+        <th>Vencimiento</th>
         <th>Formula</th>
         <th>Categoria</th>
         <th>Descripcion</th>
@@ -208,21 +216,20 @@ if(isset($_SESSION['admin'])){
     </thead>
     <tbody>
       <?php foreach($productos as $producto) { ?>
-      <tr> 
-        <td> <?php echo $producto['id_producto'];?> </td>
-        <td> <?php echo $producto['nom_producto'];?> </td>
+      <tr class="text-center"> 
+        <td> <?php echo $producto->nombre;?> </td>
 
         <td> 
-        <img src="imagenes/<?php echo $producto['imagen'];?>" width="60%">
+        <img src="imagenes/<?php echo $producto->imagen;?>" width="50%">
         </td>
 
 
-        <td> <?php echo "$".$producto['precio'];?></td>
-        <td> <?php echo $producto['fecha_vencimiento'];?></td>
-        <td> <?php echo $producto['formula'];?> </td>
-        <td> <?php echo $producto['id_cat'];?></td>
-        <td> <?php echo $producto['descripcion'];?></td>
-        <td> <a class="btn btn-danger" href="?borrar=<?php echo $producto['id_producto']; ?>" >Eliminar</a> </td>
+        <td> <?php echo "$".$producto->precio;?></td>
+        <td> <?php echo $producto->fecha;?></td>
+        <td> <?php echo $producto->formula;?> </td>
+        <td> <?php echo $producto->categoria;?></td>
+        <td> <?php echo $producto->descripcion;?></td>
+        <td> <a class="btn btn-danger" href="?borrar=<?php echo $producto->id; ?>" >Eliminar</a> </td>
       <tr>
       <?php  } ?>
     </tbody>
@@ -240,9 +247,3 @@ if(isset($_SESSION['admin'])){
 </body>
 </html>
 
-<?php
-}
-else{
-  header ("Location:../error.php");
-}
-?>
