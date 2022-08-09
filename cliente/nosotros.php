@@ -15,7 +15,6 @@ session_start();
     <title>Carousel Template · Bootstrap v5.2</title>
     <link rel="stylesheet" href="../bootstrap/css/proyecto/farmacia.css">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.rtl.min.css">
-    
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
 
