@@ -1,10 +1,15 @@
 <?php 
 //ocultar warnings
 error_reporting(E_ERROR | E_PARSE);
-include('../../admin/conexion.php');
+use MyApp\data\Database;
+use MyApp\query\ejecuta;
+use MyApp\query\Select;
+
+require("../../vendor/autoload.php");
+
 session_start();
-$obj= new conexion();
-$productos=$obj->consultar("select * from  productos inner JOIN categoria on productos.id_cat=categoria.id_cat WHERE categoria.categoria='Sueros';");
+$query = new Select();
+$productos=$query->seleccionar("select * from  productos inner JOIN categoria on productos.id_cat=categoria.id_cat WHERE categoria.categoria='Sueros';");
 ?>
 
 <!doctype html>
@@ -90,7 +95,7 @@ $productos=$obj->consultar("select * from  productos inner JOIN categoria on pro
       ?>
       &ensp; &ensp;  &ensp; &ensp;  
       <?php
-           if(isset($_SESSION['cliene'])){
+           if(isset($_SESSION['cliente'])){
             ?>
               <button class="btn sombras iniciar col-8 " type="submit" style="height: 50%; position: relative;" name="cerrar_session">
           <a class="a" href="../../registro/logout.php">  <?php echo "Cerrar Session"?> </a></button>

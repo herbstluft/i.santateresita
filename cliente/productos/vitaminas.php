@@ -1,10 +1,15 @@
 <?php 
 //ocultar warnings
 error_reporting(E_ERROR | E_PARSE);
-include('../../admin/conexion.php');
+
+use MyApp\data\Database;
+use MyApp\query\ejecuta;
+use MyApp\query\Select;
+
+require("../../vendor/autoload.php");
 session_start();
-$obj= new conexion();
-$productos=$obj->consultar("select * from  productos inner JOIN categoria on productos.id_cat=categoria.id_cat WHERE categoria.categoria='Vitaminas y minerales';");
+$query = new Select();
+$productos=$query->seleccionar("select * from  productos inner JOIN categoria on productos.id_cat=categoria.id_cat WHERE categoria.categoria='Vitaminas y minerales';");
 ?>
 
 <!doctype html>

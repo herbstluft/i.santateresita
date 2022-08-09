@@ -8,10 +8,10 @@ use MyApp\query\Select;
 
 require("../../vendor/autoload.php");
 
-$query = new Select();
+
 
 session_start();
-
+$query = new Select();
 $productos=$query->seleccionar("select * from  productos inner JOIN categoria on productos.id_cat=categoria.id_cat WHERE categoria.categoria='Dolor';");
 ?>
 
