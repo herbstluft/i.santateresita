@@ -1,8 +1,17 @@
 <?php 
-include('../../admin/conexion.php');
+use MyApp\data\Database;
+use MyApp\query\ejecuta;
+use MyApp\query\Select;
+
+
+require("../../vendor/autoload.php");
+
+$query = new Select();
+$insert = new ejecuta();
+
 session_start();
-$obj= new conexion();
-$productos=$obj->consultar("SELECT * FROM `productos`");
+
+$productos=$query->seleccionar("SELECT * FROM `productos`");
 ?>
 
 
@@ -106,7 +115,7 @@ $productos=$obj->consultar("SELECT * FROM `productos`");
 
 
   <?php
-$conexion=mysqli_connect("localhost","root","1234","proyecto"); 
+ 
 $where="";
 
 if(isset($_GET['enviar'])){
@@ -141,9 +150,9 @@ if(isset($_GET['enviar'])){
 
 <?php
 
-$conexion=mysqli_connect("localhost","root","1234","proyecto");               
+               
 $SQL="SELECT nom_producto,imagen,descripcion,precio,formula from productos $where";
-$dato = mysqli_query($conexion, $SQL);
+$con=$query->seleccionar($SQL);
 
 if($dato -> num_rows >0){
 while($fila=mysqli_fetch_array($dato)){
@@ -151,11 +160,11 @@ while($fila=mysqli_fetch_array($dato)){
 
 <tbody>
 <tr>
-<td class="sombras card-header"><?php echo $fila['nom_producto']; ?></td>
-<td><img src="../../admin/imagenes/<?php echo $fila['imagen'];?>" class="im card-img-top" style="border-radius:10px"></td>
-<td><?php echo $fila['descripcion']; ?></td>
-<td class="sombras"><?php echo "$".$fila['precio']; ?></td>
-<td><?php echo $fila['formula']; ?></td>
+<td class="sombras card-header"><?php echo $fila->nom_producto;?></td>
+<td><img src="../../admin/imagenes/<?php echo $fila->imagen;?>" class="im card-img-top" style="border-radius:10px"></td>
+<td><?php echo $fila->descripcion;?></td>
+<td class="sombras"><?php echo "$".$fila->precio;?></td>
+<td><?php echo $fila->formula;?></td>
 
 <td>
     <div class="d-grid gap-2 d-md-block">
