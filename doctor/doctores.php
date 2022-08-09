@@ -83,9 +83,23 @@ font-size: 17px;
 
 <div class="row">
       <div class="col-12 col-xs-5 col-md-12 col-lg-5 offset-2 sombras text-center space">
+      <h2 class="fw-normal">guanito</h2> 
         <br>
         <br><br>
-        <h2 class="fw-normal">Estomacal</h2> <br>
+      </div>
+
+      <div class="row">
+      <div class="col-12 col-xs-5 col-md-12 col-lg-5 offset-2 sombras text-center space">
+      <h2 class="fw-normal">mañuel</h2> 
+        <br>
+        <br><br>
+      </div>
+
+      <div class="row">
+      <div class="col-12 col-xs-5 col-md-12 col-lg-5 offset-2 sombras text-center space">
+      <h2 class="fw-normal">Jema</h2> 
+        <br>
+        <br><br>
       </div>
 
 
