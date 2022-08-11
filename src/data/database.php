@@ -6,17 +6,40 @@ use PDOException;
 
 class Database
 {
-    public $objetoPDO = null;
+    private $PDOLocal;
+    private $server = 'mysql:host=127.0.0.1:3306; dbname=proyecto; charset=utf8';
     public $user = "root";
     public $password = "1234";
+    
+    public $objetoPDO = null;
     public $dbname = "proyecto";
 
-    public function __construct(string $dbname, string $user, string $password)
-    {
-        $this->dbname = $dbname;
-        $this->user = $user;
-        $this->passoword = $password;
+    function ConectarDB(){
+        try {
+            $this->PDOLocal = new PDO($this->server, $this->user, $this->password);
+        }
+        catch (PDOException $e) {
+            echo $e->getMessage();
+        }
     }
+
+    function Selects($consulta){
+        try {
+            $resultado = $this->PDOLocal->query($consulta);
+            $fila = $resultado->fetchAll(PDO::FETCH_OBJ);
+            return $fila;
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+
+    // public function __construct(string $dbname, string $user, string $password)
+    // {
+    //     $this->dbname = $dbname;
+    //     $this->user = $user;
+    //     $this->passoword = $password;
+    // }
 
     public function getPDO()
     {

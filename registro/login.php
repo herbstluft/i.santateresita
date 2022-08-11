@@ -7,36 +7,40 @@
      require("../vendor/autoload.php");
 
 if($_GET){
+        include '../src/data/database.php';
+          //$exec= new ejecuta();
+          //$query = new Select();
 
-          $exec= new ejecuta();
-          $query = new Select();
-
+          $db = new Database();
+          $db->ConectarDB();
           extract($_GET);
 
           $usuario = $_GET["nom_user"];
           $passwd = $_GET["passwd"];
 
-          $doctor = "select usuarios.usuario, usuarios.contrasena, tipo_usuario.tipo as tipo from usuarios inner join tipo_usuario on tipo_usuario.id_tipo=usuarios.tipo_usuario WHERE  usuario='$usuario' and contrasena='$passwd' and tipo_usuario.tipo='doctor';";
-          $admin = "select usuarios.usuario, usuarios.contrasena, tipo_usuario.tipo as tipo from usuarios inner join tipo_usuario on tipo_usuario.id_tipo=usuarios.tipo_usuario WHERE  usuario='$usuario' and contrasena='$passwd' and tipo_usuario.tipo='administrador';";
-          $cliente="SELECT clientes.user_clien as user, clientes.contrasena from clientes WHERE clientes.user_clien='$usuario' and clientes.contrasena='$passwd'";
+          $doctor = "CALL `Doctor`(@p0);";
+          $admin = "CALL `Admin`(@p0);";
+          
 
-
-          $val_doc = $query->seleccionar($doctor);
-          $val_admin = $query->seleccionar($admin);
-          $val_cliente = $query->seleccionar($cliente);
+          $val_doc = $db->Selects($doctor);
+          $val_admin = $db->Selects($admin);
+          print_r($val_doc);
+     
         
-          if($val_doc){
+
+
+          // $ = $query->seleccionar($doctor);
+          // $ = $query->seleccionar($admin);
+          // $ = $query->seleccionar($cliente);
+        
+          if($val_doc="doctor"){
             echo "doctor";
-            header("location: ../doctor-/index_doctor.php");
+            header("location: ../doctor/index_doctor.php");
           }
-        elseif ($val_admin) {
+        elseif ($val_admin="administrador") {
         echo "admin";
         header("location: ../admin/index.php");
         }
-        elseif ($val_cliente) {
-          echo "cliente";
-          header("location: ../index.php");
-          }
     else{
       echo "incorrecto";
     }
@@ -45,6 +49,12 @@ if($_GET){
 
 ?>
 
+<?php
+session_start();
+session_destroy();
+
+print_r($_SESSION);
+?>
 
 <!doctype html>
 <html lang="en">
