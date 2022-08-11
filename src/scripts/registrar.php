@@ -14,8 +14,9 @@
           if($_POST){
 
           extract($_POST);
+          $contrasena= password_hash($us_cont, PASSWORD_DEFAULT);
 
-          $insert_clientes="INSERT INTO clientes (user_clien, contrasena) VALUES ('$nom_us','$us_cont')";
+          $insert_clientes="INSERT INTO clientes (user_clien, contrasena) VALUES ('$nom_us','$contrasena')";
           $insert_reg="INSERT INTO clientes_datos_personales (nombre, apellido_pat, apellido_mat, correo, edad, genero, telefono, RFC) VALUES ('$nom', '$ap', '$am', '$corr', '$edad', '$gen', '$tel', '$rfc')";
 
           $insert -> ejecutar($insert_clientes);

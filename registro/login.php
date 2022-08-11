@@ -2,28 +2,44 @@
 
      use MyApp\query\Select;
      use MyApp\data\Database;
+     use MyApp\query\ejecuta;
 
      require("../vendor/autoload.php");
 
-if($_POST){
+if($_GET){
 
-          extract($_POST);
-
-        
-
+          $exec= new ejecuta();
           $query = new Select();
 
-          extract($_POST);
+          extract($_GET);
 
-          $cadena = "Select * from usuarios where usuario=$nom_user and password=$passwd";
+          $usuario = $_GET["nom_user"];
+          $passwd = $_GET["passwd"];
 
-          $datos = $query-> ejecuta($cadena);
-
-          echo "<div class='alert alert-success'> Cliente Registrado </div>";
-          /*Registro exitoso y despues se dirige a la pagina principal*/
-          header("refresh:3; ../../index.php");
+          $doctor = "select usuarios.usuario, usuarios.contrasena, tipo_usuario.tipo as tipo from usuarios inner join tipo_usuario on tipo_usuario.id_tipo=usuarios.tipo_usuario WHERE  usuario='$usuario' and contrasena='$passwd' and tipo_usuario.tipo='doctor';";
+          $admin = "select usuarios.usuario, usuarios.contrasena, tipo_usuario.tipo as tipo from usuarios inner join tipo_usuario on tipo_usuario.id_tipo=usuarios.tipo_usuario WHERE  usuario='$usuario' and contrasena='$passwd' and tipo_usuario.tipo='administrador';";
+          $cliente="SELECT clientes.user_clien as user, clientes.contrasena from clientes WHERE clientes.user_clien='$usuario' and clientes.contrasena='$passwd'";
 
 
+          $val_doc = $query->seleccionar($doctor);
+          $val_admin = $query->seleccionar($admin);
+          $val_cliente = $query->seleccionar($cliente);
+        
+          if($val_doc){
+            echo "doctor";
+            header("location: ../doctor-/index_doctor.php");
+          }
+        elseif ($val_admin) {
+        echo "admin";
+        header("location: ../admin/index.php");
+        }
+        elseif ($val_cliente) {
+          echo "cliente";
+          header("location: ../index.php");
+          }
+    else{
+      echo "incorrecto";
+    }
 
 }
 
