@@ -1,5 +1,5 @@
 <?php
-include '../conexion.php';
+include('registro/conexion.php');
 if(isset($_GET['agregar'])){
     $sql="select * from carrito where cliente='".$_SESSION['cliente']."' and id_producto='".$_GET['agregar']."'";
     $resultados=mysqli_query($conexion,$sql);
