@@ -1,61 +1,49 @@
 <?php
+include('conexion.php');
 
-     use MyApp\query\Select;
-     use MyApp\data\Database;
-     use MyApp\query\ejecuta;
+//ocultar warnings
+error_reporting(E_ERROR | E_PARSE);
+if($_POST){
 
-     require("../vendor/autoload.php");
+session_start();
+$u = $_POST['user'];
+$p = $_POST['passwd'];
 
-if($_GET){
-        include '../src/data/database.php';
-          //$exec= new ejecuta();
-          //$query = new Select();
+//Doctor-Admin
+$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$query = $pdo->prepare("SELECT * from usuarios WHERE usuarios.usuario= :u and contrasena= :p");
+$query->bindParam(":u", $u);
+$query->bindParam(":p", $p);
+$query->execute();
+$usuario = $query->fetch(PDO::FETCH_ASSOC);
 
-          $db = new Database();
-          $db->ConectarDB();
-          extract($_GET);
-
-          $usuario = $_GET["nom_user"];
-          $passwd = $_GET["passwd"];
-
-          $doctor = "CALL `Doctor`(@p0);";
-          $admin = "CALL `Admin`(@p0);";
-          
-
-          $val_doc = $db->Selects($doctor);
-          $val_admin = $db->Selects($admin);
-          print_r($val_doc);
-     
-        
+//Clientes
+$query2 = $pdo->prepare("SELECT * from clientes WHERE clientes.user_clien= :u and clientes.contrasena= :p");
+$query2->bindParam(":u", $u);
+$query2->bindParam(":p", $p);
+$query2->execute();
+$cliente = $query2->fetch(PDO::FETCH_ASSOC);
 
 
-          // $ = $query->seleccionar($doctor);
-          // $ = $query->seleccionar($admin);
-          // $ = $query->seleccionar($cliente);
-        
-          if($val_doc="doctor"){
-            echo "doctor";
-            header("location: ../doctor/index_doctor.php");
-          }
-        elseif ($val_admin="administrador") {
-        echo "admin";
-        header("location: ../admin/index.php");
-        }
-    else{
-      echo "incorrecto";
-    }
+if($usuario['tipo_usuario']==1){
+ echo "admministrador";
+ echo "  " .$usuario['usuario'];
+ }
+
+if($usuario['tipo_usuario']==2){
+  echo "doctor";
+  echo "  " .$usuario['usuario'];
+ }
+
+ if($cliente['t_us']==3){
+  echo "Cliente";
+  echo "  " .$cliente['user_clien'];
+ }
+
 
 }
 
 ?>
-
-<?php
-session_start();
-session_destroy();
-
-print_r($_SESSION);
-?>
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -392,8 +380,7 @@ input[type=text]:placeholder {
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
     
 
-      
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link href="//mn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
@@ -412,10 +399,10 @@ input[type=text]:placeholder {
         </div>
     
         <!-- Login Form -->
-        <form action="login.php" action="../cliente/nosotros.php" action="../cliente/categorias.php" method="get">
+        <form action="login.php"  method="post">
           
           
-        <input type="text" class="form-control" placeholder="Usuario" aria-label="Usuario" name="nom_user">
+        <input type="text" class="form-control" placeholder="Usuario" aria-label="Usuario" name="user">
           <br><br>
           <input style="border-radius:5px; width:85%; height:60px; margin:auto;"
           type="password" id="password" class="form-control  text-center" placeholder="Contraseña" name="passwd">

@@ -15,8 +15,8 @@ class Database
     public $dbname = "proyecto";
 
     function ConectarDB(){
-        try {
-            $this->PDOLocal = new PDO($this->server, $this->user, $this->password);
+                  $this->PDOLocal = new PDO($this->server, $this->user, $this->password);
+  try {
         }
         catch (PDOException $e) {
             echo $e->getMessage();
