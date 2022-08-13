@@ -122,8 +122,9 @@ transition-delay: .20s;
         <?php
         if(isset($_SESSION['doctor'])){
             ?>
+            
               <button class="btn sombras iniciar col-8 " type="submit" style="height: 50px; position: relative; top:30px" name="cerrar_session">
-          <a class="a" href="../registro/logout.php">  <?php echo "Cerrar Session" ?> </a></button>
+              <a  href="../src/scripts/logout.php" style="text-decoration:none"> Cerrar Sesion</a></button>
             <?php
             } 
             ?>

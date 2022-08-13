@@ -26,18 +26,21 @@ $cliente = $query2->fetch(PDO::FETCH_ASSOC);
 
 
 if($usuario['tipo_usuario']==1){
- echo "admministrador";
- echo "  " .$usuario['usuario'];
+  session_start();
+  $_SESSION['admin']=$_POST['user'];
+ header('location:../admin/index.php');
  }
 
 if($usuario['tipo_usuario']==2){
-  echo "doctor";
-  echo "  " .$usuario['usuario'];
+  session_start();
+  $_SESSION['doctor']=$_POST['user'];
+ header('location:../doctor/index_doctor.php');
  }
 
  if($cliente['t_us']==3){
-  echo "Cliente";
-  echo "  " .$cliente['user_clien'];
+  session_start();
+  $_SESSION['cliente']=$_POST['user'];
+ header('location:../index.php');
  }
 
 
