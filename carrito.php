@@ -1,16 +1,31 @@
 <?php
-include('registro/conexion.php');
+use MyApp\data\Database;
+use MyApp\query\ejecuta;
+use MyApp\query\Select;
+
+require("vendor/autoload.php");
+
+$data = new Database();
+$query = new Select();
+$ejecuta = new ejecuta();
+echo $_GET['agregar'];
 if(isset($_GET['agregar'])){
-    $sql="select * from carrito where cliente='".$_SESSION['cliente']."' and id_producto='".$_GET['agregar']."'";
-    $resultados=mysqli_query($conexion,$sql);
-    $num=mysqli_num_rows($resultados);
-    if($num==0){
+    $sql="SELECT * from detalle_orden 
+    inner join orden on orden.id_orden = detalle_orden.id_orden inner join clientes on clientes.id_client = orden.id_cliente where detalle_orden.id_producto = 1 and clientes.user_clien = 'juanii'". $_GET['agregar'];
+    $select = $query->seleccionar($sql);
+    $number_of_rows = $select->fetchColumn();
+    if($carrito==0)
+    {
         $sql="INSERT INTO carrito(id_producto,cantidad,cliente) values('".$_GET['agregar']."','".$_POST['cantidad']."','".$_SESSION['cliente']."')";
-        mysqli_query($conexion,$sql);
-    }else{
-        $fila=mysqli_fetch_array($resultados);
+        $insert = $ejecuta->ejecutar($sql);
+        $carrito = $insert->fetch(PDO::FETCH_ASSOC);
+    }
+    else
+    {
         $cantidad=$fila['cantidad']+1;
         $sql="update carrito set cantidad='".$cantidad."' where cliente='".$_SESSION['cliente']."' and id_producto='".$_GET['agregar']."'";
+        
+        $carrito = $select->fetch(PDO::FETCH_ASSOC);
         mysqli_query($conexion,$sql);
     }
     
@@ -50,27 +65,25 @@ if(isset($_GET['limpiar'])){
 		</tr>
 
         <?php
-            $sql="select productos.nom_producto,productos.precio,carrito.cantidad,carrito.id_carrito from carrito,productos where carrito.id_producto=productos.id_producto and cliente='".$_SESSION['cliente']."'";
-            
-            $resultados=mysqli_query($conexion,$sql);
+           
             $total=0;
-            while($filas=mysqli_fetch_array($resultados)){
+            while($carrito = $select->fetch(PDO::FETCH_ASSOC)){
                 $totalproductos=$filas['cantidad']*$filas['precio'];
                 $total=$total+$totalproductos;
                 echo '
                 <form action="carrito.php" method="post">
                     <tr>
-                        <td>'.$filas['nom_producto'].'</td>
-                        <td>'.$filas['precio'].'</td>
+                        <td>'.$carrito['nom_producto'].'</td>
+                        <td>'.$carrito['precio'].'</td>
                         
 
-                        <td><input value="'.$filas['cantidad'].'" type="number" name="cantidad">
-                        <input type="hidden" value="'.$filas['id_carrito'].'" name="id"></td>
+                        <td><input value="'.$carrito['cantidad'].'" type="number" name="cantidad">
+                        <input type="hidden" value="'.$carrito['id_carrito'].'" name="id"></td>
                         
                         <td>$'.$totalproductos.'</td>
                         <td><input type="submit" value="Actualizar cantidad"></td>
                         
-                        <td><a href="#" onclick="eliminar('.$filas['id_carrito'].')">Eliminar</a></td>
+                        <td><a href="#" onclick="eliminar('.$carrito['id_carrito'].')">Eliminar</a></td>
                     </tr>
                     </form>
                 ';

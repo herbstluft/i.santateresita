@@ -1,4 +1,10 @@
 <?php session_start(); 
+
+use MyApp\data\Database;
+use MyApp\query\ejecuta;
+use MyApp\query\Select;
+
+require("../vendor/autoload.php");
 //aqui empieza el carrito
 
 	if(isset($_SESSION['carrito'])){
