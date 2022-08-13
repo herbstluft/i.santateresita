@@ -13,8 +13,7 @@ if(isset($_GET['agregar'])){
     $sql="SELECT * from detalle_orden 
     inner join orden on orden.id_orden = detalle_orden.id_orden inner join clientes on clientes.id_client = orden.id_cliente where detalle_orden.id_producto = 1 and clientes.user_clien = 'juanii'". $_GET['agregar'];
     $select = $query->seleccionar($sql);
-    $number_of_rows = $select->fetchColumn();
-    if($carrito==0)
+    if($select)
     {
         $sql="INSERT INTO carrito(id_producto,cantidad,cliente) values('".$_GET['agregar']."','".$_POST['cantidad']."','".$_SESSION['cliente']."')";
         $insert = $ejecuta->ejecutar($sql);
@@ -22,7 +21,7 @@ if(isset($_GET['agregar'])){
     }
     else
     {
-        $cantidad=$fila['cantidad']+1;
+        $cantidad=$sql['cantidad']+1;
         $sql="update carrito set cantidad='".$cantidad."' where cliente='".$_SESSION['cliente']."' and id_producto='".$_GET['agregar']."'";
         
         $carrito = $select->fetch(PDO::FETCH_ASSOC);
