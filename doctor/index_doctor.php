@@ -21,10 +21,10 @@ inner JOIN clientes_datos_personales on clientes_datos_personales.id_cliente=cli
 citas.id_doc=doctores.id_doc inner JOIN usuarios on doctores.id_usuarios=usuarios.id_usuario) as todo
 where todo.usuario='".$_SESSION['doctor']."'");
 ?>
-
-
-
-
+<?php 
+if(isset($_SESSION['doctor']))
+{
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -110,7 +110,7 @@ transition-delay: .20s;
         <center>
           <b>
         <li class="nav-item i text-center">
-          <a class="nav-link active fonts" aria-current="page" href="index.php">Inicio</a>
+          <a class="nav-link active fonts" aria-current="page" href="index_doctor.php">Citas</a>
         </li>
         </b>
       </center>
@@ -132,6 +132,12 @@ transition-delay: .20s;
     </div>
   </div>
 </nav>
+<?php
+}
+else{
+  header("location: ../registro/login.php");
+}
+?>
   <!-- Fondo de video -->
   <div class="fullscreen-container">
     <video loop muted autoplay poster="" class="fullscreen-video">
@@ -182,6 +188,7 @@ transition-delay: .20s;
 	        <i class="ri-check-line icon"><img src="https://img.icons8.com/ios-glyphs/30/000000/checkmark--v1.png"/> </i>
           </button>
           </a>
+
          <!-- Fin boton check animacion -->
 
  
@@ -196,7 +203,6 @@ transition-delay: .20s;
     </form>
 
 
-
     
 </div>
 
@@ -209,7 +215,6 @@ transition-delay: .20s;
 
 </body>
 </html>
-
 <?php
             if($_GET){
 

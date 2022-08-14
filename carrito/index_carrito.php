@@ -45,7 +45,9 @@ if(empty($res)){
 
 
 
-
+<?php 
+if(isset($_SESSION['cliente'])){
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -234,3 +236,9 @@ if(empty($res)){
   
 </body>
 </html>
+<?php
+}
+else{
+  header("location: ../registro/login.php");
+}
+?>

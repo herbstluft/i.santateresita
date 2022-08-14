@@ -15,6 +15,9 @@ $insert = new ejecuta();
 session_start();
 
 ?>
+        <?php 
+if(isset($_SESSION['cliente'])){
+?>
 
 <!doctype html>
 <html lang="en">
@@ -104,6 +107,7 @@ session_start();
       <br>
       <center><h1>Citas </h1> </center> 
       <br>
+      
 
       <form class="form1" method="get" action="index_citas.php">
         Nombre:
@@ -163,6 +167,12 @@ session_start();
   <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
 </body>
 </html>
+<?php 
+}
+else{
+  header("location: ../registro/login.php");
+}
+?>
 
 
 

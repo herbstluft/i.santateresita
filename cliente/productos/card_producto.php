@@ -24,11 +24,8 @@
               </svg> &ensp; Agregar
             </button>
             </a>
-    
-    
-        
-      
           </div>
+
           <br>
         </div>
     </div>
