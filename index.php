@@ -156,10 +156,6 @@ if(!isset($_SESSION['doctor'])){
   <main>
 
   
-
-
-
-  
   <div class="row row-cols-1 row-cols-md-12 row-cols-lg-3 mb-3 text-center">
     <!-- Capturar productos en el foreach (carrito) -->
   <?php foreach($productos as $producto) { ?>  <!-- Datos de la consulta -->
@@ -170,6 +166,8 @@ if(!isset($_SESSION['doctor'])){
         <div class="sombras card-header py-3">
           <h4 class="my-0 fw-normal"><?php echo $producto->nom_producto?></h4>
         </div>
+
+        
         <div class="card-body">
           <img src="admin/imagenes/<?php echo $producto->imagen ?>" class="im card-img-top">
           <br><br>
@@ -207,7 +205,6 @@ else{
 
     </div>
     <?php  } ?>
-    
     
 </div>
 
