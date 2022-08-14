@@ -13,6 +13,10 @@ session_start();
 //ocultar warnings
 error_reporting(E_ERROR | E_PARSE);
 
+if($_GET['agregar']){
+  $sql="insert into detalle_orden()";
+}
+
 ?>
 
 
@@ -112,27 +116,13 @@ error_reporting(E_ERROR | E_PARSE);
         </a>  &ensp; &ensp;  &ensp; &ensp;  
         <form class="d-flex" method="POST" action="index.php" role="search">
           <br><br>
-          
-
-          <?php 
-          if(isset($_SESSION['cliente'])){
-            ?>
-          <a href=""  data-bs-toggle="modal" data-bs-target="#modal_cart" >
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-          </svg> 
-          </a> 
-          <?php
-          }
-          ?>
-   
 
            &ensp; &ensp;  &ensp; 
            <?php
            if(isset($_SESSION['cliente'])){
             ?>
               <button class="btn sombras iniciar col-8 " type="submit" style="height: 50%; position: relative;" name="cerrar_session">
-          <a class="a" href="registro/logout.php">  <?php echo "Cerrar Session".$_SESSION['cliente']; ?> </a></button>
+          <a class="a" href="src/scripts/logout.php">  <?php echo "Cerrar Session".$_SESSION['cliente']; ?> </a></button>
             <?php
             } 
             else{
@@ -147,24 +137,7 @@ error_reporting(E_ERROR | E_PARSE);
     </div>
   </nav>
  
-<!-- Modal -->
-<div class="modal fade" id="modal_cart" tabindex="-1" aria-labelledby="modal_cart" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modal_cart">Modal title</h5>
-        
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Vaciar Carrito</button>
-      </div>
-    </div>
-  </div>
-</div>
+
   
 <!-- Fondo de video -->
 <div class="fullscreen-container">
@@ -189,7 +162,7 @@ error_reporting(E_ERROR | E_PARSE);
     <!-- Capturar productos en el foreach (carrito) -->
   <?php foreach($productos as $producto) { ?>  <!-- Datos de la consulta -->
       <!--Card-->
-      <form action="carrito.php" method="post">
+      <form action="carrito/index_carrito.php" method="post">
 <div class="col">
       <div class="sombras mb-4 rounded-3 shadow-sm">
         <div class="sombras card-header py-3">
@@ -198,14 +171,16 @@ error_reporting(E_ERROR | E_PARSE);
         <div class="card-body">
           <img src="admin/imagenes/<?php echo $producto->imagen ?>" class="im card-img-top">
           <br><br>
-          <h5>Descripcion</h5>
+          <h5>Descripcion</h5
+       
           <p class="br_btn"> <?php echo $producto->descripcion;?> </p>
-
-        <b> Precio: </b> <?php echo "$".$producto->precio;?> &ensp; &ensp; &ensp;  <b> Cantidad: </b> &ensp; <input class="sombras" type="number" name="cantidad" style="width: 15%;" >
-    
+      
+        <center>
+        <b> Precio: </b> <?php echo "$".number_format($producto->precio,2, '.', '.');?> 
+        </center>
         <br><br>
           <div class="d-grid gap-2 d-md-block">
-          <a href="carrito.php?agregar=<?php echo $producto->id_producto ?>"> <!--Enviar id de producto -->
+          <a href="carrito/index_carrito.php?agregar=<?php echo $producto->id_producto ?>"> <!--Enviar id de producto -->
             <button class="btn sombras br_btn" id="registrarme" type="button">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
                 <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>

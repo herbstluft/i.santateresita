@@ -9,6 +9,7 @@ require("../vendor/autoload.php");
 
 $query = new Select();
 $obj = new ejecuta();
+error_reporting(E_ERROR | E_PARSE);
 
 session_start();
 
@@ -29,6 +30,7 @@ if($_POST){
   $imagen=$_FILES['imagen']['name'];
   /////////  Crear imagenes temporales
   $imagen_temporal=$_FILES['imagen']['tmp_name'];
+  //mover  imagen a carpeta imagenes
   move_uploaded_file($imagen_temporal,"imagenes/".$imagen);
 
 
@@ -50,7 +52,8 @@ if($_GET){
  
   //borrar_imageen
   $imagen=$query->seleccionar("SELECT imagen FROM `productos` where id_producto=".$id);
-  unlink("imagenes/".$imagen[0]['imagen']);
+  //borrar la imagen temporal (de la carpeta)
+  unlink("imagenes/".$imagen[0]->imagen);
   //borrar producto
   $sql="DELETE FROM productos WHERE `productos`.`id_producto` =".$id;
   $obj->ejecutar($sql);
@@ -60,8 +63,9 @@ if($_GET){
 
 ?>
 
-
-
+<?php 
+if(isset($_SESSION['admin'])){
+?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -125,7 +129,7 @@ if($_GET){
         if(isset($_SESSION['admin'])){
             ?>
               <button class="btn sombras iniciar col-8 " type="submit" style="height: 50px; position: relative; top:30px" name="cerrar_session">
-          <a class="a" href="../registro/logout.php">  <?php echo "Cerrar Session" ?> </a></button>
+          <a class="a" href="../src/scripts/logout.php">  <?php echo "Cerrar Session" ?> </a></button>
             <?php
             } 
             ?>
@@ -224,7 +228,7 @@ if($_GET){
         </td>
 
 
-        <td> <?php echo "$".$producto->precio;?></td>
+        <td> <?php echo "$".number_format($producto->precio,2, '.' ,'.');?></td>
         <td> <?php echo $producto->fecha;?></td>
         <td> <?php echo $producto->formula;?> </td>
         <td> <?php echo $producto->categoria;?></td>
@@ -246,4 +250,12 @@ if($_GET){
 
 </body>
 </html>
+
+
+<?php 
+}
+else{
+  header("location: ../error.php");
+}
+?>
 

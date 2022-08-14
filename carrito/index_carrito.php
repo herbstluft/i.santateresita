@@ -1,3 +1,51 @@
+<?php
+use MyApp\data\Database;
+use MyApp\query\ejecuta;
+use MyApp\query\Select;
+
+require("../vendor/autoload.php");
+
+$data = new Database();
+$query = new Select();
+$ejecuta = new ejecuta();
+session_start();
+
+
+if (isset($_GET['agregar']) ){
+  //comprobar si existe un producto
+    $consulta="select * from detalle_orden where detalle_orden.cliente='".$_SESSION['cliente']."' and 
+    detalle_orden.id_producto='".$_GET['agregar']."'";
+    $res=$query->seleccionar($consulta);
+
+//condicion de producto existente
+///////////////////////////////////
+
+if(empty($res)){
+
+    //insertando producto al carro
+    $add_producto ="insert into detalle_orden (id_producto,cantidad, cliente) values ('".$_GET['agregar']."',1, '".$_SESSION['cliente']."')";
+    $ejecuta->ejecutar($add_producto);
+    header("location: index_carrito.php");
+  }
+  else{
+   
+    }
+}
+//Borrar producto del carrito
+    if(isset($_GET['id']))
+    {
+      $sql="delete from detalle_orden where id_producto=".$_GET['id']."";
+      $ejecuta->ejecutar($sql);
+      
+      header("location: index_carrito.php");
+    }
+
+
+?>
+
+
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -47,7 +95,7 @@
 
 <nav class="navbar navbar-expand-lg barra sticky-top" >
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.php"><img src="../bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
+      <a class="navbar-brand" href="../index.php"><img src="../bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
       
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -58,16 +106,16 @@
           <center>
             <b>
           <li class="nav-item i">
-            <a class="nav-link active fonts" aria-current="page" href="index.php">Inicio</a>
+            <a class="nav-link active fonts" aria-current="page" href="../index.php">Inicio</a>
           </li>
           <li class="nav-item i">
-            <a class="nav-link fonts" href="cliente/categorias.php">Categorias</a>
+            <a class="nav-link fonts" href="../cliente/categorias.php">Categorias</a>
           </li>
           <li class="nav-item i">
-            <a class="nav-link fonts" href="#">Cita</a>
+            <a class="nav-link fonts" href="../citas_index_citas.php">Cita</a>
           </li>
           <li class="nav-item i">
-            <a class="nav-link fonts" href="#">Nosotros</a>
+            <a class="nav-link fonts" href="../cliente/nosotros.php">Nosotros</a>
           </li>
           </b>
         </center> &ensp; &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;
@@ -90,7 +138,13 @@
     <!--Contenido de la pagina-->
 
     <div class="sombras"> <!--Inicio-->
-      <br>
+
+      <br> <?php echo $_SESSION['cliente'] ?>
+
+
+
+
+
       <center><h1>Carrito</h1></center>
       <br>
 
@@ -102,13 +156,35 @@
             <th scope="col">Precio</th>
             <th scope="col">Cantidad</th>
             <th scope="col">Subtotal</th>
+            <th scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody>
-            <tr>
+        
+        <?php
+        $sql="SELECT todo.nom as Producto, todo.precio, todo.cantidad, todo.subtotal as subtotal, todo.id from (select productos.nom_producto as nom, productos.precio as precio, detalle_orden.cantidad as cantidad, (productos.precio * detalle_orden.cantidad) as subtotal, productos.id_producto as id from detalle_orden inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente='".$_SESSION['cliente']."') as todo";
 
-            </tr>
-            <tr><td colspan="5"><p>Tu carrito esta vacio.....</p></td>
+        //ejecutar consulta
+        $resultados=$query->seleccionar($sql);
+        //convirtiendo en array  ?>
+        
+        <?php foreach($resultados as $producto) { ?>
+
+              <tr>
+        <td> <?php echo $producto->Producto?></td>
+        <td> <?php echo "$".number_format($producto->precio,2,'.','.')?></td>
+        <td> <?php 
+        echo  $producto->cantidad?></td>    
+        <td> <?php echo "$".number_format($producto->subtotal,2, '.','.')?></td>
+
+        <!--METODO GET: envia el id sacado de la consulta mediante la URL-->
+        <td><a href="index_carrito.php?id=<?php echo $producto->id ?>" class="btn btn-danger"><i class="glyphicon glyphicon-menu-left"></i> Borrar</a></td>
+         
+
+                    </tr>
+          
+              <?php  } ?>
+          
            
         </tbody>
         <tfoot>
@@ -126,26 +202,35 @@
 
   </main>
 
-        <!--Boton flotante -->
-  <div class="conta" id="d">
+ 
+
+</div>
+<!--Boton flotante -->
+<div class="conta">
     <div class="boton">
       <input type="checkbox" id="btn-mas">
       <div class="redes">
-          <a href="#" class="fa fa-facebook"></a>
-          <a href="#" class="fa fa-whatsapp"></a>
+          <a href="#"><img src="https://img.icons8.com/material-outlined/25/FFFFFF/facebook-new.png"/></a>
+          <a href="#"><img src="https://img.icons8.com/material-outlined/25/FFFFFF/whatsapp--v1.png"/></a>
+          <a href="../cliente/buscar/index_buscar.php"><img src="https://img.icons8.com/ios-glyphs/25/FFFFFF/search--v1.png"/></a>
         </div>
 
-        <div class="btn-mas">
+        <div class=" btn-mas">
           <label for="btn-mas" class="fa fa-plus"></label>
         </div>
-    </div>
-  </div>
 
-</div>
+
+
+    </div>
+ 
+  </div>    
+<!-- Fin del boton flotante -->
+
 
   <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>   
   <script src="../bootstrap/js/bootstrap.min.js"></script>
   <script type="module" src="../bootstrap/js/background.js"></script>
   <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+  
 </body>
 </html>

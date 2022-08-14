@@ -19,7 +19,7 @@ clientes_datos_personales.genero as Genero, clientes_datos_personales.telefono a
 usuarios.usuario as usuario, citas.hora as hora, citas.fecha as fecha,citas.id_cita as id_cita from citas inner JOIN clientes on clientes.id_client=citas.id_cliente
 inner JOIN clientes_datos_personales on clientes_datos_personales.id_cliente=clientes.id_reg inner join doctores on
 citas.id_doc=doctores.id_doc inner JOIN usuarios on doctores.id_usuarios=usuarios.id_usuario) as todo
-where todo.usuario='fabian';");
+where todo.usuario='".$_SESSION['doctor']."'");
 ?>
 
 
@@ -197,13 +197,11 @@ transition-delay: .20s;
 
 
 
-    </div>
     
 </div>
 
 
 
-</div>
   
     <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>    
     <script src="../bootstrap/js/bootstrap.min.js"></script>

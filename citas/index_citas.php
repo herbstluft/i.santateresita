@@ -10,7 +10,7 @@ $query = new Select();
 $insert = new ejecuta();
 
 //ocultar warnings
-error_reporting(E_ERROR | E_PARSE);
+
 
 session_start();
 
@@ -64,10 +64,10 @@ session_start();
           <a class="nav-link fonts" href="../cliente/categorias.php">Categorias</a>
         </li>
         <li class="nav-item i">
-          <a class="nav-link fonts" href="../citas/index_citas.php">Cita</a>
+          <a class="nav-link active fonts" href="../citas/index_citas.php">Cita</a>
         </li>
         <li class="nav-item i">
-          <a class="nav-link active fonts" href="../cliente/nosotros.php">Nosotros</a>
+          <a class="nav-link  fonts" href="../cliente/nosotros.php">Nosotros</a>
         </li>
         </b>
       &ensp; &ensp; 
@@ -117,10 +117,10 @@ session_start();
                where clientes.user_clien='$_SESSION[cliente]'";
               $id=$query -> seleccionar($consulta);
      
-              foreach($resultado as $res)
+              foreach($id as $res)
 
               $nombre_cliente= $res->nombre ." ". $res->app ." ". $res->apm;
-              echo $nombre_cliente;
+           echo $nombre_cliente;
               
             }
           ?>
@@ -146,15 +146,7 @@ session_start();
           <center> <input type="submit" class="fadeIn fourth" value="Generar cita" name="generar"></center>
           <a href="mis_citas.php"><button type="button" class="btn" style="background-color: #CC7272; color:white">Ver mis citas</button>
           <br><br>
-          <?php 
-            if(isset($_GET['generar'])){
-              ?>
-               <div class="alert alert-success" role="alert">
-                <center> Su cita ha sido generada con exito! </center>
-              </div>
-              <?php
-            }
-          ?>
+          
 
           
       </form>
@@ -185,16 +177,24 @@ if(isset($_GET['generar'])){
   
   //obtener id del cliente
   $cliente_id="SELECT clientes.id_client from clientes where clientes.user_clien='$_SESSION[cliente]'";
-  $id=$query -> seleccionar($cliente_id);
+  $id=$query->seleccionar($cliente_id);
   //convertir resultado a entero
-  if (mysqli_num_rows($id1) > 0) {
-    while($id_cliente = mysqli_fetch_array($id1)){
-        echo $id_cliente['id_client'];
+  if (!empty($id)) {
+    foreach ($id as $id_cliente) {
+      # code...
+
         
-        $insert_cita="INSERT INTO `citas` (`id_cliente`,`id_doc`,`hora`,`fecha`) VALUES ($id_cliente[id_client],'$doctor','$hora','$fecha')";
-        $cita=$query -> seleccionar($insert_cita);
-        header('location:index_citas.php');
-    }
+        $insert_cita="INSERT INTO `citas` (`id_cliente`,`id_doc`,`hora`,`fecha`,`realizadas`) VALUES ($id_cliente->id_client,$doctor,'$hora','$fecha',0)";
+        $insert->ejecutar($insert_cita);  
+    } 
+    echo "
+    <div class='container'>
+    <div class='alert alert-success' role='alert'>
+    <center> Su cita ha sido generada con exito! </center>
+  </div>
+  <div>
+  ";
+
   }
 
   }
