@@ -21,6 +21,9 @@ if($_GET['agregar']){
 
 
 
+<?php
+if(isset($_SESSION['cliente']) or isset($_SESSION['admin'])){
+?>
 
 <!doctype html>
 <html lang="en">
@@ -133,9 +136,16 @@ else{
            if(isset($_SESSION['cliente'])){
             ?>
               <button class="btn sombras iniciar col-8 " type="submit" style="height: 50%; position: relative;" name="cerrar_session">
-          <a class="a" href="src/scripts/logout.php">  <?php echo "Cerrar Session".$_SESSION['cliente']; ?> </a></button>
+          <a class="a" href="src/scripts/logout.php"> Cerrar session </a></button>
             <?php
             } 
+            elseif(isset($_SESSION['admin'])){
+              ?>
+          <button class="btn sombras iniciar col-8 " type="submit" style="height: 50%; position: relative;" name="cerrar_session">
+          <a class="a" href="admin/index.php"> Regresar a inicio </a></button>
+
+              <?php
+             }
             else{
               ?>
                <button class="btn sombras iniciar" id="registrarme" type="submit">
@@ -253,3 +263,10 @@ else{
   </body>
 </html>
 
+
+<?php
+ }
+else{
+  header("location: error.php");
+}
+?>

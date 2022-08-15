@@ -9,6 +9,14 @@ error_reporting(E_ERROR | E_PARSE);
 session_start();
 
 ?>
+
+<?php
+if($_SESSION['admin']){
+
+?>
+
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -145,7 +153,7 @@ session_start();
         <br><br>
         <h2 class="fw-normal">Reportes</h2> <br>
         <h5>Ver reporte de venta diario</h5><br>
-        <p><a class="btn sombras" id="registrarme" href="productos/estomacal.php">Publicar &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="acciones/reportes.php">Publicar &raquo;</a></p>
       </div>
     
       
@@ -155,7 +163,7 @@ session_start();
         <br><br>
         <h2 class="fw-normal">Creadores</h2> <br>
         <h5>Ver los creadores de la paginas</h5><br><br>
-        <p><a class="btn sombras" id="registrarme" href="/index.php">Ir &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="acciones/creadores/creadores.html">Ir &raquo;</a></p>
       </div>
 
     
@@ -166,26 +174,7 @@ session_start();
    
 </div>
 </div>
-<!--Boton flotante -->
-<div class="conta">
-    <div class="boton">
-      <input type="checkbox" id="btn-mas">
-      <div class="redes">
-          <a href="#"><img src="https://img.icons8.com/material-outlined/25/FFFFFF/facebook-new.png"/></a>
-          <a href="#"><img src="https://img.icons8.com/material-outlined/25/FFFFFF/whatsapp--v1.png"/></a>
-          <a href="../cliente/buscar/index_buscar.php" ><img src="https://img.icons8.com/ios-glyphs/25/FFFFFF/search--v1.png"/></a>
-        </div>
 
-        <div class=" btn-mas">
-          <label for="btn-mas" class="fa fa-plus"></label>
-        </div>
-
-
-
-    </div>
- 
-  </div>    
-<!-- Fin del boton flotante -->
 
 <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
     <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>    
@@ -194,3 +183,13 @@ session_start();
 
 </body>
 </html>
+
+
+
+<?php
+}
+else {
+  header("location: ../error.php");
+}
+
+?>

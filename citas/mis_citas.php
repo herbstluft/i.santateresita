@@ -28,6 +28,10 @@ inner join usuarios on usuarios.id_usuario=doctores.id_usuarios
 inner JOIN datos_pers_user on datos_pers_user.id_registro=usuarios.id_reg) as todo WHERE todo.cliente='juanii'");
 ?>
 
+<?php
+if(isset($_SESSION['cliente'])){
+?>
+
 
 
 
@@ -187,3 +191,10 @@ inner JOIN datos_pers_user on datos_pers_user.id_registro=usuarios.id_reg) as to
 </body>
 </html>
 
+
+<?php
+ }
+else{
+  header("location: ../error.php");
+}
+?>

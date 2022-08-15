@@ -98,7 +98,7 @@ $productos=$query->seleccionar("select * from  productos inner JOIN categoria on
       ?>
       &ensp; &ensp;  &ensp; &ensp;  
       <?php
-           if(isset($_SESSION['cliente'])){
+           if(isset($_SESSION['cliente']) or isset($_SESSION['admin'])){
             ?>
               <button class="btn sombras iniciar col-8 " type="submit" style="height: 50%; position: relative;" name="cerrar_session">
           <a class="a" href="../../registro/logout.php">  <?php echo "Cerrar Session"?> </a></button>

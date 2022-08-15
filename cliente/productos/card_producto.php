@@ -16,7 +16,11 @@
         <b> Precio: </b> <?php echo "$".number_format($producto->precio,2, '.','.');?>  
     
         <br><br>
-          <div class="d-grid gap-2 d-md-block">
+        <?php
+          if(isset($_SESSION['cliente'])){
+          ?>
+
+          <div class="d-grid gap-2 d-md-block">         
           <a href="../../carrito/index_carrito.php?agregar=<?php echo $producto->id_producto ?>"> <!--Enviar id de producto -->
             <button class="btn sombras br_btn" id="registrarme" type="button">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
@@ -25,6 +29,10 @@
             </button>
             </a>
           </div>
+
+          <?php
+           }
+          ?>
 
           <br>
         </div>

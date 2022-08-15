@@ -60,11 +60,7 @@ if($_GET){
   
 }
 
-
-?>
-
-
-<?php 
+ 
 if(isset($_SESSION['admin'])){
 ?>
 <!DOCTYPE html>

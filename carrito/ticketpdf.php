@@ -18,80 +18,24 @@ session_start();
 <head>
 
     <style>
-        * {
-            font-size: 12px;
-            font-family: 'DejaVu Sans', serif;
-        }
+     .ticket{
+        margin:auto;
+        background-color: green;
+        width: 80%;
+     }
 
-        h1 {
-            font-size: 18px;
-        }
-
-        .ticket {
-            margin: 2px;
-        }
-
-        td,
-        th,
-        tr,
-        table {
-            border-top: 1px solid black;
-            border-collapse: collapse;
-            margin: 0 auto;
-        }
-
-        td.precio {
-            text-align: right;
-            font-size: 11px;
-        }
-
-        td.cantidad {
-            font-size: 11px;
-        }
-
-        td.producto {
-            text-align: center;
-        }
-
-        th {
-            text-align: center;
-        }
-
-
-        .centrado {
-            text-align: center;
-            align-content: center;
-        }
-
-        .ticket {
-            width: <?php echo $medidaTicket ?>px;
-            max-width: <?php echo $medidaTicket ?>px;
-        }
-
-        img {
-            max-width: inherit;
-            width: inherit;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        .ticket {
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            text-align: center;
-        }
     </style>
 </head>
 
 <body>
     <div class="ticket centrado">
-        <h1>FARMACIA SANTA TERESITA</h1>
+        <center>
+            <img src="../bootstrap/img/logo.png" alt="">
+        </center>
+        <?php //imprimir hora actual
+$DateAndTime = date('m-d-Y h:i:s a', time());  
+echo " $DateAndTime.";
+?>
         <h2>Ticket de venta #1</h2>
         <h2>2022-07-28 00:10:46</h2>
         <?php
@@ -148,6 +92,10 @@ session_start();
         </table>
         <p class="centrado">¡GRACIAS POR SU COMPRA!
     </div>
+
+
+
+    
 </body>
 
 </html>

@@ -9,6 +9,13 @@ error_reporting(E_ERROR | E_PARSE);
 session_start();
 
 ?>
+
+
+
+<?php
+if(isset($_SESSION['cliente']) or isset($_SESSION['admin'])){
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -83,7 +90,7 @@ session_start();
         
        &ensp;  &ensp; &ensp;  &ensp; &ensp; 
       <?php
-           if($_SESSION['cliente']){
+           if($_SESSION['cliente'] or isset($_SESSION['admin'])){
             ?>
           
             <?php
@@ -249,3 +256,12 @@ session_start();
 
 </body>
 </html>
+
+
+
+<?php
+ }
+else{
+  header("location: ../error.php");
+}
+?>

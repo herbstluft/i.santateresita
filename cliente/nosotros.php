@@ -4,6 +4,15 @@ error_reporting(E_ERROR | E_PARSE);
 session_start();
 ?>
 
+
+
+
+<?php
+if(isset($_SESSION['cliente']) or isset($_SESSION['admin'])){
+?>
+
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -77,7 +86,7 @@ session_start();
         
        &ensp; &ensp;  &ensp; &ensp;  
       <?php
-           if($_SESSION['cliente']){
+           if(isset($_SESSION['cliente']) or isset($_SESSION['admin'])){
             ?>
          
             <?php
@@ -111,7 +120,7 @@ session_start();
        
       <div class="row">
          <div class="col-4 offset-1" >
-          <img  src="../bootstrap/img/farmacianosotros.jpg" alt="" style="width:100%; border-radius: 60px 0px; position: relative;top: 5%; left: 10%;">
+          <img  src="../bootstrap/img/logo.png" alt="" style="width:100%; border-radius: 60px 0px; position: relative;top: 5%; left: 10%;">
         </div>
 
         <div class="col-5" >
@@ -162,3 +171,11 @@ session_start();
 
 </body>
 </html>
+
+
+<?php
+ }
+else{
+  header("location: ../error.php");
+}
+?>

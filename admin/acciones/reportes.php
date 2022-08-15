@@ -15,11 +15,6 @@ $productos=$query->seleccionar("SELECT * FROM `productos`");
 ?>
 
 
-<?php
-if(isset($_SESSION['cliente']) or isset($_SESSION['admin'])){
-?>
-
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -80,7 +75,7 @@ if(isset($_SESSION['cliente']) or isset($_SESSION['admin'])){
 
            &ensp; 
            <?php
-           if(isset($_SESSION['cliente']) or isset($_SESSION['admin'])){
+           if(isset($_SESSION['cliente'])){
             ?>
             
             <?php
@@ -134,15 +129,7 @@ if(isset($_SESSION['cliente']) or isset($_SESSION['admin'])){
         <th>Descripcion</th>
         <th>Precio</th>
         <th>Formula</th>
-
-        <?php
-        //ocultar agregar
-         if(isset($_SESSION['cliente'])){
-        ?>
         <th>Acciones</th>
-        <?php
-         }
-        ?>
     </tr>
 </thead>
 
@@ -165,11 +152,6 @@ if(!empty($con)){
 <td class="sombras"><?php echo "$".number_format($fila->precio, 2, '.', '.');?></td>
 <td><?php echo $fila->formula;?></td>
 
-
-<?php
-//ocultar agregar
-         if(isset($_SESSION['cliente'])){
-        ?>
 <td>
     <div class="d-grid gap-2 d-md-block">
     <a href="../../carrito/index_carrito.php?agregar=<?php echo $fila->id_producto ?>"> <!--Enviar id de producto -->
@@ -181,10 +163,6 @@ if(!empty($con)){
     </a>
     </div>
 </td>
-
-<?php
-         }
-        ?>
 
 </tr>
 
@@ -208,10 +186,3 @@ if(!empty($con)){
 
 </body>
 </html>
-
-<?php
- }
-else{
-  header("location: ../../error.php");
-}
-?>
