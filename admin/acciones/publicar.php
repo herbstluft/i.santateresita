@@ -31,7 +31,7 @@ if($_POST){
   /////////  Crear imagenes temporales
   $imagen_temporal=$_FILES['imagen']['tmp_name'];
   //mover  imagen a carpeta imagenes
-  move_uploaded_file($imagen_temporal,"imagenes/".$imagen);
+  move_uploaded_file($imagen_temporal,"../imagenes/".$imagen);
 
 
   $insert="INSERT INTO `productos` (`nom_producto`,`imagen`,`precio`,`fecha_vencimiento`,`id_cat`,`formula`,`descripcion`) VALUES ('$nom','$imagen','$precio','$fecha','$categoria','$formula','$desc')";
@@ -215,7 +215,7 @@ if(isset($_SESSION['admin'])){
         <td> <?php echo $producto->nombre;?> </td>
 
         <td> 
-        <img src="imagenes/<?php echo $producto->imagen;?>" width="50%">
+        <img src="../imagenes/<?php echo $producto->imagen;?>" width="50%">
         </td>
 
 
