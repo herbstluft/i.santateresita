@@ -75,6 +75,7 @@ if(isset($_SESSION['cliente'])){
   <body>
     
 
+   
   <div class="fullscreen-container">
     <video loop muted autoplay poster="dist/img/office.jpg" class="fullscreen-video">
         <source src="https://player.vimeo.com/external/641767478.hd.mp4?s=d1e3f6e09192708d3ac42cc85979c361242f11f5&profile_id=174&oauth_token_id=1027659655" type="video/mp4">
@@ -120,13 +121,23 @@ if(isset($_SESSION['cliente'])){
             <a class="nav-link fonts" href="../cliente/nosotros.php">Nosotros</a>
           </li>
           </b>
-        </center> &ensp; &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;
+        </center> &ensp; &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp; &ensp; &ensp;  &ensp; &ensp; &ensp; &ensp;  &ensp; &ensp; &ensp; &ensp;  &ensp; &ensp;
         </ul>
         <form class="d-flex" role="search">
           <br><br>
           
+          <?php
+          if(isset($_SESSION['cliente'])){
+
+          }
+          else{
+          ?>
           <button class="btn sombras iniciar" type="submit">
             <a class="a" href="login.php">  Iniciar Session   </a></button>
+          
+          <?php
+          }
+            ?>
         </form>
       </div>
     </div>
@@ -152,7 +163,7 @@ if(isset($_SESSION['cliente'])){
 
 <div class="sombras, tabcar">
       <table class="table">
-        <thead>
+        <thead  class="text-center">
           <tr>
             <th scope="col">Producto</th>
             <th scope="col">Precio</th>
@@ -173,14 +184,14 @@ if(isset($_SESSION['cliente'])){
         <?php foreach($resultados as $producto) { ?>
 
               <tr>
-        <td> <?php echo $producto->Producto?></td>
-        <td> <?php echo "$".number_format($producto->precio,2,'.','.')?></td>
-        <td> <?php 
+        <td  class="text-center"> <?php echo $producto->Producto?></td>
+        <td  class="text-center"> <?php echo "$".number_format($producto->precio,2,'.','.')?></td>
+        <td  class="text-center"> <?php 
         echo  $producto->cantidad?></td>    
-        <td> <?php echo "$".number_format($producto->subtotal,2, '.','.')?></td>
+        <td  class="text-center"> <?php echo "$".number_format($producto->subtotal,2, '.','.')?></td>
 
         <!--METODO GET: envia el id sacado de la consulta mediante la URL-->
-        <td><a href="index_carrito.php?id=<?php echo $producto->id ?>" class="btn btn-danger"><i class="glyphicon glyphicon-menu-left"></i> Borrar</a></td>
+        <td class="text-center"><a href="index_carrito.php?id=<?php echo $producto->id ?>" class="btn btn-danger"><i class="glyphicon glyphicon-menu-left"></i> Borrar</a></td>
          
 
                     </tr>
@@ -190,17 +201,21 @@ if(isset($_SESSION['cliente'])){
            
         </tbody>
         <tfoot>
-        <tr>
+        <tr class="text-center">
             <td><a href="../index.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> < Continue Comprando</a></td>
-            <td colspan="2"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+         
+            <td><a href="ticketpdf.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Generar ticket ></a></td>
            
-            <td class="text-center"><strong></strong></td>
-           
+            
             
         </tr>
     </tfoot>
     </table>
     </div>
+
 
   </main>
 
