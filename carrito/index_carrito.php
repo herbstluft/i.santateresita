@@ -206,9 +206,19 @@ if(isset($_SESSION['cliente'])){
             <td></td>
             <td></td>
             <td></td>
-         
-            <td><a href="ticketpdf.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Generar ticket ></a></td>
-           
+
+
+            <?php
+
+            //hacer aparecer o no el boton del ticket
+              if(!empty($resultados)){
+            ?>
+         <form action="ticketpdf.php" method="post">
+            <td><a href="ticketpdf.php?gen_orden" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Generar ticket ></a></td>
+            </form>
+            <?php
+              }
+            ?>
             
             
         </tr>

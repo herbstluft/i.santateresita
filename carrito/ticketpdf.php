@@ -51,7 +51,7 @@ session_start();
 
         $productos = "SELECT todo.nom as Producto, todo.precio, todo.orden,todo.cantidad, todo.total as subtotal from  
         (select productos.nom_producto as nom, productos.precio as precio, orden.id_orden as orden, detalle_orden.cantidad as cantidad, (productos.precio * detalle_orden.cantidad) as total from detalle_orden inner JOIN orden on orden.detalle=orden.detalle 
-        inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente='juanii')as  todo";
+        inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente='".$_SESSION['cliente']."')as  todo";
         $resultado = $query->seleccionar($productos);
         
 
@@ -60,7 +60,7 @@ session_start();
         $consulta="SELECT clientes_datos_personales.nombre as nombre,clientes_datos_personales.apellido_pat as app,
         clientes_datos_personales.apellido_mat as apm
          from clientes_datos_personales inner join clientes on clientes.id_reg=clientes_datos_personales.id_cliente
-         where clientes.user_clien='juanii'";
+         where clientes.user_clien='".$_SESSION['cliente']."'";
         $id=$query -> seleccionar($consulta);
 
         //convirtiendo el nombre en array y concadenandolo
@@ -73,8 +73,15 @@ session_start();
         ?>
 
 
-
+<?php  
+if (!empty($ord))
+{
+?>
 <p> <b> Orden: #</b><?php echo $ord->orden?></p>
+<?php
+}
+else{}
+?>
 <p> <b> Cliente: </b> <?php echo $nombre_cliente?></p>
         <h2>2022-07-28 00:10:46</h2>
         <table>
@@ -109,7 +116,7 @@ session_start();
                 (select productos.nom_producto as nom, productos.precio as precio, detalle_orden.cantidad as cantidad, 
                 (productos.precio * detalle_orden.cantidad) as total from detalle_orden inner JOIN orden 
                 on orden.detalle=orden.detalle inner join productos on productos.id_producto=detalle_orden.id_producto 
-                where detalle_orden.cliente='juanii')as todo)as SAM;";
+                where detalle_orden.cliente='".$_SESSION['cliente']."')as todo)as SAM;";
                 $totalx = $query->seleccionar($total);
                 foreach ($totalx as $totalito) {
                 ?>
