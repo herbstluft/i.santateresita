@@ -37,7 +37,7 @@ if ($rr==0)
 
 }
 
-$rr = 2;
+$rr = 1;
 
 
 if(empty($res)){
@@ -47,16 +47,30 @@ if(empty($res)){
     $ejecuta->ejecutar($add_producto);
     header("location: index_carrito.php");
   }
+ 
+// Si el produco existe aumenta la cantidad
   else{
-   
-    }
+    include '../src/data/conexion_sqli.php';
+    $consult="select * from detalle_orden where detalle_orden.cliente='".$_SESSION['cliente']."' and 
+    detalle_orden.id_producto='".$_GET['agregar']."'";
+    $resultados=mysqli_query($conexion,$consult);
+    $num=mysqli_num_rows($resultados);
+
+    $fila=mysqli_fetch_array($resultados);
+    $cantidad=$fila['cantidad'];
+    $sum=$cantidad+1;
+    $sql="update detalle_orden set cantidad='".$sum."' where cliente='".$_SESSION['cliente']."' and id_producto='".$_GET['agregar']."' and estatus=0";
+    mysqli_query($conexion,$sql);
+  }    
 }
 
 //condicion de producto existente
 ///////////////////////////////////
+
+//Regenerar Carrito
 if(isset($_GET['regenerarcarrito'])){
   $rr=0;
-  $del="DELETE * from detalle_orden where detalle_orden.id_orden = $or and cliente='juanii'";
+  $del="DELETE from detalle_orden where cliente='".$_SESSION['cliente']."' and estatus=0";
   $ejecuta->ejecutar($del);
   }
 
@@ -68,6 +82,8 @@ if(isset($_GET['regenerarcarrito'])){
       
       header("location: index_carrito.php");
     }
+
+
 
 
 ?>
@@ -233,7 +249,17 @@ if(isset($_SESSION['cliente'])){
         <tr class="text-center">
             <td><a href="../index.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> < Continue Comprando</a></td>
             <td></td>
-            <td><a href="index_carrito.php?regenerarcarrito=<?php echo $_SESSION['cliente'] ?>" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Regenerar carrito</a></td>
+
+            <?php
+            //hacer aparecer o no el boton del ticket
+              if(!empty($resultados)){
+            ?>
+            <td><a href="index_carrito.php?regenerarcarrito=1" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Regenerar carrito</a></td>
+
+            <?php
+              }
+            ?>
+            
             <td></td>
 
 

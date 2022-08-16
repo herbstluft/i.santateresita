@@ -7,10 +7,6 @@ session_start();
 
 
 
-<?php
-if(isset($_SESSION['cliente']) or isset($_SESSION['admin'])){
-?>
-
 
 
 <!doctype html>
@@ -172,10 +168,3 @@ if(isset($_SESSION['cliente']) or isset($_SESSION['admin'])){
 </body>
 </html>
 
-
-<?php
- }
-else{
-  header("location: ../error.php");
-}
-?>

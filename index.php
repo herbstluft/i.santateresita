@@ -21,9 +21,7 @@ if($_GET['agregar']){
 
 
 
-<?php
-if(isset($_SESSION['cliente']) or isset($_SESSION['admin'])){
-?>
+
 
 <!doctype html>
 <html lang="en">
@@ -263,10 +261,3 @@ else{
   </body>
 </html>
 
-
-<?php
- }
-else{
-  header("location: error.php");
-}
-?>
