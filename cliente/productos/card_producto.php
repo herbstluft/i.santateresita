@@ -8,7 +8,7 @@
           <h4 class="my-0 fw-normal"><?php echo $producto->nom_producto; ?></h4>
         </div>
         <div class="card-body">
-          <img src="../../admin/imagenes/<?php echo $producto->imagen;?>" class="im">
+          <img src="../../admin/imagenes/<?php echo $producto->IMAGEN;?>" class="im">
           <br><br>
           <h5>Descripcion</h5>
           <p class="br_btn"> <?php echo $producto->descripcion;?> </p>

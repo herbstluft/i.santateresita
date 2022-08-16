@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-08-2022 a las 00:31:16
+-- Tiempo de generación: 16-08-2022 a las 04:44:22
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -90,6 +90,15 @@ CREATE TABLE `citas` (
   `realizadas` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `citas`
+--
+
+INSERT INTO `citas` (`id_cita`, `id_cliente`, `id_doc`, `hora`, `fecha`, `realizadas`) VALUES
+(32, 2, 3, '13:53:00', '2022-08-30', 0),
+(33, 1, 3, '04:48:00', '2022-08-17', 0),
+(34, 1, 3, '04:48:00', '2022-08-17', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -110,7 +119,7 @@ CREATE TABLE `clientes` (
 
 INSERT INTO `clientes` (`id_client`, `user_clien`, `contrasena`, `id_reg`, `t_us`) VALUES
 (1, 'Manu22', 'sami', 1, 3),
-(2, 'Juanii', 'juanitoo', 2, 3),
+(2, 'juanii', 'juanitoo', 2, 3),
 (3, 'gemaaa', 'gemita', 3, 3),
 (4, 'viktor', 'vik', 4, 3),
 (5, 'dylan1', 'dyl', 5, 3),
@@ -183,17 +192,18 @@ CREATE TABLE `detalle_orden` (
   `id_do` int(11) NOT NULL,
   `id_producto` int(11) DEFAULT NULL,
   `cantidad` int(11) DEFAULT NULL,
-  `cliente` varchar(30) DEFAULT NULL
+  `cliente` varchar(30) DEFAULT NULL,
+  `estatus` int(11) DEFAULT NULL,
+  `id_orden` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `detalle_orden`
 --
 
-INSERT INTO `detalle_orden` (`id_do`, `id_producto`, `cantidad`, `cliente`) VALUES
-(38, 1, 1, 'juanii'),
-(39, 2, 1, 'juanii'),
-(42, 3, 1, 'juanii');
+INSERT INTO `detalle_orden` (`id_do`, `id_producto`, `cantidad`, `cliente`, `estatus`, `id_orden`) VALUES
+(38, 1, 1, 'juanii', 0, 2),
+(55, 1, 5, 'gemaaa', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -226,9 +236,44 @@ INSERT INTO `doctores` (`id_doc`, `id_usuarios`, `cedula`, `especialidad`, `univ
 
 CREATE TABLE `orden` (
   `id_orden` int(11) NOT NULL,
-  `detalle` int(11) DEFAULT NULL,
-  `fecha` date DEFAULT NULL
+  `tiempo` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `orden`
+--
+
+INSERT INTO `orden` (`id_orden`, `tiempo`) VALUES
+(2, NULL),
+(3, NULL),
+(17, '2022-08-16 01:15:05'),
+(18, '2022-08-16 01:24:08'),
+(19, '2022-08-16 01:25:31'),
+(20, '2022-08-16 01:26:15'),
+(21, '2022-08-16 01:26:41'),
+(22, '2022-08-16 02:30:22'),
+(23, '2022-08-16 02:32:36'),
+(24, '2022-08-16 02:47:47'),
+(25, '2022-08-16 02:47:53'),
+(26, '2022-08-16 02:50:48'),
+(27, '2022-08-16 02:50:55'),
+(28, '2022-08-16 02:51:00'),
+(29, '2022-08-16 02:51:04'),
+(30, '2022-08-16 02:55:21'),
+(31, '2022-08-16 02:55:42'),
+(32, '2022-08-16 02:55:56'),
+(33, '2022-08-16 03:15:03'),
+(34, '2022-08-16 03:17:12'),
+(35, '2022-08-16 03:17:16'),
+(36, '2022-08-16 03:17:21'),
+(37, '2022-08-16 03:17:37'),
+(38, '2022-08-16 03:18:01'),
+(39, '2022-08-16 03:18:05'),
+(40, '2022-08-16 03:18:10'),
+(41, '2022-08-16 03:18:47'),
+(42, '2022-08-16 03:18:57'),
+(43, '2022-08-16 03:19:00'),
+(44, '2022-08-16 03:19:14');
 
 -- --------------------------------------------------------
 
@@ -252,7 +297,8 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nom_producto`, `precio`, `fecha_vencimiento`, `formula`, `id_cat`, `descripcion`, `IMAGEN`) VALUES
-(3, 'Aspirinas', 49, '2022-07-03', 'Carbonato de calcio', 3, 'Producto farmaceutico de la farmacia', 'imagen.jpg');
+(3, 'Aspirinas', 49, '2022-07-03', 'Carbonato de calcio', 3, 'Producto farmaceutico de la farmacia', 'imagen.jpg'),
+(12, 'coca', 20, '2022-08-03', 'coca', 4, 'ssdvscvxsvvsddvssvsd', 'dsfsdddv.jpg');
 
 -- --------------------------------------------------------
 
@@ -340,7 +386,8 @@ ALTER TABLE `datos_pers_user`
 -- Indices de la tabla `detalle_orden`
 --
 ALTER TABLE `detalle_orden`
-  ADD PRIMARY KEY (`id_do`);
+  ADD PRIMARY KEY (`id_do`),
+  ADD KEY `fk_dord` (`id_orden`);
 
 --
 -- Indices de la tabla `doctores`
@@ -353,8 +400,7 @@ ALTER TABLE `doctores`
 -- Indices de la tabla `orden`
 --
 ALTER TABLE `orden`
-  ADD PRIMARY KEY (`id_orden`),
-  ADD KEY `detalle` (`detalle`);
+  ADD PRIMARY KEY (`id_orden`);
 
 --
 -- Indices de la tabla `productos`
@@ -391,7 +437,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
@@ -415,7 +461,7 @@ ALTER TABLE `datos_pers_user`
 -- AUTO_INCREMENT de la tabla `detalle_orden`
 --
 ALTER TABLE `detalle_orden`
-  MODIFY `id_do` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_do` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT de la tabla `doctores`
@@ -427,13 +473,13 @@ ALTER TABLE `doctores`
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `id_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
@@ -466,16 +512,16 @@ ALTER TABLE `clientes`
   ADD CONSTRAINT `fk_usclien` FOREIGN KEY (`id_reg`) REFERENCES `clientes_datos_personales` (`id_cliente`);
 
 --
+-- Filtros para la tabla `detalle_orden`
+--
+ALTER TABLE `detalle_orden`
+  ADD CONSTRAINT `fk_dord` FOREIGN KEY (`id_orden`) REFERENCES `orden` (`id_orden`);
+
+--
 -- Filtros para la tabla `doctores`
 --
 ALTER TABLE `doctores`
   ADD CONSTRAINT `fk_docuser` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id_usuario`);
-
---
--- Filtros para la tabla `orden`
---
-ALTER TABLE `orden`
-  ADD CONSTRAINT `orden_ibfk_1` FOREIGN KEY (`detalle`) REFERENCES `detalle_orden` (`id_do`);
 
 --
 -- Filtros para la tabla `productos`

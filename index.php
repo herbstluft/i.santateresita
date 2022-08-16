@@ -190,7 +190,7 @@ else{
           <h4 class="my-0 fw-normal"><?php echo $producto->nom_producto?></h4>
         </div>
         <div class="card-body">
-          <img src="admin/imagenes/<?php echo $producto->imagen ?>" class="im card-img-top">
+          <img src="admin/imagenes/<?php echo $producto->IMAGEN ?>" class="im card-img-top">
           <br><br>
           <h5>Descripcion</h5
        
