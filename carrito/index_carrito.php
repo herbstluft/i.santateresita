@@ -32,17 +32,12 @@ if ($rr==0)
     $resi = $query->seleccionar($q);
     foreach ($resi as $sam)
     $or = $sam->id_orden;
-$rr = 2;
+
   
 
 }
-//condicion de producto existente
-///////////////////////////////////
-if(isset($_GET['regenerarcarrito'])){
-  $rr=0;
-  $del="DELETE * from detalle_orden where detalle_orden.id_orden = $or and cliente='juanii'";
-  $ejecuta->ejecutar($del);
-  }
+
+$rr = 2;
 
 
 if(empty($res)){
@@ -56,6 +51,15 @@ if(empty($res)){
    
     }
 }
+
+//condicion de producto existente
+///////////////////////////////////
+if(isset($_GET['regenerarcarrito'])){
+  $rr=0;
+  $del="DELETE * from detalle_orden where detalle_orden.id_orden = $or and cliente='juanii'";
+  $ejecuta->ejecutar($del);
+  }
+
 //Borrar producto del carrito
     if(isset($_GET['id']))
     {
