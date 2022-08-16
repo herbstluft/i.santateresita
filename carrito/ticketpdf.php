@@ -11,6 +11,7 @@ $medidaTicket = 180;
 session_start();
 
 
+
 ?>
 <!DOCTYPE html>
 <link rel="stylesheet" href="../bootstrap/css/bootstrap.rtl.min.css">
@@ -40,17 +41,19 @@ session_start();
         <center>
             <img src="../bootstrap/img/logo.png" alt="">
         </center>
-        <?php //imprimir hora actual
-//$DateAndTime = date('m-d-Y h:i:s a', time());  
-//echo " $DateAndTime.";
-?>
+   
        
         <?php
         # Recuerda que este arreglo puede venir de cualquier lugar; aquí lo defino manualmente para simplificar
         # Puedes obtenerlo de una base de datos, por ejemplo: https://parzibyte.me/blog/2019/07/17/php-bases-de-datos-ejemplos-tutoriales-conexion/
 
+    
+        
+       
+        
+
         $productos = "SELECT todo.nom as Producto, todo.precio, todo.orden,todo.cantidad, todo.total as subtotal from  
-        (select productos.nom_producto as nom, productos.precio as precio, orden.id_orden as orden, detalle_orden.cantidad as cantidad, (productos.precio * detalle_orden.cantidad) as total from detalle_orden inner JOIN orden on orden.detalle=orden.detalle 
+        (select productos.nom_producto as nom, productos.precio as precio, orden.id_orden as orden, detalle_orden.cantidad as cantidad, (productos.precio * detalle_orden.cantidad) as total from detalle_orden inner JOIN orden on orden.id_orden=detalle_orden.id_orden 
         inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente='".$_SESSION['cliente']."')as  todo";
         $resultado = $query->seleccionar($productos);
         
@@ -115,7 +118,7 @@ else{}
                 $total = "SELECT SUM(SAM.total)as TOTAL FROM(SELECT todo.nom as Producto, todo.precio, todo.cantidad, todo.total from  
                 (select productos.nom_producto as nom, productos.precio as precio, detalle_orden.cantidad as cantidad, 
                 (productos.precio * detalle_orden.cantidad) as total from detalle_orden inner JOIN orden 
-                on orden.detalle=orden.detalle inner join productos on productos.id_producto=detalle_orden.id_producto 
+                on orden.id_orden=detalle_orden.id_orden inner join productos on productos.id_producto=detalle_orden.id_producto 
                 where detalle_orden.cliente='".$_SESSION['cliente']."')as todo)as SAM;";
                 $totalx = $query->seleccionar($total);
                 foreach ($totalx as $totalito) {

@@ -10,6 +10,8 @@ $query = new Select();
 $ejecuta = new ejecuta();
 session_start();
 
+$rr=0;
+
 
 if (isset($_GET['agregar']) ){
   //comprobar si existe un producto
@@ -17,13 +19,36 @@ if (isset($_GET['agregar']) ){
     detalle_orden.id_producto='".$_GET['agregar']."'";
     $res=$query->seleccionar($consulta);
 
+if ($rr==0)
+{
+  
+    $DateAndTime = date('Y-m-d h:i:s a', time()); 
+    echo "$DateAndTime.";
+
+    
+    $fecha = "INSERT INTO orden (`id_orden`, `tiempo`) VALUES (NULL ,'$DateAndTime')";
+    $f=$ejecuta->ejecutar($fecha);
+    $q = "SELECT * FROM orden where orden.tiempo ='$DateAndTime'";
+    $resi = $query->seleccionar($q);
+    foreach ($resi as $sam)
+    $or = $sam->id_orden;
+$rr = 2;
+  
+
+}
 //condicion de producto existente
 ///////////////////////////////////
+if(isset($_GET['regenerarcarrito'])){
+  $rr=0;
+  $del="DELETE * from detalle_orden where detalle_orden.id_orden = $or and cliente='juanii'";
+  $ejecuta->ejecutar($del);
+  }
+
 
 if(empty($res)){
 
     //insertando producto al carro
-    $add_producto ="insert into detalle_orden (id_producto,cantidad, cliente) values ('".$_GET['agregar']."',1, '".$_SESSION['cliente']."')";
+    $add_producto ="insert into detalle_orden (id_producto,cantidad, cliente,estatus, id_orden) values ('".$_GET['agregar']."',1, '".$_SESSION['cliente']."',0, '$or')";
     $ejecuta->ejecutar($add_producto);
     header("location: index_carrito.php");
   }
@@ -204,7 +229,7 @@ if(isset($_SESSION['cliente'])){
         <tr class="text-center">
             <td><a href="../index.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> < Continue Comprando</a></td>
             <td></td>
-            <td></td>
+            <td><a href="index_carrito.php?regenerarcarrito=<?php echo $_SESSION['cliente'] ?>" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Regenerar carrito</a></td>
             <td></td>
 
 
@@ -213,9 +238,9 @@ if(isset($_SESSION['cliente'])){
             //hacer aparecer o no el boton del ticket
               if(!empty($resultados)){
             ?>
-         <form action="ticketpdf.php" method="post">
+         
             <td><a href="ticketpdf.php?gen_orden" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Generar ticket ></a></td>
-            </form>
+           
             <?php
               }
             ?>
