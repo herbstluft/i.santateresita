@@ -1,4 +1,3 @@
-
 <?php
 
 use MyApp\data\Database;
@@ -12,12 +11,15 @@ $query = new Select();
 $obj = new ejecuta();
 session_start();
 
-$citas=$query->seleccionar("SELECT todo.cliente, todo.edad, todo.gen, todo.tel, todo.rfc, todo.correo, todo.fecha, todo.hora from
-(SELECT datos_pers_user.nombre, datos_pers_user.apellido_pat, datos_pers_user.apellido_mat, usuarios.usuario, citas.id_cliente, concat(clientes_datos_personales.nombre,' ', clientes_datos_personales.apellido_pat,' ',clientes_datos_personales.apellido_mat) as cliente, 
+
+
+$citas=$query->seleccionar("SELECT todo.cliente, todo.edad, todo.gen, todo.tel, todo.id, todo.rfc, todo.correo, todo.fecha, todo.hora from
+(SELECT datos_pers_user.nombre, datos_pers_user.apellido_pat, datos_pers_user.apellido_mat, usuarios.usuario, citas.id_cliente, citas.id_cita as id, concat(clientes_datos_personales.nombre,' ', clientes_datos_personales.apellido_pat,' ',clientes_datos_personales.apellido_mat) as cliente, 
   clientes_datos_personales.edad as edad, clientes_datos_personales.genero as gen, clientes_datos_personales.RFC as rfc, clientes_datos_personales.telefono as tel, clientes_datos_personales.correo as correo, citas.realizadas as estado, citas.hora, citas.fecha from datos_pers_user 
   inner join usuarios on usuarios.id_reg = datos_pers_user.id_registro INNER JOIN doctores on doctores.id_usuarios = usuarios.id_usuario INNER JOIN citas on doctores.id_doc = citas.id_doc INNER JOIN clientes on clientes.id_client = citas.id_cliente inner join clientes_datos_personales on clientes.id_reg=clientes_datos_personales.id_cliente) as todo  WHERE todo.estado=0
   and todo.usuario='".$_SESSION['doctor']."'");
 ?>
+
 <?php 
 if(isset($_SESSION['doctor']))
 {
@@ -176,23 +178,14 @@ else{
       
 
           <div class="d-grid gap-2 d-md-block">
-           <form action="index_doctor.php" method="POST">
+     
            <br>
+           
            <!-- boton check animacion -->
-           <a href="?borrar=<?php echo $cita->id_cita; ?>">
-           <button class="sombras button">
-	        <span class="text"> Realizada </span>
-	        <i class="ri-check-line icon"><img src="https://img.icons8.com/ios-glyphs/30/000000/checkmark--v1.png"/> </i>
-          </button>
-          </a>
+          <button> <a href="citas_pendientes.php?real= <?php  echo $cita->id?>">sssss</a></button>
 
          <!-- Fin boton check animacion -->
 
- 
-
-
-   
-          </form>
           </div>
           <br>
         </div>
@@ -213,27 +206,14 @@ else{
 </body>
 </html>
 <?php
-            if($_GET){
+  }
 
-             $id=$_GET['borrar'];
-              //borrar registro de cita
-              $sql="DELETE FROM citas WHERE `citas`.`id_cita` =".$id;
-              $obj->ejecutar($sql);
-              header('refresh:6s');
-              header('location:index_doctor.php');
-             
-            }
-            ?>
-     <?php
-            if($_GET){
-
-              $id=$_GET['borrar'];
-              //borrar registro de cita
-              $sql="DELETE FROM citas WHERE `citas`.`id_cita` =".$id;
-              $obj->ejecutar($sql);
-              header('location:index_doctor.php');
-             
-            }
-          }
-            ?>
   
+if(isset($_GET['real'])){
+  foreach ($citas as $cita)
+  $gft = $cita->id;
+  $ti ="UPDATE citas set realizadas = '1' where id_cita = '$gft' ";
+  $trc = $obj->ejecutar($ti);
+}
+          
+            ?>
