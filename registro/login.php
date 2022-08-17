@@ -427,11 +427,7 @@ input[type=text]:placeholder {
           <input type="submit" class="fadeIn fourth" value="Iniciar Sesion" name="login">
         </form>
     
-        <!-- Remind Passowrd -->
-        <div id="formFooter">
-          <a class="underlineHover" href="#">Olvide Contraseña?</a>
-        </div>
-    
+   
         
         
       </div>
