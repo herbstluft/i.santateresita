@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-08-2022 a las 12:17:17
+-- Tiempo de generación: 17-08-2022 a las 17:16:42
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -208,12 +208,12 @@ CREATE TABLE `detalle_orden` (
 
 INSERT INTO `detalle_orden` (`id_do`, `id_producto`, `cantidad`, `cliente`, `estatus`, `id_orden`) VALUES
 (145, 19, 1, 'juanii', 1, 126),
-(146, 18, 1, 'juanii', 1, 127),
 (147, 20, 1, 'Manu22', 1, 128),
 (148, 24, 2, 'Manu22', 1, 129),
-(149, 18, 3, 'viktor', 1, 131),
 (150, 19, 1, 'viktor', 1, 134),
-(151, 20, 1, 'viktor', 1, 135);
+(151, 20, 1, 'viktor', 1, 135),
+(159, 19, 1, 'juanii', 1, 147),
+(160, 20, 1, 'juanii', 1, 148);
 
 -- --------------------------------------------------------
 
@@ -263,7 +263,20 @@ INSERT INTO `orden` (`id_orden`, `tiempo`) VALUES
 (132, '2022-08-17 11:41:54'),
 (133, '2022-08-17 11:41:57'),
 (134, '2022-08-17 11:42:00'),
-(135, '2022-08-17 11:42:05');
+(135, '2022-08-17 11:42:05'),
+(136, '2022-08-17 05:02:47'),
+(137, '2022-08-17 05:02:49'),
+(138, '2022-08-17 05:02:51'),
+(139, '2022-08-17 05:11:27'),
+(140, '2022-08-17 05:12:50'),
+(141, '2022-08-17 05:12:53'),
+(142, '2022-08-17 05:12:53'),
+(143, '2022-08-17 05:12:57'),
+(144, '2022-08-17 05:13:06'),
+(145, '2022-08-17 05:13:18'),
+(146, '2022-08-17 05:13:18'),
+(147, '2022-08-17 05:13:29'),
+(148, '2022-08-17 05:15:24');
 
 -- --------------------------------------------------------
 
@@ -307,9 +320,31 @@ INSERT INTO `productos` (`id_producto`, `nom_producto`, `precio`, `fecha_vencimi
 (48, 'Electrolit de Coco', 22, '2022-09-01', 'Agua purificada, cloruro de sodio, Ã¡cido lÃ¡ctico', 8, 'Bebida hidratante sin azÃºcar', 'coco.jfif'),
 (49, 'Electrolit de uva', 22, '2022-08-31', 'Agua purificada, cloruro de sodio, Ã¡cido lÃ¡ctico', 8, 'Bebida hidratante sin azÃºcar', 'uva.jfif'),
 (50, 'Suerox de aloe vera', 22, '2022-08-31', 'Agua purificada, cloruro de sodio, Ã¡cido lÃ¡ctico', 8, 'Bebida hidratante sin azÃºcar', 'aloe vera.jfif'),
-(51, 'Suerox de limÃ³n', 22, '2022-08-30', 'Agua purificada, cloruro de sodio, Ã¡cido lÃ¡ctico', 8, 'Bebida hidratante sin azÃºcar', 'limon.jfif'),
 (52, 'Suerox de limÃ³n', 22, '2022-08-30', 'Agua purificada, cloruro de sodio, Ã¡cido lÃ¡ctico', 8, 'Bebida hidratante sin azÃºcar', 'limon.jfif'),
-(53, 'Canescalm', 119, '2023-01-11', 'Glicina, avena, mentol', 10, 'Alivia Molestias Ãntimas como ComezÃ³n e IrritaciÃ³n', 'canascalm.jfif');
+(53, 'Canescalm', 119, '2023-01-11', 'Glicina, avena, mentol', 10, 'Alivia Molestias Ãntimas como ComezÃ³n e IrritaciÃ³n', 'canascalm.jfif'),
+(54, 'Condones sin latex sico', 91, '2022-09-21', 'Latex, agua y jabon', 9, 'EstÃ¡n lubricados con silicona ayuda a estimulacion', 'condones.png'),
+(55, 'Gel lubricante K-Y ', 198, '2022-10-19', ' Agua, silicona o aceite', 9, 'Desarrollado para incrementar la lubricaciÃ³n FEM', 'lubricante.jfif'),
+(56, 'SIco mutual climax', 221, '2022-11-29', 'Latex, agua y jabon', 9, 'Desarrollado para retardar el clÃ­max masculino.', 'sico fem.jfif'),
+(57, 'Condones Playboy', 230, '2022-11-27', ' Latex, agua y jabon', 9, '24 condones texty anatimico lub de latex 7050.', 'playboy.jfif'),
+(58, 'Buscapina', 145, '2023-10-20', 'Butilbromuro, bromuro ', 1, 'Contienen 10 mg de butilhioscina y 250 mg de Mtm', 'buscapina.jfif'),
+(59, 'Picot sal de uvas', 36, '2023-04-07', 'Bicarbonato de Sodio, Ã¡cido tartÃ¡rico', 1, 'Es un polvo efervescente con efecto antiÃ¡cido', 'sal de uvas.jfif'),
+(60, 'Alka-setzer', 35, '2023-05-25', 'Bicarbonato de sodio', 1, 'Se utiliza para tratar Ãºlceras estomacales y otras', 'alkasetser.jfif'),
+(62, 'Losec A-20', 76, '2023-02-23', 'Acido metacrÃ­lico-acrilato de etilo, hipromelosa.', 1, 'Alivia los sÃ­ntomas de gastritis y dolor abdominal', 'losec.jfif'),
+(64, 'Voltaren', 108, '2023-06-16', 'Diclofenaco dietilamonio 2.32 g', 2, 'Alivia el dolor de dolor de cuello y espalda', 'voltaren.png'),
+(65, 'Pomada de la campana', 100, '2024-10-16', 'Diclofenaco dietilamonio 2.32 g', 2, 'Alivia el dolor muscular localizada', 'campana.jfif'),
+(66, 'Excedrin', 120, '2023-10-16', 'AcetaminofÃ©n, cafeÃ­na', 2, 'Alivio del dolor severo y dolores de cabeza', 'excedrin.jfif'),
+(67, 'Ultra Bengue', 163, '2023-10-16', 'Naproxeno 10.0 g Clorhidrato de lidocaÃ­na 2.0 g', 2, 'Tratamiento en gel para la inflamaciÃ³n y dolor', 'ultra bengue.jfif'),
+(68, 'Bio Electro', 87, '2023-11-16', 'Paracetamol 250 mg ,Ãcido acetilsalicÃ­lico 250 mg, CafeÃ­na', 2, 'Especialista en migraÃ±a y dolor de cabeza', 'bioelectro.jfif'),
+(69, 'Tabcin Active', 58, '2023-11-06', 'Clorfenamina, paracetamol,Fenilefrina', 5, 'Te ayuda a aliviar tus sÃ­ntomas de gripe', 'tabcin act.jfif'),
+(70, 'Tabcin Noche', 69, '2022-08-31', 'Clorfenamina, paracetamol,Fenilefrina', 5, 'Te ayuda a aliviar tus sÃ­ntomas de gripe', 'tabcin noche.jfif'),
+(71, 'XL-3', 55, '2023-11-16', 'Paracetamol,Fenilefrina,Clorfenamina', 5, 'Para el alivio de las molestia del resfriado comÃºn', 'xl3.jfif'),
+(72, 'Theraflu ', 119, '2022-12-21', ' Paracetamol, Dextrometorfano, Fenilefrina.', 5, 'Alivio de los sÃ­ntomas de resfriado severo y tos', 'thera.jfif'),
+(73, 'Tabcin', 119, '2023-08-16', 'Paracetamol, Dextrometorfano, Fenilefrina.', 5, 'Alivio de los sÃ­ntomas de resfriado severo y tos.', 'tabcin.jfif'),
+(74, 'Guante Curapack', 32, '2025-06-17', 'Latex', 6, 'Guante Curapack Multiusos Mediano 10pzas', 'guantes.jfif'),
+(75, 'Guante desechable', 3, '2024-12-17', 'Latex', 6, ' Este producto es efectivo como barrera biolÃ³gica ', 'ambiderm.jfif'),
+(77, 'Guante dalux ', 43, '2024-10-21', 'Latex', 6, 'Guante Dalux LÃ¡tex Mediano 10pzas', 'dalux.jfif'),
+(78, 'Sonda foley', 48, '2023-11-17', 'LÃ¡tex de caucho natural', 6, 'Sonda de Foley Bardia de 2 vÃ­as, estÃ©ril, calibre ', 'sonda.jfif'),
+(79, 'Aceite suavisante', 19, '0000-00-00', 'Aceite de almendras', 6, 'Protege la piel de factores externos ', 'aceite.jfif');
 
 -- --------------------------------------------------------
 
@@ -472,7 +507,7 @@ ALTER TABLE `datos_pers_user`
 -- AUTO_INCREMENT de la tabla `detalle_orden`
 --
 ALTER TABLE `detalle_orden`
-  MODIFY `id_do` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+  MODIFY `id_do` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
 -- AUTO_INCREMENT de la tabla `doctores`
@@ -484,13 +519,13 @@ ALTER TABLE `doctores`
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `id_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+  MODIFY `id_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
