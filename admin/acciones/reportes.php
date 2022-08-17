@@ -11,7 +11,16 @@ $insert = new ejecuta();
 
 session_start();
 
-$productos=$query->seleccionar("SELECT * FROM `productos`");
+$reporte="SELECT KV.id_orden as VENTA, KV.nombre as Cliente, KV.tiempo as Fecha, SUM(KV.CantidadProd)as Cantidad, SUM(KV.Total)as Total 
+from(select orden.id_orden ,clientes_datos_personales.nombre, productos.nom_producto, orden.tiempo, sum(detalle_orden.cantidad)as CantidadProd, 
+sum(productos.precio * detalle_orden.cantidad)as Total
+from clientes_datos_personales inner join clientes on clientes_datos_personales.id_cliente = clientes.id_reg 
+inner join detalle_orden on detalle_orden.cliente = clientes.user_clien inner join orden on orden.id_orden = detalle_orden.id_orden 
+inner join productos on productos.id_producto = detalle_orden.id_producto where clientes.user_clien = 'juanii' and detalle_orden.estatus = 1
+group by clientes_datos_personales.nombre, orden.id_orden, productos.nom_producto, orden.tiempo)as KV
+group by KV.id_orden;";
+$productos=$query->seleccionar($reporte);
+foreach($productos as $prod) 
 ?>
 
 
@@ -55,134 +64,38 @@ $productos=$query->seleccionar("SELECT * FROM `productos`");
       <form class="d-flex primary" role="search" style="width:100%; position:relative;">
       <!--Buscar-->
 
-      <input class="sombras light-table-filter " data-table="table_id" type="text" 
-      placeholder="Buscar" style="width:90%; padding-left:2%;">
-
-      &ensp; &ensp;  &ensp; &ensp;  
-    <div>
-    <?php 
-          if(isset($_SESSION['cliente'])){
-            ?>
-          <a href=""  data-bs-toggle="modal" data-bs-target="#modal_cart" >
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" fill="currentColor" style="top:10px; position:relative;" class="bi bi-cart4" viewBox="0 0 16 16">
-            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-          </svg> 
-          </a> 
-          <?php
-          }
-          ?>
-   
-
-           &ensp; 
-           <?php
-           if(isset($_SESSION['cliente'])){
-            ?>
-            
-            <?php
-            } 
-            else{
-              ?>
-               <button class="btn sombras iniciar" id="registrarme" type="submit">
-              <a class="a" href="../../registro/login.php"  >  Iniciar Session   </a></button>
-              <?php
-            }
-            ?>
-
-
-        </form>
-      </div>
-      </nav>
-    </div>
-  <!-- Fondo de video -->
-  <div class="fullscreen-container">
-    <video loop muted autoplay poster="" class="fullscreen-video">
-        <source src="../../bootstrap/img/back.mp4" type="video/mp4">
-
-    </video>
-</div>
-<!-- fin de video -->
-
- 
-  <br>
-
-
-    <!--Contenido de la pagina-->
-  <main>
-
-
-  <div class="container">
-
-
-
-
-</form>
-
-
-
-<table id="tabla" class="sombras table table-borderless table_id table align-middle text-center " style="width:100%; border:0px;">
-
-                   
-<thead class="sombras card-header">    
-    <tr >
-        <th >Nombre</th>
-        <th>Imagen</th>
-        <th>Descripcion</th>
-        <th>Precio</th>
-        <th>Formula</th>
-        <th>Acciones</th>
-    </tr>
-</thead>
-
-
-<?php
-
-               
-$SQL="SELECT id_producto, nom_producto,imagen,descripcion,precio,formula from productos";
-$con=$query->seleccionar($SQL);
-
-if(!empty($con)){
-  foreach($con as $fila) {
-?>
-
-<tbody>
-<tr>
-<td class="sombras card-header"><?php echo $fila->nom_producto;?></td>
-<td><img src="../../admin/imagenes/<?php echo $fila->imagen;?>" class="im card-img-top" style="border-radius:10px"></td>
-<td><?php echo $fila->descripcion;?></td>
-<td class="sombras"><?php echo "$".number_format($fila->precio, 2, '.', '.');?></td>
-<td><?php echo $fila->formula;?></td>
-
-<td>
-    <div class="d-grid gap-2 d-md-block">
-    <a href="../../carrito/index_carrito.php?agregar=<?php echo $fila->id_producto ?>"> <!--Enviar id de producto -->
-           <button class="btn sombras br_btn" id="registrarme" type="button">
-             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
-               <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-             </svg> &ensp; Agregar
-           </button>
-    </a>
-    </div>
-</td>
-
-</tr>
-
-
-<?php
-}
-}
-
-?>
-</table>
-
-
-</div>
-</main>
-
-
-
+      <input class="sombras light-table-filter" data-table="table_id" type="text" 
+      placeholder="Buscar" style="width:50%; padding-left:2%;">
+      </form>
+     
 <script src="buscador.js"></script>
   <script src="../../bootstrap/js/bootstrap.min.js"></script>
+</div>
+</nav>
+</div>
 
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">VENTA</th>
+      <th scope="col">Cliente</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><?php {echo $prod->VENTA?></th>
+      <td><?php echo $prod->Cliente?></td>
+      <td><?php echo $prod->Fecha?></td>
+      <td><?php echo $prod->Cantidad?></td>
+      <td><?php echo $prod->Total;}?></td>
+
+    </tr>
+   
+  </tbody>
+</table>
 
 </body>
 </html>
