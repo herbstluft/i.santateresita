@@ -15,9 +15,7 @@ $productos=$query->seleccionar("SELECT * FROM `productos`");
 ?>
 
 
-<?php
-if(isset($_SESSION['cliente']) or isset($_SESSION['admin'])){
-?>
+
 
 
 <!doctype html>
@@ -209,9 +207,3 @@ if(!empty($con)){
 </body>
 </html>
 
-<?php
- }
-else{
-  header("location: ../../error.php");
-}
-?>
