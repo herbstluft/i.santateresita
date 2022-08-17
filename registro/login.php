@@ -34,7 +34,7 @@ if($usuario['tipo_usuario']==1){
 if($usuario['tipo_usuario']==2){
   session_start();
   $_SESSION['doctor']=$_POST['user'];
- header('location:../doctor/index_doctor.php');
+ header('location:../doctor/ini.php');
  }
 
  if($cliente['t_us']==3){

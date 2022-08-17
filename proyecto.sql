@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-08-2022 a las 04:44:22
+-- Tiempo de generación: 17-08-2022 a las 02:44:25
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -203,7 +203,10 @@ CREATE TABLE `detalle_orden` (
 
 INSERT INTO `detalle_orden` (`id_do`, `id_producto`, `cantidad`, `cliente`, `estatus`, `id_orden`) VALUES
 (38, 1, 1, 'juanii', 0, 2),
-(55, 1, 5, 'gemaaa', 1, 3);
+(55, 1, 5, 'gemaaa', 1, 3),
+(88, 19, 1, '', 0, 45),
+(90, 52, 1, '', 0, 47),
+(95, 19, 1, 'viktor', 0, 52);
 
 -- --------------------------------------------------------
 
@@ -273,7 +276,15 @@ INSERT INTO `orden` (`id_orden`, `tiempo`) VALUES
 (41, '2022-08-16 03:18:47'),
 (42, '2022-08-16 03:18:57'),
 (43, '2022-08-16 03:19:00'),
-(44, '2022-08-16 03:19:14');
+(44, '2022-08-16 03:19:14'),
+(45, '2022-08-16 06:27:16'),
+(46, '2022-08-16 06:27:26'),
+(47, '2022-08-16 06:27:33'),
+(48, '2022-08-16 09:47:49'),
+(49, '2022-08-17 01:31:42'),
+(50, '2022-08-17 01:32:34'),
+(51, '2022-08-17 02:42:38'),
+(52, '2022-08-17 02:43:21');
 
 -- --------------------------------------------------------
 
@@ -297,8 +308,29 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nom_producto`, `precio`, `fecha_vencimiento`, `formula`, `id_cat`, `descripcion`, `IMAGEN`) VALUES
-(3, 'Aspirinas', 49, '2022-07-03', 'Carbonato de calcio', 3, 'Producto farmaceutico de la farmacia', 'imagen.jpg'),
-(12, 'coca', 20, '2022-08-03', 'coca', 4, 'ssdvscvxsvvsddvssvsd', 'dsfsdddv.jpg');
+(18, 'Tempra 500', 119, '2023-02-16', 'C10H9NO2', 3, 'Para el alivio sintomÃ¡tico de los dolores ocasiona', 'tempra.jfif'),
+(19, 'Ibuprofeno', 120, '2023-02-21', 'C8H9NO2', 3, 'Para el alivio sintomÃ¡tico del dolor leve o modera', 'ibuprofeno.jfif'),
+(20, 'Cafiaspirina', 120, '2023-04-13', 'C10H9NO2', 3, 'RÃ¡pido y efectivo alivia el dolor De cabeza', 'Cafiaspirina.jfif'),
+(22, 'Gelocatil', 120, '2022-04-01', 'C10H9NO2', 3, 'RÃ¡pido y efectivo alivia el dolor De cabeza', 'gelocatil.jfif'),
+(24, 'Advil', 110, '2022-01-03', 'C13H18O2', 3, 'RÃ¡pido y efectivo alivia el dolor De cabeza', 'advil.jfif'),
+(30, 'Casec', 510, '2022-12-31', 'Alto en ProteÃ­na en Polvo, sin azÃºcar aÃ±adida.', 4, 'ProteÃ­na de alta calidad para adicionar alimentos', 'descarga.webp'),
+(31, 'Emergen-c', 99, '2023-06-02', 'Vitamia C Vitamina B y antioxidantes', 7, 'Suplemento alimenticio efervescente sabor limÃ³n', '1283057_A_168_AL.jpg'),
+(33, 'Centrum', 296, '2022-12-22', 'Vitamia C Vitamina A', 7, 'Tables centrum multivitaminico silver ', '1054961_A_168_AL.jpg'),
+(34, 'Vivioptal', 199, '2023-05-11', '4 vitaminas, 4 minerales, 5 oligoelementos', 7, 'Formula de antioxidante mas importantes ', '1123467_A_168_AL.jpg'),
+(35, 'Nature Bounty', 200, '2022-11-29', 'ColÃ¡geno Hidrolizado Vitamina C', 7, 'Aporta nutrientes importantes para la piel', '1313037_A_168_AL.jpg'),
+(36, 'Neurobion', 219, '2023-05-18', 'Vitamina B12. Vitamina B6. Vitamina B1', 7, 'combinan tres vitaminas escenciales para el SN', '1192191_A_168_AL.jpg'),
+(39, 'Centrum', 296, '2022-12-22', 'Vitamia C Vitamina A', 7, 'Tables centrum multivitaminico silver ', '1054961_A_168_AL.jpg'),
+(40, 'Suerox de manzana ', 22, '2022-09-01', 'Agua purificada, cloruro de sodio, Ã¡cido lÃ¡ctico', 8, 'Bebida hidratante sin azÃºcar', 'descarga.jfif'),
+(43, 'Ensure', 249, '2023-02-23', 'calcio, zinc, magnesio y Vitamina C', 4, 'Apoyan la recuperaciÃ³n de la masa muscular.', 'ensure.jfif'),
+(44, 'Pediasure', 300, '2022-11-30', 'Sacarosa, almidÃ³n hidrolizado de maÃ­z', 4, 'Ayuda a los niÃ±os a crecer', 'pediasure.jfif'),
+(45, 'Boost', 210, '2022-11-05', '27 vitaminas y minerales, Calcio y Vitamina D', 4, 'Suplemento Alimenticio con 27 vitaminas y mineral', 'boost.jfif'),
+(47, 'Gatorade en polvo', 5400, '2023-11-24', 'hidratos de carbono, sodio, potasio y electrolitos', 4, 'Bebida energÃ©tica para atletas', 'gatorade.jfif'),
+(48, 'Electrolit de Coco', 22, '2022-09-01', 'Agua purificada, cloruro de sodio, Ã¡cido lÃ¡ctico', 8, 'Bebida hidratante sin azÃºcar', 'coco.jfif'),
+(49, 'Electrolit de uva', 22, '2022-08-31', 'Agua purificada, cloruro de sodio, Ã¡cido lÃ¡ctico', 8, 'Bebida hidratante sin azÃºcar', 'uva.jfif'),
+(50, 'Suerox de aloe vera', 22, '2022-08-31', 'Agua purificada, cloruro de sodio, Ã¡cido lÃ¡ctico', 8, 'Bebida hidratante sin azÃºcar', 'aloe vera.jfif'),
+(51, 'Suerox de limÃ³n', 22, '2022-08-30', 'Agua purificada, cloruro de sodio, Ã¡cido lÃ¡ctico', 8, 'Bebida hidratante sin azÃºcar', 'limon.jfif'),
+(52, 'Suerox de limÃ³n', 22, '2022-08-30', 'Agua purificada, cloruro de sodio, Ã¡cido lÃ¡ctico', 8, 'Bebida hidratante sin azÃºcar', 'limon.jfif'),
+(53, 'Canescalm', 119, '2023-01-11', 'Glicina, avena, mentol', 10, 'Alivia Molestias Ãntimas como ComezÃ³n e IrritaciÃ³n', 'canascalm.jfif');
 
 -- --------------------------------------------------------
 
@@ -461,7 +493,7 @@ ALTER TABLE `datos_pers_user`
 -- AUTO_INCREMENT de la tabla `detalle_orden`
 --
 ALTER TABLE `detalle_orden`
-  MODIFY `id_do` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id_do` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT de la tabla `doctores`
@@ -473,13 +505,13 @@ ALTER TABLE `doctores`
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `id_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`

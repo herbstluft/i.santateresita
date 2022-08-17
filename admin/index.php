@@ -120,7 +120,7 @@ if($_SESSION['admin']){
         <br><br>
         <h2 class="fw-normal">Buscar</h2> <br>
         <h5>Busca y elimina productos.</h5><br><br>
-        <p><a class="btn sombras" id="registrarme" href="/index.php">Ir &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="../admin/buscar/index_buscar.php">Buscar &raquo;</a></p>
       </div>
   </div>
 
@@ -149,11 +149,11 @@ if($_SESSION['admin']){
   <div class="row">
       <div class="col-12 col-xs-5 col-md-12 col-lg-5 offset-2 sombras text-center space">
         <br>
-        <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="http://4.bp.blogspot.com/-cVO8CTsGC1w/Um0SOZz6fDI/AAAAAAAAAok/dopUSBWisYs/s1600/Reporte+I.png" alt="">
+        <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://cdn-icons-png.flaticon.com/512/1055/1055644.png" alt="">
         <br><br>
         <h2 class="fw-normal">Reportes</h2> <br>
         <h5>Ver reporte de venta diario</h5><br>
-        <p><a class="btn sombras" id="registrarme" href="acciones/reportes.php">Publicar &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="acciones/reportes.php">Ir &raquo;</a></p>
       </div>
     
       
@@ -165,10 +165,26 @@ if($_SESSION['admin']){
         <h5>Ver los creadores de la paginas</h5><br><br>
         <p><a class="btn sombras" id="registrarme" href="acciones/creadores/creadores.html">Ir &raquo;</a></p>
       </div>
-
-    
   </div>
 
+  <div class="row">
+      <div class="col-12 col-xs-5 col-md-12 col-lg-5 offset-2 sombras text-center space">
+        <br>
+        <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://images.vexels.com/media/users/3/151869/isolated/preview/767ca771755f4675d4063c03e17c8595-icono-de-lista-de-verificacion-medica.png" alt="">
+        <br><br>
+        <h2 class="fw-normal">Citas Realizadas</h2> <br>
+        <p><a class="btn sombras" id="registrarme" href="acciones/publicar.php">Ir &raquo;</a></p>
+      </div>
+    
+      
+      <div class="col-12 col-xs-12 col-md-12 col-lg-5 sombras text-center space">
+        <br>
+        <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://equipatupizzeria.com/wp-content/uploads/2022/02/tiempo.png" alt="">
+        <br><br>
+        <h2 class="fw-normal">Citas Pendientes</h2> <br>
+        <p><a class="btn sombras" id="registrarme" href="/index.php">Ir &raquo;</a></p>
+      </div>
+  </div>
 
   </div>
    
