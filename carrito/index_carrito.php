@@ -164,7 +164,7 @@ if(isset($_SESSION['cliente'])){
             <a class="nav-link fonts" href="../cliente/categorias.php">Categorias</a>
           </li>
           <li class="nav-item i">
-            <a class="nav-link fonts" href="../citas_index_citas.php">Cita</a>
+            <a class="nav-link fonts" href="../citas/index_citas.php">Cita</a>
           </li>
           <li class="nav-item i">
             <a class="nav-link fonts" href="../cliente/nosotros.php">Nosotros</a>

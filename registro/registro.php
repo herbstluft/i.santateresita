@@ -96,9 +96,9 @@
 
         <div class="input-group mb-3">
             &ensp; &ensp; &ensp; &ensp;
-            <input type="text" class="sombras_input form-control col-4" placeholder="Edad" name="edad" maxlength="2" required>
+            <input type="number" class="sombras_input form-control col-4" placeholder="Edad" name="edad" maxlength="2" required>
             &ensp;
-            <input type="text" class="sombras_input form-control col-4" placeholder="Telefono" name="tel" minlength="10" maxlength="10">
+            <input type="number" class="sombras_input form-control col-4" placeholder="Telefono" name="tel" minlength="10" maxlength="10">
     
                     <div class="col-6 " style="position:relative; left:2%; width:26%;">
                     

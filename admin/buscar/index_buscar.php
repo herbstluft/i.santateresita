@@ -12,7 +12,7 @@ error_reporting(E_ERROR | E_PARSE);
 
 session_start();
 
-$produ=ctos$query->seleccionar("SELECT * FROM `productos`");
+$produ=$query->seleccionar("SELECT * FROM `productos`");
 
 
 if($_GET){
