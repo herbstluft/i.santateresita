@@ -9,6 +9,7 @@ $data = new Database();
 $query = new Select();
 $ejecuta = new ejecuta();
 session_start();
+error_reporting(E_ERROR | E_PARSE);
 
 $rr=0;
 
@@ -23,6 +24,7 @@ if ($rr==0)
 {
   
     
+  $DateAndTime = date('Y-m-d h:i:s a', time()); 
 
     
     $fecha = "INSERT INTO orden (`id_orden`, `tiempo`) VALUES (NULL ,'$DateAndTime')";
