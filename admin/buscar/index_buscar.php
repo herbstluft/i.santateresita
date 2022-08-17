@@ -8,6 +8,7 @@ require("../../vendor/autoload.php");
 
 $query = new Select();
 $insert = new ejecuta();
+error_reporting(E_ERROR | E_PARSE);
 
 session_start();
 
@@ -88,17 +89,12 @@ if($_GET){
 
            &ensp; 
            <?php
-           if(isset($_SESSION['cliente'])){
+           if(isset($_SESSION['admin'])){
             ?>
-            
+              <button class="btn sombras iniciar" id="registrarme" type="submit">
+              <a class="a" href="../index.php"  > Volver Atras   </a></button>
             <?php
             } 
-            else{
-              ?>
-               <button class="btn sombras iniciar" id="registrarme" type="submit">
-              <a class="a" href="../../registro/login.php"  >  Iniciar Session   </a></button>
-              <?php
-            }
             ?>
 
 

@@ -12,6 +12,12 @@ session_start();
 
 
 
+if(isset($_GET['g_orden'])){
+    $sql="update detalle_orden set estatus='1' where  cliente='".$_SESSION['cliente']."'";
+    $ejecuta->ejecutar($sql);
+
+    header("Location: ../index.php");
+}
 ?>
 <!DOCTYPE html>
 <link rel="stylesheet" href="../bootstrap/css/bootstrap.rtl.min.css">
@@ -54,7 +60,7 @@ session_start();
 
         $productos = "SELECT todo.nom as Producto, todo.precio, todo.orden,todo.cantidad, todo.total as subtotal from  
         (select productos.nom_producto as nom, productos.precio as precio, orden.id_orden as orden, detalle_orden.cantidad as cantidad, (productos.precio * detalle_orden.cantidad) as total from detalle_orden inner JOIN orden on orden.id_orden=detalle_orden.id_orden 
-        inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente='".$_SESSION['cliente']."')as  todo";
+        inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente='".$_SESSION['cliente']."' and detalle_orden.estatus=0)as  todo";
         $resultado = $query->seleccionar($productos);
         
 
@@ -119,7 +125,7 @@ else{}
                 (select productos.nom_producto as nom, productos.precio as precio, detalle_orden.cantidad as cantidad, 
                 (productos.precio * detalle_orden.cantidad) as total from detalle_orden inner JOIN orden 
                 on orden.id_orden=detalle_orden.id_orden inner join productos on productos.id_producto=detalle_orden.id_producto 
-                where detalle_orden.cliente='".$_SESSION['cliente']."')as todo)as SAM;";
+                where detalle_orden.cliente='".$_SESSION['cliente']."' and detalle_orden.estatus=0)as todo)as SAM;";
                 $totalx = $query->seleccionar($total);
                 foreach ($totalx as $totalito) {
                 ?>
@@ -136,12 +142,12 @@ else{}
 
 
         <br><br>
-        <h3 class="text-center">¡GRACIAS POR SU COMPRA!</h3>
     </div>
 
-
-
-    
+<center>
+    <a href="?g_orden">
+<button class="btn" style="border 1px solid; border-color:black"> <h3> ¡GRACIAS POR SU COMPRA! </h3> </button>
+</center>
 </body>
 
 </html>

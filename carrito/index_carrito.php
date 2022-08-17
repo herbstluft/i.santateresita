@@ -16,7 +16,7 @@ $rr=0;
 if (isset($_GET['agregar']) ){
   //comprobar si existe un producto
     $consulta="select * from detalle_orden where detalle_orden.cliente='".$_SESSION['cliente']."' and 
-    detalle_orden.id_producto='".$_GET['agregar']."'";
+    detalle_orden.id_producto='".$_GET['agregar']."' and estatus=0";
     $res=$query->seleccionar($consulta);
 
 if ($rr==0)
@@ -83,6 +83,8 @@ if(isset($_GET['regenerarcarrito'])){
       header("location: index_carrito.php");
     }
 
+
+    
 
 
 
@@ -220,7 +222,7 @@ if(isset($_SESSION['cliente'])){
         <tbody>
         
         <?php
-        $sql="SELECT todo.nom as Producto, todo.precio, todo.cantidad, todo.subtotal as subtotal, todo.id from (select productos.nom_producto as nom, productos.precio as precio, detalle_orden.cantidad as cantidad, (productos.precio * detalle_orden.cantidad) as subtotal, productos.id_producto as id from detalle_orden inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente='".$_SESSION['cliente']."') as todo";
+        $sql="SELECT todo.nom as Producto, todo.precio, todo.cantidad, todo.subtotal as subtotal, todo.id from (select productos.nom_producto as nom, productos.precio as precio, detalle_orden.cantidad as cantidad, (productos.precio * detalle_orden.cantidad) as subtotal, productos.id_producto as id from detalle_orden inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente='".$_SESSION['cliente']."' and estatus=0) as todo";
 
         //ejecutar consulta
         $resultados=$query->seleccionar($sql);
@@ -269,7 +271,7 @@ if(isset($_SESSION['cliente'])){
               if(!empty($resultados)){
             ?>
          
-            <td><a href="ticketpdf.php?gen_orden" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Generar ticket ></a></td>
+            <td><a href="ticketpdf.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Generar ticket ></a></td>
            
             <?php
               }

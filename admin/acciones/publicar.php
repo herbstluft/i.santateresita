@@ -13,31 +13,6 @@ error_reporting(E_ERROR | E_PARSE);
 
 session_start();
 
-if($_POST){
-
-  print_r($_POST);
-  $nom=$_POST['nom'];
-  $imagen=$_FILES['imagen']['name'];
-  $precio=$_POST['precio'];
-  $fecha=$_POST['fecha_v'];
-  $formula=$_POST['formula'];
-  $categoria=$_POST['categoria'];
-  $desc=$_POST['desc'];
-
-
-
-  // Guardar imagen
-  $imagen=$_FILES['imagen']['name'];
-  /////////  Crear imagenes temporales
-  $imagen_temporal=$_FILES['imagen']['tmp_name'];
-  //mover  imagen a carpeta imagenes
-  move_uploaded_file($imagen_temporal,"../imagenes/".$imagen);
-
-
-  $insert="INSERT INTO `productos` (`nom_producto`,`imagen`,`precio`,`fecha_vencimiento`,`id_cat`,`formula`,`descripcion`) VALUES ('$nom','$imagen','$precio','$fecha','$categoria','$formula','$desc')";
-  $obj->ejecutar($insert);
-}
-
 
 //Seleccionar datos de los productos
 $productos=$query->seleccionar("SELECT todo.id, todo.nombre, todo.precio, todo.fecha, todo.formula, todo.descripcion, todo.imagen, todo.categoria from
@@ -195,43 +170,57 @@ if(isset($_SESSION['admin'])){
   </div>
   
     <br><br>
-  <table class="sombras table table-hover table-responsive">
-    <thead>
-      <tr class="text-center">
-   
-        <th>Nombre</th>
-        <th>Imagen</th>
-        <th>Precio</th>
-        <th>Vencimiento</th>
-        <th>Formula</th>
-        <th>Categoria</th>
-        <th>Descripcion</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php foreach($productos as $producto) { ?>
-      <tr class="text-center"> 
-        <td> <?php echo $producto->nombre;?> </td>
+ 
 
-        <td> 
-        <img src="../imagenes/<?php echo $producto->imagen;?>" width="50%">
-        </td>
+      <?php
+ 
+ //comprobar si existe
+if(isset($_POST['enviar'])){
+  include '../../src/data/conexion_sqli.php';
+$ver="Select nom_producto from productos";
+$resultados=mysqli_query($conexion,$ver);
+$num=mysqli_num_rows($resultados);
 
+if($num=0){
+  //insertando producto
 
-        <td> <?php echo "$".number_format($producto->precio,2, '.' ,'.');?></td>
-        <td> <?php echo $producto->fecha;?></td>
-        <td> <?php echo $producto->formula;?> </td>
-        <td> <?php echo $producto->categoria;?></td>
-        <td> <?php echo $producto->descripcion;?></td>
-        <td> <a class="btn btn-danger" href="?borrar=<?php echo $producto->id; ?>" >Eliminar</a> </td>
-      <tr>
-      <?php  } ?>
-    </tbody>
-  </table>
-  
+  print_r($_POST);
+  $nom=$_POST['nom'];
+  $imagen=$_FILES['imagen']['name'];
+  $precio=$_POST['precio'];
+  $fecha=$_POST['fecha_v'];
+  $formula=$_POST['formula'];
+  $categoria=$_POST['categoria'];
+  $desc=$_POST['desc'];
 
 
+
+  // Guardar imagen
+  $imagen=$_FILES['imagen']['name'];
+  /////////  Crear imagenes temporales
+  $imagen_temporal=$_FILES['imagen']['tmp_name'];
+  //mover  imagen a carpeta imagenes
+  move_uploaded_file($imagen_temporal,"../imagenes/".$imagen);
+
+
+  $insert="INSERT INTO `productos` (`nom_producto`,`imagen`,`precio`,`fecha_vencimiento`,`id_cat`,`formula`,`descripcion`) VALUES ('$nom','$imagen','$precio','$fecha','$categoria','$formula','$desc')";
+  $obj->ejecutar($insert);
+?>
+
+
+<div class="alert alert-success text-center" role="alert">
+  Producto publicado correctamente!
+</div>
+<?php
+}
+else{
+  ?>
+  <div class="alert alert-danger text-center" role="alert">
+ Este producto ya existe en el sistema!
+</div>
+<?php
+}
+     ?>
 
 </div>
   
@@ -247,5 +236,6 @@ if(isset($_SESSION['admin'])){
 }
 else{
   header("location: ../../error.php");
+}
 }
 ?>

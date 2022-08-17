@@ -142,7 +142,7 @@ if($_SESSION['admin']){
         <br><br>
         <h2 class="fw-normal">Doctores</h2> <br>
         <h5>Ver los doctores que atienden.</h5><br>
-        <p><a class="btn sombras" id="registrarme" href="productos/suplementos.php">Ir &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="acciones/doctores/doc.html">Ir &raquo;</a></p>
       </div>
   </div>
   
@@ -173,7 +173,7 @@ if($_SESSION['admin']){
         <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://images.vexels.com/media/users/3/151869/isolated/preview/767ca771755f4675d4063c03e17c8595-icono-de-lista-de-verificacion-medica.png" alt="">
         <br><br>
         <h2 class="fw-normal">Citas Realizadas</h2> <br>
-        <p><a class="btn sombras" id="registrarme" href="acciones/publicar.php">Ir &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="acciones/citas/citas_realizadas.php">Ir &raquo;</a></p>
       </div>
     
       
@@ -182,7 +182,7 @@ if($_SESSION['admin']){
         <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://equipatupizzeria.com/wp-content/uploads/2022/02/tiempo.png" alt="">
         <br><br>
         <h2 class="fw-normal">Citas Pendientes</h2> <br>
-        <p><a class="btn sombras" id="registrarme" href="/index.php">Ir &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="acciones/citas/citas_pendientes.php">Ir &raquo;</a></p>
       </div>
   </div>
 

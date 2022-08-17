@@ -135,9 +135,9 @@ if(isset($_SESSION['cliente'])){
         Doctor:
         <br>
        <select class="form-select sombras" aria-label="Disabled select example"  name="doctor" >
-          <option value="1" >Ricardo Cabello Rodriguez (Default)</option>
-          <option value="2">Nicole Cabello Rodriguez</option>
-          <option value="3">Eduardo Tapia Marquez</option>
+          <option value="1" >Fernando Molino Villa Lobos (Default)</option>
+          <option value="2">Edwin Fraire Mascorro</option>
+          <option value="3">Julia Delgado Molina</option>
         </select><br>
 
     

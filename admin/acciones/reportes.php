@@ -11,16 +11,10 @@ $insert = new ejecuta();
 
 session_start();
 
-$reporte="SELECT KV.id_orden as VENTA, KV.nombre as Cliente, KV.tiempo as Fecha, SUM(KV.CantidadProd)as Cantidad, SUM(KV.Total)as Total 
-from(select orden.id_orden ,clientes_datos_personales.nombre, productos.nom_producto, orden.tiempo, sum(detalle_orden.cantidad)as CantidadProd, 
-sum(productos.precio * detalle_orden.cantidad)as Total
-from clientes_datos_personales inner join clientes on clientes_datos_personales.id_cliente = clientes.id_reg 
-inner join detalle_orden on detalle_orden.cliente = clientes.user_clien inner join orden on orden.id_orden = detalle_orden.id_orden 
-inner join productos on productos.id_producto = detalle_orden.id_producto where clientes.user_clien = 'juanii' and detalle_orden.estatus = 1
-group by clientes_datos_personales.nombre, orden.id_orden, productos.nom_producto, orden.tiempo)as KV
-group by KV.id_orden;";
+$reporte="SELECT KV.id_orden as VENTA, KV.nombre as Cliente, KV.tiempo as Fecha, SUM(KV.CantidadProd)as Cantidad, SUM(KV.Total)as Total from (select orden.id_orden ,clientes_datos_personales.nombre, productos.nom_producto, orden.tiempo, sum(detalle_orden.cantidad)as CantidadProd, sum(productos.precio * detalle_orden.cantidad)as Total from clientes_datos_personales inner join clientes on clientes_datos_personales.id_cliente = clientes.id_reg inner join detalle_orden on detalle_orden.cliente = clientes.user_clien inner join orden on orden.id_orden = detalle_orden.id_orden inner join productos on productos.id_producto = detalle_orden.id_producto where detalle_orden.estatus and detalle_orden.id_orden=orden.id_orden= 1 group by clientes_datos_personales.nombre, orden.id_orden, productos.nom_producto, orden.tiempo)as KV group by KV.nombre, KV.id_orden";
 $productos=$query->seleccionar($reporte);
-foreach($productos as $prod) 
+
+
 ?>
 
 
@@ -64,8 +58,8 @@ foreach($productos as $prod)
       <form class="d-flex primary" role="search" style="width:100%; position:relative;">
       <!--Buscar-->
 
-      <input class="sombras light-table-filter" data-table="table_id" type="text" 
-      placeholder="Buscar" style="width:50%; padding-left:2%;">
+      <input class="sombras light-table-filter " data-table="table_id" type="text" 
+      placeholder="Buscar" style="width:90%; padding-left:2%;">
       </form>
      
 <script src="buscador.js"></script>
@@ -73,6 +67,7 @@ foreach($productos as $prod)
 </div>
 </nav>
 </div>
+
 
   <table class="table">
   <thead>
@@ -84,6 +79,9 @@ foreach($productos as $prod)
       <th scope="col">Total</th>
     </tr>
   </thead>
+  <?php 
+foreach($productos as $prod) {
+  ?>
   <tbody>
     <tr>
       <th scope="row"><?php {echo $prod->VENTA?></th>
@@ -95,7 +93,12 @@ foreach($productos as $prod)
     </tr>
    
   </tbody>
+  <?php
+}
+?>
 </table>
 
+
+<script src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
