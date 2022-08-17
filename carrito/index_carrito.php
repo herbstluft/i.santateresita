@@ -22,8 +22,7 @@ if (isset($_GET['agregar']) ){
 if ($rr==0)
 {
   
-    $DateAndTime = date('Y-m-d h:i:s a', time()); 
-    echo "$DateAndTime.";
+    
 
     
     $fecha = "INSERT INTO orden (`id_orden`, `tiempo`) VALUES (NULL ,'$DateAndTime')";
@@ -94,6 +93,7 @@ if(isset($_GET['regenerarcarrito'])){
 
 <?php 
 if(isset($_SESSION['cliente'])){
+
 ?>
 <!doctype html>
 <html lang="en">

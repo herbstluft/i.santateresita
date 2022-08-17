@@ -182,7 +182,7 @@ else{
            <br>
            
            <!-- boton check animacion -->
-          <button> <a href="citas_pendientes.php?real= <?php  echo $cita->id?>">sssss</a></button>
+          <button class="sombras btn"> <a style="text-decoration:none" href="citas_pendientes.php?real= <?php  echo $cita->id?>">Realizada</a></button>
 
          <!-- Fin boton check animacion -->
 

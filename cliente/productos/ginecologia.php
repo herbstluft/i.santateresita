@@ -75,7 +75,7 @@ $productos=$query->seleccionar("select * from  productos inner JOIN categoria on
           <a class="nav-link fonts" href="../../cliente/categorias.php">Categorias</a>
         </li>
         <li class="nav-item i">
-          <a class="nav-link fonts" href="#">Cita</a>
+          <a class="nav-link fonts" href="../../citas/index_citas.php">Cita</a>
         </li>
         <li class="nav-item i">
           <a class="nav-link fonts" href="../nosotros.php">Nosotros</a>

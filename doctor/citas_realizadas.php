@@ -176,10 +176,7 @@ else{
            <br>
            <!-- boton check animacion -->
            <a href="?borrar=<?php echo $cita->id_cita; ?>">
-           <button class="sombras button">
-	        <span class="text"> Realizada </span>
-	        <i class="ri-check-line icon"><img src="https://img.icons8.com/ios-glyphs/30/000000/checkmark--v1.png"/> </i>
-          </button>
+    
           </a>
 
          <!-- Fin boton check animacion -->
@@ -190,7 +187,7 @@ else{
    
           </form>
           </div>
-          <br>
+        
         </div>
     </div>
     </form>

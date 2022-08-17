@@ -63,7 +63,8 @@ if(isset($_GET['g_orden'])){
         inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente='".$_SESSION['cliente']."' and detalle_orden.estatus=0)as  todo";
         $resultado = $query->seleccionar($productos);
         
-
+        $DateAndTime = date('Y-m-d h:i:s a', time()); 
+        
 
         //Nombre del cliente
         $consulta="SELECT clientes_datos_personales.nombre as nombre,clientes_datos_personales.apellido_pat as app,
@@ -92,7 +93,7 @@ if (!empty($ord))
 else{}
 ?>
 <p> <b> Cliente: </b> <?php echo $nombre_cliente?></p>
-        <h2>2022-07-28 00:10:46</h2>
+        <h6><?php echo $DateAndTime ?></h6>
         <table>
             <thead>
                 
