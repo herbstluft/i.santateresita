@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-08-2022 a las 08:53:51
+-- Tiempo de generación: 17-08-2022 a las 12:17:17
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -97,7 +97,8 @@ CREATE TABLE `citas` (
 INSERT INTO `citas` (`id_cita`, `id_cliente`, `id_doc`, `hora`, `fecha`, `realizadas`) VALUES
 (32, 2, 3, '13:53:00', '2022-08-30', 0),
 (33, 1, 3, '04:48:00', '2022-08-17', 0),
-(34, 1, 3, '04:48:00', '2022-08-17', 0);
+(34, 1, 3, '04:48:00', '2022-08-17', 0),
+(36, 4, 3, '08:01:00', '2022-09-01', 0);
 
 -- --------------------------------------------------------
 
@@ -123,7 +124,9 @@ INSERT INTO `clientes` (`id_client`, `user_clien`, `contrasena`, `id_reg`, `t_us
 (3, 'gemaaa', 'gemita', 3, 3),
 (4, 'viktor', 'vik', 4, 3),
 (5, 'dylan1', 'dyl', 5, 3),
-(11, 'julio', '$2y$10$UWsVttIrn5xtVuYo/VbQmOy/HRYlYwXStQ.Kb6.CjeXgbH0ULpxL.', NULL, 3);
+(16, 'pepsi', 'a', NULL, 3),
+(17, 'cocacola', 'a', 17, 3),
+(18, 'pepito', 'a', NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -153,7 +156,9 @@ INSERT INTO `clientes_datos_personales` (`id_cliente`, `nombre`, `apellido_pat`,
 (3, 'Gema', 'Castaneda', 'Barraza', 'gema@gmail.com', 24, 'F', '8736457897', NULL),
 (4, 'Victor', 'Cabello', 'Rodriguez', 'victor@gmail.com', 20, 'M', '8712647536', NULL),
 (5, 'Dylan', 'Gonzales', 'Flores', 'dylan@gmail.com', 23, 'M', '8714628710', NULL),
-(11, 'julio', 'Castañeda', 'Chavez', 'julio.28@gmail.com', 24, 'M', '7878978998', 'GGHHHFF556');
+(16, 'pepsi', 'Castañed', 'Chavez', 'herbstluftwm.28@gmail.com', 22, 'M', '3435345435', 'tdgsdfe4t4'),
+(17, 'cocacolasss', 'abc', 'ssdkdjdf', 'sjsks@gmail.con', 22, 'M', '3333337788', 'tdgsdfe4t4'),
+(18, 'pepe aaaooo', 'Castañed', 'Chavez', '21170139@uttcampus.edu.mx', 22, 'M', '3435345435', 'tdgsdfe4t4');
 
 -- --------------------------------------------------------
 
@@ -197,6 +202,19 @@ CREATE TABLE `detalle_orden` (
   `id_orden` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `detalle_orden`
+--
+
+INSERT INTO `detalle_orden` (`id_do`, `id_producto`, `cantidad`, `cliente`, `estatus`, `id_orden`) VALUES
+(145, 19, 1, 'juanii', 1, 126),
+(146, 18, 1, 'juanii', 1, 127),
+(147, 20, 1, 'Manu22', 1, 128),
+(148, 24, 2, 'Manu22', 1, 129),
+(149, 18, 3, 'viktor', 1, 131),
+(150, 19, 1, 'viktor', 1, 134),
+(151, 20, 1, 'viktor', 1, 135);
+
 -- --------------------------------------------------------
 
 --
@@ -230,6 +248,22 @@ CREATE TABLE `orden` (
   `id_orden` int(11) NOT NULL,
   `tiempo` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `orden`
+--
+
+INSERT INTO `orden` (`id_orden`, `tiempo`) VALUES
+(126, '2022-08-17 11:29:20'),
+(127, '2022-08-17 11:29:23'),
+(128, '2022-08-17 11:34:16'),
+(129, '2022-08-17 11:34:20'),
+(130, '2022-08-17 11:34:24'),
+(131, '2022-08-17 11:41:49'),
+(132, '2022-08-17 11:41:54'),
+(133, '2022-08-17 11:41:57'),
+(134, '2022-08-17 11:42:00'),
+(135, '2022-08-17 11:42:05');
 
 -- --------------------------------------------------------
 
@@ -414,19 +448,19 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
-  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_cita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes_datos_personales`
 --
 ALTER TABLE `clientes_datos_personales`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `datos_pers_user`
@@ -438,7 +472,7 @@ ALTER TABLE `datos_pers_user`
 -- AUTO_INCREMENT de la tabla `detalle_orden`
 --
 ALTER TABLE `detalle_orden`
-  MODIFY `id_do` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
+  MODIFY `id_do` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 
 --
 -- AUTO_INCREMENT de la tabla `doctores`
@@ -450,7 +484,7 @@ ALTER TABLE `doctores`
 -- AUTO_INCREMENT de la tabla `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `id_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `id_orden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`

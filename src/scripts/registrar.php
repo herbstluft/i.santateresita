@@ -14,9 +14,9 @@
           if($_POST){
 
           extract($_POST);
-          $contrasena= password_hash($us_cont, PASSWORD_DEFAULT);
+      
 
-          $insert_clientes="INSERT INTO clientes (user_clien, contrasena) VALUES ('$nom_us','$contrasena')";
+          $insert_clientes="INSERT INTO clientes (user_clien, contrasena,t_us) VALUES ('$nom_us','$us_cont','3')";
           $insert_reg="INSERT INTO clientes_datos_personales (nombre, apellido_pat, apellido_mat, correo, edad, genero, telefono, RFC) VALUES ('$nom', '$ap', '$am', '$corr', '$edad', '$gen', '$tel', '$rfc')";
 
           $insert -> ejecutar($insert_clientes);
@@ -31,6 +31,12 @@
           WHERE clientes.id_client=clientes_datos_personales.id_cliente and clientes.user_clien='$nom_us'";
 
           $id=$query -> seleccionar($cadena);
+
+          foreach($id as $all)
+          $id_c=$all->id_cliente;
+            
+
+    
 
 
 

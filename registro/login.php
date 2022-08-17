@@ -25,6 +25,7 @@ $query2->execute();
 $cliente = $query2->fetch(PDO::FETCH_ASSOC);
 
 
+
 if($usuario['tipo_usuario']==1){
   session_start();
   $_SESSION['admin']=$_POST['user'];
@@ -41,6 +42,14 @@ if($usuario['tipo_usuario']==2){
   session_start();
   $_SESSION['cliente']=$_POST['user'];
  header('location:../index.php');
+ }
+
+ else{
+  ?>
+  <div class="alert text-center alert-danger" role="alert">
+  Contraseña o Usuario incorrecto!
+</div>
+  <?php
  }
 
 
