@@ -13,15 +13,12 @@ session_start();
 //ocultar warnings
 error_reporting(E_ERROR | E_PARSE);
 
-if($_GET['agregar']){
+if($_GET['agregar'])
+{
   $sql="insert into detalle_orden()";
 }
 
 ?>
-
-
-
-
 
 <!doctype html>
 <html lang="en">
