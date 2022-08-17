@@ -16,6 +16,12 @@
           extract($_POST);
       
 
+
+          $rep="SELECT * from clientes WHERE clientes.user_clien='$nom_us'";
+          $re=$query->seleccionar($rep);
+
+          if(empty($re)){
+
           $insert_clientes="INSERT INTO clientes (user_clien, contrasena,t_us) VALUES ('$nom_us','$us_cont','3')";
           $insert_reg="INSERT INTO clientes_datos_personales (nombre, apellido_pat, apellido_mat, correo, edad, genero, telefono, RFC) VALUES ('$nom', '$ap', '$am', '$corr', '$edad', '$gen', '$tel', '$rfc')";
 
@@ -34,6 +40,7 @@
 
           foreach($id as $all)
           $id_c=$all->id_cliente;
+      
             
 
     
@@ -44,4 +51,8 @@
           /*Registro exitoso y despues se dirige a la pagina principal*/
           header("refresh:3; ../../registro/login.php");
           }
+          else{
+            echo "<div class='alert alert-success'> Este nombre de usuario ya existe </div>";
+          }
+        }
         ?>

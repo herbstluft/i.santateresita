@@ -143,12 +143,16 @@ else{}
 
 
         <br><br>
+
+        <center>
+    <a href="?g_orden">
+<button class="btn" style="border 1px solid; border-color:black"> <h3> ¡GRACIAS POR SU COMPRA! </h3> </button> </a>
+</center>
+
+<h3><b>Instrucciones:</b> <h6>Imprime el ticket dando click derecho e imprimir. Para asi poder pasar por tus productos en la tienda.</h6></h3>
     </div>
 
-<center>
-    <a href="?g_orden">
-<button class="btn" style="border 1px solid; border-color:black"> <h3> ¡GRACIAS POR SU COMPRA! </h3> </button>
-</center>
+
 </body>
 
 </html>
