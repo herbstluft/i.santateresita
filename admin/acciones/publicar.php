@@ -177,14 +177,15 @@ if(isset($_SESSION['admin'])){
  //comprobar si existe
 if(isset($_POST['enviar'])){
   include '../../src/data/conexion_sqli.php';
-$ver="Select nom_producto from productos";
+$ver="Select nom_producto from productos where nom_producto='$nom'";
 $resultados=mysqli_query($conexion,$ver);
 $num=mysqli_num_rows($resultados);
 
-if($num=0){
+
+if($num==0){
   //insertando producto
 
-  print_r($_POST);
+  
   $nom=$_POST['nom'];
   $imagen=$_FILES['imagen']['name'];
   $precio=$_POST['precio'];
@@ -204,7 +205,7 @@ if($num=0){
 
 
   $insert="INSERT INTO `productos` (`nom_producto`,`imagen`,`precio`,`fecha_vencimiento`,`id_cat`,`formula`,`descripcion`) VALUES ('$nom','$imagen','$precio','$fecha','$categoria','$formula','$desc')";
-  $obj->ejecutar($insert);
+  $res=$obj->ejecutar($insert);
 ?>
 
 

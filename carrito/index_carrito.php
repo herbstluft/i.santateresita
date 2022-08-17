@@ -199,8 +199,7 @@ if(isset($_SESSION['cliente'])){
 
     <div class="sombras"> <!--Inicio-->
 
-      <br> <?php echo $_SESSION['cliente'] ?>
-
+   
 
 
 

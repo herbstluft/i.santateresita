@@ -67,10 +67,18 @@ $productos=$query->seleccionar($reporte);
       <form class="d-flex primary" role="search" style="width:100%; position:relative;">
       <!--Buscar-->
 
+    
       <input class="sombras light-table-filter " data-table="table_id" type="text" 
       placeholder="Buscar" style="width:90%; padding-left:2%;">
-      </form>
 
+      
+
+    
+      </form>
+           
+      <button class="btn sombras iniciar" type="submit" style="height: 50px; width:10%; position: relative;" >
+              <a  href="../index.php" style="text-decoration:none"> < Atras </a></button>
+</div>
 
      
 <script src="../buscar/buscador.js"></script>
@@ -82,7 +90,7 @@ $productos=$query->seleccionar($reporte);
 
 <div class="container">
 
-  <table class="table text-center sombras">
+  <table class="table text-center sombras" id="tabla">
   <thead>
     <tr>
       <th scope="col">VENTA</th>
@@ -115,7 +123,7 @@ foreach($productos as $prod) {
 </div>
 
 
-
+<script src="../buscar/buscador.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
