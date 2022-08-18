@@ -58,9 +58,10 @@ if(isset($_GET['g_orden'])){
        
         
 
-        $productos = "SELECT todo.nom as Producto, todo.precio, todo.orden,todo.cantidad, todo.total as subtotal from  
+        $productos = "SELECT WS.Producto, WS.precio, WS.orden, WS.cantidad, WS.subtotal, WS.IVA, SUM(WS.subtotal + WS.IVA)as Total from(SELECT todo.nom as Producto, todo.precio, todo.orden,todo.cantidad, todo.total as subtotal, (todo.total * 0.16)as IVA from  
         (select productos.nom_producto as nom, productos.precio as precio, orden.id_orden as orden, detalle_orden.cantidad as cantidad, (productos.precio * detalle_orden.cantidad) as total from detalle_orden inner JOIN orden on orden.id_orden=detalle_orden.id_orden 
-        inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente='".$_SESSION['cliente']."' and detalle_orden.estatus=0)as  todo";
+        inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente = '".$_SESSION['cliente']."' and detalle_orden.estatus = 0)as  todo)as WS
+        group by WS.Producto,  WS.orden, WS.cantidad;";
         $resultado = $query->seleccionar($productos);
         
         $DateAndTime = date('Y-m-d h:i:s a', time()); 
@@ -95,12 +96,14 @@ else{}
 <p> <b> Cliente: </b> <?php echo $nombre_cliente?></p>
         <h6><?php echo $DateAndTime ?></h6>
         <table>
-            <thead>
+        <thead>
                 
                 <tr class="text-center">
-                    <th class="cantidad">Cantidad</th>
-                    <th class="producto">Producto</th>
+                    <th class="cantidad">Producto</th>
+                    <th class="producto">Cantidad</th>
                     <th class="precio">Precio Unitario</th>
+                    <th class="precio">Iva</th>
+                    <th class="precio">TOTAL</th>
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -114,6 +117,8 @@ else{}
                         <td class="cantidad"><?php echo $producto->cantidad ?></td>
                         <td class="producto"><?php echo $producto->Producto ?></td>
                         <td class="precio"><?php echo "$".number_format($producto->precio,2,'.','.') ?></td>
+                        <td class="precio"><?php echo "$".number_format($producto->IVA,2,'.','.')?></td>
+                        <td class="precio"><?php echo "$".number_format($producto->Total,2,'.','.')?></td>
                     </tr>
                 <?php } ?>
             </tbody>
@@ -122,11 +127,10 @@ else{}
             <tr class="text-center" style="background-color: yellow;">
             
                 <?php 
-                $total = "SELECT SUM(SAM.total)as TOTAL FROM(SELECT todo.nom as Producto, todo.precio, todo.cantidad, todo.total from  
-                (select productos.nom_producto as nom, productos.precio as precio, detalle_orden.cantidad as cantidad, 
-                (productos.precio * detalle_orden.cantidad) as total from detalle_orden inner JOIN orden 
-                on orden.id_orden=detalle_orden.id_orden inner join productos on productos.id_producto=detalle_orden.id_producto 
-                where detalle_orden.cliente='".$_SESSION['cliente']."' and detalle_orden.estatus=0)as todo)as SAM;";
+                $total = "SELECT sum(Total.Total)as TOTAL from(SELECT WS.Producto, WS.precio, WS.orden, WS.cantidad, WS.subtotal, WS.IVA, SUM(WS.subtotal + WS.IVA)as Total from(SELECT todo.nom as Producto, todo.precio, todo.orden,todo.cantidad, todo.total as subtotal, (todo.total * 0.16)as IVA from  
+                (select productos.nom_producto as nom, productos.precio as precio, orden.id_orden as orden, detalle_orden.cantidad as cantidad, (productos.precio * detalle_orden.cantidad) as total from detalle_orden inner JOIN orden on orden.id_orden=detalle_orden.id_orden 
+                inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente = '".$_SESSION['cliente']."' and detalle_orden.estatus = 1)as  todo)as WS
+                group by WS.Producto,  WS.orden, WS.cantidad)as Total;";
                 $totalx = $query->seleccionar($total);
                 foreach ($totalx as $totalito) {
                 ?>
@@ -146,7 +150,7 @@ else{}
 
         <center>
     <a href="?g_orden">
-<button class="btn" style="border 1px solid; border-color:black"> <h3> ¡GRACIAS POR SU COMPRA! </h3> </button> </a>
+<button class="btn" style="border:1px solid; border-color:black"> <h3> ¡GRACIAS POR SU COMPRA! </h3> </button> </a>
 </center>
 
 <h3><b>Instrucciones:</b> <h6>Imprime el ticket dando click derecho e imprimir. Para asi poder pasar por tus productos en la tienda.</h6></h3>
