@@ -12,41 +12,50 @@ session_start();
 error_reporting(E_ERROR | E_PARSE);
 
 $rr=0;
+$DateAndTime = date('Y-m-d h:i:s a', time()); 
 
-
-if (isset($_GET['agregar']) ){
-  //comprobar si existe un producto
-    $consulta="select * from detalle_orden where detalle_orden.cliente='".$_SESSION['cliente']."' and 
-    detalle_orden.id_producto='".$_GET['agregar']."' and estatus=0";
-    $res=$query->seleccionar($consulta);
-
-if ($rr==0)
+if(isset($_GET['newcompra']))
 {
   
-    
-  $DateAndTime = date('Y-m-d h:i:s a', time()); 
 
     
-    $fecha = "INSERT INTO orden (`id_orden`, `tiempo`) VALUES (NULL ,'$DateAndTime')";
-    $f=$ejecuta->ejecutar($fecha);
-    $q = "SELECT * FROM orden where orden.tiempo ='$DateAndTime'";
-    $resi = $query->seleccionar($q);
-    foreach ($resi as $sam)
-    $or = $sam->id_orden;
-
-  
-
+  $fecha = "INSERT INTO orden (`id_orden`, `tiempo`) VALUES (NULL ,'$DateAndTime')";
+  $f=$ejecuta->ejecutar($fecha);
+  $q = "SELECT * FROM orden where orden.tiempo ='$DateAndTime'";
+  $resi = $query->seleccionar($q);
+  foreach ($resi as $sam)
+  $or = $sam->id_orden;
 }
 
-$rr = 1;
+
+if (isset($_GET['agregar']) || isset($_GET['newcompra']) ){
+  //comprobar si existe un producto
+    $consulta="select * from detalle_orden where detalle_orden.cliente='".$_SESSION['cliente']."' and 
+    detalle_orden.id_producto='".$_GET['agregar']."' and detalle_orden.id_orden = '$or'";
+    $res=$query->seleccionar($consulta);
+
+
 
 
 if(empty($res)){
 
     //insertando producto al carro
+    if (isset($_GET['newcompra'])) 
+    {
+      $add_producto ="insert into detalle_orden (id_producto,cantidad, cliente,estatus, id_orden) values ('".$_GET['newcompra']."',1, '".$_SESSION['cliente']."',0, '$or')";
+      $ejecuta->ejecutar($add_producto);
+      header("location: index_carrito.php");
+    }
+    
+    if(isset($_GET['agregar'])){
+
+      $q = "SELECT * FROM orden ";
+      $resi = $query->seleccionar($q);
+      foreach ($resi as $sam)
+  $or = $sam->id_orden;
     $add_producto ="insert into detalle_orden (id_producto,cantidad, cliente,estatus, id_orden) values ('".$_GET['agregar']."',1, '".$_SESSION['cliente']."',0, '$or')";
     $ejecuta->ejecutar($add_producto);
-    header("location: index_carrito.php");
+    header("location: index_carrito.php");}
   }
  
 // Si el produco existe aumenta la cantidad
@@ -265,7 +274,7 @@ if(isset($_SESSION['cliente'])){
         </tbody>
         <tfoot>
         <tr class="text-center">
-            <td><a href="../index.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> < Continue Comprando</a></td>
+            <td><a href="../index.php?continue" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> < Continue Comprando</a></td>
             <td></td>
 
             <?php

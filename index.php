@@ -18,6 +18,11 @@ if($_GET['agregar'])
   $sql="insert into detalle_orden()";
 }
 
+
+$new=0;
+if (isset($_GET['newcompra'])){
+  $new=1;
+}
 ?>
 
 <!doctype html>
@@ -124,6 +129,7 @@ if($_GET['agregar'])
         </ul>
         <?php
            if(isset($_SESSION['cliente'])){
+            if(isset($_GET['continue'])){
             ?>
         <a href="carrito/index_carrito.php">
           <svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
@@ -131,6 +137,7 @@ if($_GET['agregar'])
           </svg>
         </a> 
         <?php 
+}
 }
 else{
 
@@ -226,7 +233,7 @@ if(isset($_SESSION['cliente'])){
 ?>
 
 
-<?php  if (isset($_GET['newcompra']) || isset ($_GET[''])) {?>
+<?php  if (isset($_GET['newcompra']) || isset($_GET['continue'])){?>
 
 
           <div class="d-grid gap-2 d-md-block">
@@ -240,10 +247,10 @@ if(isset($_SESSION['cliente'])){
           </div>
           
           <?php 
-          $new=1;
+
 }
 
-else {
+if(!isset($_GET['continue'])){
   ?>
   <div class="d-grid gap-2 d-md-block">
           <a href="carrito/index_carrito.php?newcompra=<?php echo $producto->id_producto ?>"> <!--Enviar id de producto -->
@@ -256,11 +263,11 @@ else {
           </div>
   <?php
 }
+else{}
+
+
 }
 
-else{
-  
-}
 ?>
           <br>
         </div>
