@@ -106,13 +106,9 @@ if(isset($_SESSION['cliente'])){
     <div class="sombras"> <!--Inicio-->
       <br>
       <center><h1>Citas </h1> </center> 
-      <br>
-      
-
+  
       <form class="form1" method="get" action="index_citas.php">
-        Nombre:
-        <select class="form-select" aria-label="Disabled select example" disabled name="nombre_cliente">
-          <option selected> 
+      
           <?php 
             if(isset($_SESSION['cliente'])){
               $consulta="SELECT clientes_datos_personales.nombre as nombre,clientes_datos_personales.apellido_pat as app,
@@ -124,42 +120,42 @@ if(isset($_SESSION['cliente'])){
               foreach($id as $res)
 
               $nombre_cliente= $res->nombre ." ". $res->app ." ". $res->apm;
-           echo $nombre_cliente;
+           echo  "<center><h1> Bienvenido $nombre_cliente</h1></center>";
               
             }
           ?>
           
           </option>
         </select>
+        <br><br>
     
-        Doctor:
-        <br>
+        <h4>Doctor</h4>
        <select class="form-select sombras" aria-label="Disabled select example"  name="doctor" >
           <option value="1" >Fernando Molino Villa Lobos (Default)</option>
           <option value="2">Edwin Fraire Mascorro</option>
           <option value="3">Julia Delgado Molina</option>
         </select><br>
 
-    
-        <center>  Hora:
-        <input type="time" class="sombras" name="hora" required ><br><br> </center>
-          <center> Fecha:
-          <input type="date" class="sombras" name="fecha" required><br><br></center>
+ 
+        <!--Calendarios de citas -->
+        <?php
+        date_default_timezone_set('America/Mexico_City');
+        $fecha_actual=date("Y-m-d   H:i");
+        ?>
+        <label>Fecha: <br><input type="date" class="sombras" name="fecha" min="2022-08-18" max="2022-09-15"></label><br>
+        <label>Hora:</label><br>
+        <form action="https://www.anerbarrena.com/demos/2014/002-time-input-html5.php" name="formulario">
+	      <input type="time" class="sombras" name="hora" value="11:45:00" min="10:00:00"  max="22:30:00" step="1">
         
-          <!--BOTON DE CITA-->
-          <center> <input type="submit" class="fadeIn fourth" value="Generar cita" name="generar"></center>
-          <a href="mis_citas.php"><button type="button" class="btn" style="background-color: #CC7272; color:white">Ver mis citas</button>
+               <!--BOTON DE CITA-->
+ <center> <input type="submit" class="fadeIn fourth" value="Generar cita" name="generar"></center>
+          <a href="index_citas.php"><button type="button" class="btn" style="background-color: #CC7272; color:white">Ver mis citas</button>
           <br><br>
-          
-
-          
+                                                    
+      
       </form>
     </div> <!--Fin-->
-
-
 </div>
-
- 
 
   <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>   
   <script src="../bootstrap/js/bootstrap.min.js"></script>
@@ -182,7 +178,6 @@ if(isset($_GET['generar'])){
 
   $doctor=$_GET['doctor'];
   $hora=$_GET['hora'];
-
   $fecha=$_GET['fecha'];
   
   //obtener id del cliente
@@ -191,10 +186,8 @@ if(isset($_GET['generar'])){
   //convertir resultado a entero
   if (!empty($id)) {
     foreach ($id as $id_cliente) {
-      # code...
-
-        
-        $insert_cita="INSERT INTO `citas` (`id_cliente`,`id_doc`,`hora`,`fecha`,`realizadas`) VALUES ($id_cliente->id_client,$doctor,'$hora','$fecha',0)";
+      
+        $insert_cita="INSERT INTO citas (id_cliente,id_doc,hora, fecha, realizadas) VALUES ($id_cliente->id_client,$doctor,'$hora','$fecha',0)";
         $insert->ejecutar($insert_cita);  
     } 
     echo "
