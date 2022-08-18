@@ -5,8 +5,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../bootstrap/css/proyecto/farmacia.css">
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../bootstrap/css/proyecto/farmacia.css">
  
 
   </head>
@@ -14,7 +14,7 @@
 <!-- Fondo de video -->
 <div class="fullscreen-container">
     <video loop muted autoplay poster="" class="fullscreen-video">
-        <source src="../bootstrap/img/back.mp4" type="video/mp4">
+        <source src="../../bootstrap/img/back.mp4" type="video/mp4">
 
     </video>
 </div>
@@ -25,7 +25,7 @@
 
   <nav class="navbar navbar-expand-lg barra sticky-top" >
     <div class="container-fluid">
-      <a class="navbar-brand" href="../index.php"><img src="../bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
+      <a class="navbar-brand" href="../index.php"><img src="../../bootstrap/img/logo.png" style="width: 30%;"/> &ensp; Santa Teresita</a>
       
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -124,18 +124,11 @@
             <input type="text" class="sombras_input form-control col-4" placeholder="Escuela" name="escuela" required>
             &ensp; &ensp; &ensp; &ensp;
         </div>
-
-
         <br>
- 
         <center>
         <button class="btn sombras registrarme" id="registrarme" name="registrar" type="submit">Registrarme</button>
         </center>
-        
-
     </form>
-
-
 </main>
 <br><br>
 </div>
