@@ -67,6 +67,21 @@ if($_GET['agregar'])
     height: 100%;
   }
 }
+.a{
+  top:10px;
+}
+.b{
+  background-color: transparent;
+  border: none;
+  width: 100px;
+  left:-10px;
+}
+.c{
+  background-color: rgba(191, 191, 191, 0.996)
+  backdrop-filter: blur(100px);
+  margin-top:10px;
+  
+}
     
     </style>
 
@@ -130,8 +145,19 @@ else{
            <?php
            if(isset($_SESSION['cliente'])){
             ?>
-              <button class="btn sombras iniciar col-8 " type="submit" style="height: 50%; position: relative;" name="cerrar_session">
-          <a class="a" href="src/scripts/logout.php"> Cerrar session </a></button>
+
+<li class="nav-item dropdown a">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/48/000000/external-user-user-tanah-basah-glyph-tanah-basah-4.png"/>
+          </a>
+          <ul class="dropdown-menu b">
+          <li class="sombras c"><a class="dropdown-item" style="color: #0d6efd"> <b><?php echo mb_strtoupper($_SESSION['cliente'])?> </b> </a></li>
+            <li class="sombras c"><a class="dropdown-item" style="color: #0d6efd" href="cliente/mis_compras.php"> <b>Mis compras </b> </a></li>
+            <li class="sombras c"><a class="dropdown-item" style="color:red;" href="src/scripts/logout.php"> <b> Cerrar Session </b> </a></li>
+           
+          </ul>
+        </li>´
+
             <?php
             } 
             elseif(isset($_SESSION['admin'])){
@@ -255,6 +281,7 @@ else{
   <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <script type="module" src="bootstrap/js/background.js"></script>
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
 
