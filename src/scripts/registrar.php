@@ -28,13 +28,8 @@
           $insert -> ejecutar($insert_clientes);
           $insert  -> ejecutar($insert_reg);
 
-
           //obtener el id del cliente
-          $cadena="SELECT 
-          clientes_datos_personales.id_cliente
-          from  clientes_datos_personales, clientes 
-          
-          WHERE clientes.id_client=clientes_datos_personales.id_cliente and clientes.user_clien='$nom_us'";
+          $cadena="SELECT clientes_datos_personales.id_cliente from  clientes_datos_personales, clientes WHERE clientes.id_client=clientes_datos_personales.id_cliente and clientes.user_clien='$nom_us'";
 
           $id=$query -> seleccionar($cadena);
 
