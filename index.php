@@ -77,7 +77,7 @@ if($_GET['agregar'])
   left:-10px;
 }
 .c{
-  background-color: rgba(191, 191, 191, 0.996)
+  background-color: rgba(191, 191, 191, 0.996);
   backdrop-filter: blur(100px);
   margin-top:10px;
   
