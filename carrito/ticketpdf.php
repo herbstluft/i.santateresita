@@ -54,17 +54,25 @@ if(isset($_GET['g_orden'])){
         # Puedes obtenerlo de una base de datos, por ejemplo: https://parzibyte.me/blog/2019/07/17/php-bases-de-datos-ejemplos-tutoriales-conexion/
 
     
+        //Sacar la orden
+        $DateAndTime = date('Y-m-d h:i:s a', time()); 
+
+        $ordii = "SELECT * FROM orden";
+        $sre = $query->seleccionar($ordii);
         
-       
-        
+        foreach($sre as $ste) 
+
+        $y = $ste->id_orden;
 
         $productos = "SELECT WS.Producto, WS.precio, WS.orden, WS.cantidad, WS.subtotal, WS.IVA, SUM(WS.subtotal + WS.IVA)as Total from(SELECT todo.nom as Producto, todo.precio, todo.orden,todo.cantidad, todo.total as subtotal, (todo.total * 0.16)as IVA from  
         (select productos.nom_producto as nom, productos.precio as precio, orden.id_orden as orden, detalle_orden.cantidad as cantidad, (productos.precio * detalle_orden.cantidad) as total from detalle_orden inner JOIN orden on orden.id_orden=detalle_orden.id_orden 
-        inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente = '".$_SESSION['cliente']."' and detalle_orden.estatus = 0)as  todo)as WS
+        inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente = '".$_SESSION['cliente']."' and orden.id_orden = '$y')as  todo)as WS
         group by WS.Producto,  WS.orden, WS.cantidad;";
         $resultado = $query->seleccionar($productos);
         
-        $DateAndTime = date('Y-m-d h:i:s a', time()); 
+        
+
+         
         
 
         //Nombre del cliente
@@ -88,7 +96,7 @@ if(isset($_GET['g_orden'])){
 if (!empty($ord))
 {
 ?>
-<p> <b> Orden: #</b><?php echo $ord->orden?></p>
+<p> <b> Orden: #</b><?php echo $ft = $ord->orden?></p>
 <?php
 }
 else{}
@@ -129,7 +137,7 @@ else{}
                 <?php 
                 $total = "SELECT sum(Total.Total)as TOTAL from(SELECT WS.Producto, WS.precio, WS.orden, WS.cantidad, WS.subtotal, WS.IVA, SUM(WS.subtotal + WS.IVA)as Total from(SELECT todo.nom as Producto, todo.precio, todo.orden,todo.cantidad, todo.total as subtotal, (todo.total * 0.16)as IVA from  
                 (select productos.nom_producto as nom, productos.precio as precio, orden.id_orden as orden, detalle_orden.cantidad as cantidad, (productos.precio * detalle_orden.cantidad) as total from detalle_orden inner JOIN orden on orden.id_orden=detalle_orden.id_orden 
-                inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente = '".$_SESSION['cliente']."' and detalle_orden.estatus = 1)as  todo)as WS
+                inner join productos on productos.id_producto=detalle_orden.id_producto where detalle_orden.cliente = '".$_SESSION['cliente']."' and orden.id_orden = '$y')as  todo)as WS
                 group by WS.Producto,  WS.orden, WS.cantidad)as Total;";
                 $totalx = $query->seleccionar($total);
                 foreach ($totalx as $totalito) {
