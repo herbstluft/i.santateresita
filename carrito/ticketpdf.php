@@ -114,8 +114,8 @@ else{}
                    
                 ?>
                     <tr>
-                        <td class="cantidad"><?php echo $producto->cantidad ?></td>
-                        <td class="producto"><?php echo $producto->Producto ?></td>
+                        <td class="cantidad"><?php echo $producto->Producto ?></td>
+                        <td class="producto"><?php echo $producto->cantidad ?></td>
                         <td class="precio"><?php echo "$".number_format($producto->precio,2,'.','.') ?></td>
                         <td class="precio"><?php echo "$".number_format($producto->IVA,2,'.','.')?></td>
                         <td class="precio"><?php echo "$".number_format($producto->Total,2,'.','.')?></td>
@@ -152,8 +152,26 @@ else{}
     <a href="?g_orden">
 <button class="btn" style="border:1px solid; border-color:black"> <h3> ¡GRACIAS POR SU COMPRA! </h3> </button> </a>
 </center>
+<br>
+<h3><b>Instrucciones:</b> <h6>Imprime este ticket, para asi poder pasar por tus productos en la tienda.</h6></h3>
 
-<h3><b>Instrucciones:</b> <h6>Imprime el ticket dando click derecho e imprimir. Para asi poder pasar por tus productos en la tienda.</h6></h3>
+<br><br>
+<center>
+<SCRIPT LANGUAGE="JavaScript">
+
+if (window.print) {
+
+document.write('<form>'
+
++ '<input type=button name=print value="imprimir" '
+
++ 'onClick="javascript:window.print()"></form>');
+
+}
+
+</script>
+</center>
+
     </div>
 
 

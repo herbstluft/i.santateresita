@@ -87,6 +87,14 @@ if(isset($_GET['regenerarcarrito'])){
 
     
 
+    //actualizar cantidad
+    if($_POST['can']){
+      $update="update detalle_orden set cantidad='".$_POST['can']."' where cliente='".$_SESSION['cliente']."' and id_producto='22' and estatus=0";
+      
+      print_r($update);
+      $ejecuta->ejecutar($update);
+    }
+
 
 
 ?>
@@ -234,8 +242,13 @@ if(isset($_SESSION['cliente'])){
               <tr>
         <td  class="text-center"> <?php echo $producto->Producto?></td>
         <td  class="text-center"> <?php echo "$".number_format($producto->precio,2,'.','.')?></td>
-        <td  class="text-center"> <?php 
-        echo  $producto->cantidad?></td>    
+
+        <form action="index_carrito.php?i=<?php echo $producto->id ?>" method="post">
+        <td  class="text-center"> 
+          <input type="number" name="can" id="" value="<?php echo $producto->cantidad?>">   
+        </td> 
+        </form>
+
         <td  class="text-center"> <?php echo "$".number_format($producto->subtotal,2, '.','.')?></td>
 
         <!--METODO GET: envia el id sacado de la consulta mediante la URL-->
