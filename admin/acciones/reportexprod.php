@@ -11,13 +11,11 @@ $insert = new ejecuta();
 
 session_start();
 
-$reporte="SELECT RTY.VENTA, RTY.Cliente, RTY.Fecha, RTY.Cantidad, RTY.subtotal, RTY.IVA, (RTY.subtotal + RTY.IVA)as TOTAL FROM (SELECT GY.VENTA, GY.Cliente, GY.Fecha, GY.Cantidad, GY.subtotal, (GY.subtotal * 0.16)as IVA FROM (SELECT KV.id_orden as VENTA, KV.nombre as Cliente, KV.tiempo as Fecha, SUM(KV.CantidadProd)as Cantidad, 
-SUM(KV.Total)as subtotal from (select orden.id_orden ,clientes_datos_personales.nombre, productos.nom_producto, orden.tiempo, 
-sum(detalle_orden.cantidad)as CantidadProd, sum(productos.precio * detalle_orden.cantidad)as Total from clientes_datos_personales 
-inner join clientes on clientes_datos_personales.id_cliente = clientes.id_reg inner join detalle_orden 
-on detalle_orden.cliente = clientes.user_clien inner join orden on orden.id_orden = detalle_orden.id_orden 
-inner join productos on productos.id_producto = detalle_orden.id_producto group by clientes_datos_personales.nombre, orden.id_orden, 
-productos.nom_producto, orden.tiempo)as KV group by KV.id_orden)as GY)as RTY;";
+$reporte="SELECT TYR.id_producto, TYR.nom_producto, TYR.precio, TYR.cantidad, TYR.SUBTOTAL, TYR.IVA ,(TYR.SUBTOTAL + TYR.IVA)as TOTAL 
+FROM(SELECT FRG.id_producto, FRG.nom_producto, FRG.precio, FRG.cantidad, FRG.SUBTOTAL, (FRG.SUBTOTAL * 0.16)as IVA from 
+(select productos.id_producto, productos.nom_producto, productos.precio, detalle_orden.cantidad, (productos.precio * detalle_orden.cantidad)
+as SUBTOTAL from productos inner join detalle_orden on productos.id_producto = detalle_orden.id_producto inner join orden 
+on orden.id_orden = detalle_orden.id_orden where orden.id_orden = '".$_GET['id_orden']."')as FRG)as TYR;";
 $productos=$query->seleccionar($reporte);
 
 
@@ -83,7 +81,7 @@ $productos=$query->seleccionar($reporte);
       </form>
            
       <button class="btn sombras iniciar" type="submit" style="height: 50px; width:10%; position: relative;" >
-              <a  href="../index.php" style="text-decoration:none"> < Atras </a></button>
+              <a  href="reportes.php" style="text-decoration:none"> < Atras </a></button>
 </div>
 
      
@@ -99,10 +97,9 @@ $productos=$query->seleccionar($reporte);
   <table class="table text-center sombras" id="tabla">
   <thead>
     <tr>
-      <th scope="col">VENTA</th>
-      <th></th>
-      <th scope="col">Cliente</th>
-      <th scope="col">Fecha</th>
+      <th scope="col">CODIGO</th>
+      <th scope="col">PRODUCTO</th>
+      <th scope="col">Precio</th>
       <th scope="col">Cantidad</th>
       <th scope="col">SUBTOTAL</th>
       <th scope="col">IVA</th>
@@ -115,12 +112,11 @@ foreach($productos as $prod) {
   ?>
   <tbody>
     <tr>
-      <th> <?php echo $prod->VENTA?></th>
-      <th scope="row"><button class="btn btn-warning"><a href="reportexprod.php?id_orden=<?php echo $prod->VENTA ?>">Ver productos</a> </button></th>
-      <td><?php echo $prod->Cliente?></td>
-      <td><?php echo $prod->Fecha?></td>
-      <td><?php echo $prod->Cantidad?></td>
-      <td><?php echo "$".number_format($prod->subtotal,2,'.','.')?></td>
+      <th> <?php echo $prod->id_producto?></th>
+      <td><?php echo $prod->nom_producto?></td>
+      <td><?php echo "$".number_format($prod->precio,2,'.','.')?></td>
+      <td><?php echo $prod->cantidad?></td>
+      <td><?php echo "$".number_format($prod->SUBTOTAL,2,'.','.')?></td>
       <td><?php echo "$".number_format($prod->IVA,2,'.','.')?></td>
       <td><?php echo "$".number_format($prod->TOTAL,2,'.','.')?></td>
 
