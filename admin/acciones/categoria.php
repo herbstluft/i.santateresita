@@ -3,40 +3,16 @@
 use MyApp\data\Database;
 use MyApp\query\ejecuta;
 use MyApp\query\Select;
-
+session_start();
 
 require("../../vendor/autoload.php");
-
 $query = new Select();
 $obj = new ejecuta();
 error_reporting(E_ERROR | E_PARSE);
 
-session_start();
-
-
-//Seleccionar datos de los productos
-$productos=$query->seleccionar("SELECT todo.id, todo.nombre, todo.precio, todo.fecha, todo.formula, todo.descripcion, todo.imagen, todo.categoria from
-(SELECT productos.id_producto as id, productos.nom_producto as nombre, productos.precio as precio, productos.fecha_vencimiento as fecha, productos.formula as formula,
-productos.id_cat as id_cat, productos.descripcion as descripcion, productos.IMAGEN as imagen, categoria.categoria as categoria from productos 
-inner join categoria on categoria.id_cat=productos.id_cat) as todo");
-
-
-
-if($_GET){
-  $id=$_GET['borrar'];
- 
-  //borrar_imageen
-  $imagen=$query->seleccionar("SELECT imagen FROM `productos` where id_producto=".$id);
-  //borrar la imagen temporal (de la carpeta)
-  unlink("imagenes/".$imagen[0]->imagen);
-  //borrar producto
-  $sql="DELETE FROM productos WHERE `productos`.`id_producto` =".$id;
-  $obj->ejecutar($sql);
-  
-}
 
  
-if(isset($_SESSION['admin'])){
+if($_SESSION['admin']){
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -124,55 +100,21 @@ if(isset($_SESSION['admin'])){
 
   <div class="sombras" style="padding:4% ;">
     <div class="card-header ">
-      <center><h2>Datos del producto</h2></center>
+      <center><h2>Nombre de la categoria</h2></center><br>
     </div>
     <div class="card-body">
 
-      <form action="publicar.php" method="post" enctype="multipart/form-data">
-        Nombre: <br>
+      <form action="categoria.php" method="post" enctype="multipart/form-data">
+        Nombre: 
         <input class="form-control" type="text" name="nom" required>
-        <br><br>
-        Imagen:
-        <input class="form-control" type="file" name="imagen" required>
-        <br>
-        Precio:
-        <input class="form-control" type="number" name="precio" required>
-        <br>
-        Fecha Vencimiento;
-        <input class="form-control" type="date" name="fecha_v">
-        <br> 
-        Formula: <br>
-        <input class="form-control" type="text" name="formula">
-        <br><br>
-        
-          <?php
-        $cadena="SELECT categoria.id_cat,categoria.categoria FROM categoria";
-              $reg=$query->seleccionar($cadena);
-              
-              echo "<div class='mb-3'>
-              <label class=''>Categoria</labe>
-              <select class'form-select' name='categoria'>";
-
-              foreach($reg as $value)
-              {
-                echo "<option value='".$value->id_cat."'>".$value->categoria."</option>";
-              }
-              echo "<select>
-              </div>";
-              
-            echo $categoria;
-            ?>
-        <br>
-        Descripcion: <br>
-        <input class="form-control" type="text" name="desc" minlength="20" maxlength="50" required>
         <br> <br>
-        <button class="btn sombras registrarme" type="submit" id="registrarme" name="enviar" style="font-size:25px;">Publicar</button>
+        
+        <button class="btn sombras registrarme" type="submit" id="registrarme" name="enviar" style="position:relative;left:50%;font-size:25px; height:auto; width:auto">Publicar</button>
 
     </form>
     </div>
     
   </div>
-
   
     <br><br>
  
@@ -182,7 +124,7 @@ if(isset($_SESSION['admin'])){
  //comprobar si existe
 if(isset($_POST['enviar'])){
   include '../../src/data/conexion_sqli.php';
-$ver="Select nom_producto from productos where nom_producto='$nom'";
+$ver="Select categoria from categoria where categoria='$nom'";
 $resultados=mysqli_query($conexion,$ver);
 $num=mysqli_num_rows($resultados);
 
@@ -192,37 +134,21 @@ if($num==0){
 
   
   $nom=$_POST['nom'];
-  $imagen=$_FILES['imagen']['name'];
-  $precio=$_POST['precio'];
-  $fecha=$_POST['fecha_v'];
-  $formula=$_POST['formula'];
-  $categoria=$_POST['categoria'];
-  $desc=$_POST['desc'];
 
-
-
-  // Guardar imagen
-  $imagen=$_FILES['imagen']['name'];
-  /////////  Crear imagenes temporales
-  $imagen_temporal=$_FILES['imagen']['tmp_name'];
-  //mover  imagen a carpeta imagenes
-  move_uploaded_file($imagen_temporal,"../imagenes/".$imagen);
-
-
-  $insert="INSERT INTO `productos` (`nom_producto`,`imagen`,`precio`,`fecha_vencimiento`,`id_cat`,`formula`,`descripcion`) VALUES ('$nom','$imagen','$precio','$fecha','$categoria','$formula','$desc')";
+  $insert="INSERT INTO `categoria` (`categoria`) VALUES ('$nom')";
   $res=$obj->ejecutar($insert);
 ?>
 
 
 <div class="alert alert-success text-center" role="alert">
-  Producto publicado correctamente!
+  Categoria publicada correctamente!
 </div>
 <?php
 }
 else{
   ?>
   <div class="alert alert-danger text-center" role="alert">
- Este producto ya existe en el sistema!
+ Esta categoria ya existe en el sistema!
 </div>
 <?php
 }
@@ -240,8 +166,9 @@ else{
 
 <?php 
 }
-else{
-  header("location: ../../error.php");
+
 }
+else{
+    header("location: ../../error.php");
 }
 ?>

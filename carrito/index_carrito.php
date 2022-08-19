@@ -281,7 +281,7 @@ if(isset($_SESSION['cliente'])){
             //hacer aparecer o no el boton del ticket
               if(!empty($resultados)){
             ?>
-            <td><a href="index_carrito.php?regenerarcarrito=1" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Regenerar carrito</a></td>
+            <td><a href="index_carrito.php?regenerarcarrito=1" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Vacias carrito</a></td>
 
             <?php
               }

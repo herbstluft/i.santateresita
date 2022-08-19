@@ -186,6 +186,19 @@ if($_SESSION['admin']){
       </div>
   </div>
 
+
+  <div class="row">
+      <div class="col-12 col-xs-5 col-md-12 col-lg-5 offset-2 sombras text-center space">
+        <br>
+        <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://img.icons8.com/external-others-iconmarket/64/000000/external-category-user-experience-others-iconmarket-3.png" alt="">
+        <br><br>
+        <h2 class="fw-normal">Agregar Categoria</h2> <br>
+        <p><a class="btn sombras" id="registrarme" href="acciones/categoria.php">Ir &raquo;</a></p>
+      </div>
+    
+      
+   
+  </div>
   </div>
    
 </div>
