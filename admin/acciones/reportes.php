@@ -10,15 +10,10 @@ $query = new Select();
 $insert = new ejecuta();
 
 session_start();
+error_reporting(E_ERROR | E_PARSE);
 
-$reporte="SELECT RTY.VENTA, RTY.Cliente, RTY.Fecha, RTY.Cantidad, RTY.subtotal, RTY.IVA, (RTY.subtotal + RTY.IVA)as TOTAL FROM (SELECT GY.VENTA, GY.Cliente, GY.Fecha, GY.Cantidad, GY.subtotal, (GY.subtotal * 0.16)as IVA FROM (SELECT KV.id_orden as VENTA, KV.nombre as Cliente, KV.tiempo as Fecha, SUM(KV.CantidadProd)as Cantidad, 
-SUM(KV.Total)as subtotal from (select orden.id_orden ,clientes_datos_personales.nombre, productos.nom_producto, orden.tiempo, 
-sum(detalle_orden.cantidad)as CantidadProd, sum(productos.precio * detalle_orden.cantidad)as Total from clientes_datos_personales 
-inner join clientes on clientes_datos_personales.id_cliente = clientes.id_reg inner join detalle_orden 
-on detalle_orden.cliente = clientes.user_clien inner join orden on orden.id_orden = detalle_orden.id_orden 
-inner join productos on productos.id_producto = detalle_orden.id_producto group by clientes_datos_personales.nombre, orden.id_orden, 
-productos.nom_producto, orden.tiempo)as KV group by KV.id_orden)as GY)as RTY;";
-$productos=$query->seleccionar($reporte);
+
+
 
 
 ?>
@@ -70,11 +65,11 @@ $productos=$query->seleccionar($reporte);
       
       
       <br><br>
-      <form class="d-flex primary" role="search" style="width:100%; position:relative;">
+      <form action="reportes.php" method="post" style="width:100%; position:relative;">
       <!--Buscar-->
 
     
-      <input class="sombras light-table-filter " data-table="table_id" type="text" 
+      <input class="sombras " name="buscar" type="text" 
       placeholder="Buscar" style="width:90%; padding-left:2%;">
 
       
@@ -110,6 +105,20 @@ $productos=$query->seleccionar($reporte);
     </tr>
   </thead>
   <?php 
+  extract($_POST);
+  $buscar=$_POST['buscar'];
+
+
+ 
+
+$reporte="SELECT RTY.VENTA, RTY.Cliente, RTY.Fecha, RTY.Cantidad, RTY.subtotal, RTY.IVA, (RTY.subtotal + RTY.IVA)as TOTAL FROM (SELECT GY.VENTA, GY.Cliente, GY.Fecha, GY.Cantidad, GY.subtotal, (GY.subtotal * 0.16)as IVA FROM (SELECT KV.id_orden as VENTA, KV.nombre as Cliente, KV.tiempo as Fecha, SUM(KV.CantidadProd)as Cantidad, 
+SUM(KV.Total)as subtotal from (select orden.id_orden ,clientes_datos_personales.nombre, productos.nom_producto, orden.tiempo, 
+sum(detalle_orden.cantidad)as CantidadProd, sum(productos.precio * detalle_orden.cantidad)as Total from clientes_datos_personales 
+inner join clientes on clientes_datos_personales.id_cliente = clientes.id_reg inner join detalle_orden 
+on detalle_orden.cliente = clientes.user_clien inner join orden on orden.id_orden = detalle_orden.id_orden 
+inner join productos on productos.id_producto = detalle_orden.id_producto group by clientes_datos_personales.nombre, orden.id_orden, 
+productos.nom_producto, orden.tiempo)as KV group by KV.id_orden)as GY)as RTY where month(RTY.Fecha)='$buscar';";
+$productos=$query->seleccionar($reporte);
 
 foreach($productos as $prod) {
   ?>
@@ -126,11 +135,33 @@ foreach($productos as $prod) {
 
     </tr>
    
+
+    
   </tbody>
   <?php
 }
+
 ?>
 </table>
+<?php
+if(empty($productos)){
+  
+  ?>
+  <div class="alert sombras text-center" style="width:50%;margin-left:auto; margin-right:auto; margin-top:5%" role="alert">
+  <h4 style="color:#00FFCD">Lo sentimos no se encontraron resultados! </h4>
+</div>
+<?php
+
+}
+if(!isset($_POST['buscar'])){
+  ?>
+  <div class="alert sombras text-center" style="width:50%;margin-left:auto; margin-right:auto; margin-top:5%" role="alert">
+  <h4 style="color:#0d6efd">Filtra un mes para ver los resultados! </h4>
+</div>
+<?php
+}
+else{}
+?>
 
 </div>
 

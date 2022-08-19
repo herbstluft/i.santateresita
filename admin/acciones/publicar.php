@@ -15,8 +15,8 @@ session_start();
 
 
 //Seleccionar datos de los productos
-$productos=$query->seleccionar("SELECT todo.id, todo.nombre, todo.precio, todo.fecha, todo.formula, todo.descripcion, todo.imagen, todo.categoria from
-(SELECT productos.id_producto as id, productos.nom_producto as nombre, productos.precio as precio, productos.fecha_vencimiento as fecha, productos.formula as formula,
+$productos=$query->seleccionar("SELECT todo.id, todo.nombre, todo.precio, todo.unidad, todo.formula, todo.descripcion, todo.imagen, todo.categoria from
+(SELECT productos.id_producto as id, productos.nom_producto as nombre, productos.precio as precio, productos.unidad as unidad, productos.formula as formula,
 productos.id_cat as id_cat, productos.descripcion as descripcion, productos.IMAGEN as imagen, categoria.categoria as categoria from productos 
 inner join categoria on categoria.id_cat=productos.id_cat) as todo");
 
@@ -138,8 +138,13 @@ if(isset($_SESSION['admin'])){
         Precio:
         <input class="form-control" type="number" name="precio" required>
         <br>
-        Fecha Vencimiento;
-        <input class="form-control" type="date" name="fecha_v">
+        Unidad:
+        <select class="form-select" aria-label="Default select example" name="unidad">
+          <option value="Caja">Caja</option>
+          <option value="Paquete">Paquete</option>
+          <option value="Pieza">Pieza</option>
+        </select>
+     
         <br> 
         Formula: <br>
         <input class="form-control" type="text" name="formula">
@@ -179,6 +184,7 @@ if(isset($_SESSION['admin'])){
 
       <?php
  
+
  //comprobar si existe
 if(isset($_POST['enviar'])){
   include '../../src/data/conexion_sqli.php';
@@ -194,7 +200,7 @@ if($num==0){
   $nom=$_POST['nom'];
   $imagen=$_FILES['imagen']['name'];
   $precio=$_POST['precio'];
-  $fecha=$_POST['fecha_v'];
+  $unidad=$_POST['unidad'];
   $formula=$_POST['formula'];
   $categoria=$_POST['categoria'];
   $desc=$_POST['desc'];
@@ -209,8 +215,10 @@ if($num==0){
   move_uploaded_file($imagen_temporal,"../imagenes/".$imagen);
 
 
-  $insert="INSERT INTO `productos` (`nom_producto`,`imagen`,`precio`,`fecha_vencimiento`,`id_cat`,`formula`,`descripcion`) VALUES ('$nom','$imagen','$precio','$fecha','$categoria','$formula','$desc')";
+  $insert="INSERT INTO `productos` (`nom_producto`,`imagen`,`precio`,`unidad`,`id_cat`,`formula`,`descripcion`) VALUES ('$nom','$imagen','$precio','$unidad','$categoria','$formula','$desc')";
   $res=$obj->ejecutar($insert);
+  print_r($res);
+  echo $insert;
 ?>
 
 
