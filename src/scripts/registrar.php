@@ -14,8 +14,6 @@
           if($_POST){
 
           extract($_POST);
-      
-
 
           $rep="SELECT * from clientes WHERE clientes.user_clien='$nom_us'";
           $re=$query->seleccionar($rep);

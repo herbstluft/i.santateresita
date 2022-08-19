@@ -148,7 +148,7 @@ if(isset($_SESSION['cliente'])){
 	      <input type="time" class="sombras" name="hora" value="11:45:00" min="10:00:00"  max="22:30:00" step="1">
         
                <!--BOTON DE CITA-->
- <center> <input type="submit" class="fadeIn fourth" value="Generar cita" name="generar"></center>
+        <center> <input type="submit" class="fadeIn fourth" value="Generar cita" name="generar"></center>
           <a href="index_citas.php"><button type="button" class="btn" style="background-color: #CC7272; color:white">Ver mis citas</button>
           <br><br>
                                                     

@@ -80,9 +80,9 @@
     <br>
         <div class="input-group mb-3">
             &ensp; &ensp; &ensp; &ensp;
-            <input type="text" class="sombras_input form-control col-4 " placeholder="Nombre" name="nom" minlength="10" maxlength="25" required > 
+            <input type="text" class="sombras_input form-control col-4 " placeholder="Nombre" name="nom" minlength="10" maxlength="24" required > 
             &ensp; &ensp;
-            <input type="text" class="sombras_input form-control col-4 " placeholder="Apellido Paterno" name="ap"  maxlength="20" required>
+            <input type="text" class="sombras_input form-control col-4 " placeholder="Apellido Paterno" name="ap"  maxlength="24" required>
             &ensp; &ensp; &ensp; &ensp;
         </div>
 
@@ -117,18 +117,62 @@
                       Masculino
                       </label>
                   </div>
+                  
         </div>
-
+        <center><div class="input-group mb-9">
+        <div>
+        <input type="text" class="sombras_input form-control col-4"  placeholder="Usuario" name="user" required>
+        &ensp; &ensp; &ensp; &ensp;
+        </div>
+        <div>
+        <input type="text" class="sombras_input form-control col-4" placeholder="Contraseña" name="contra" required>
+        &ensp; &ensp; &ensp; &ensp;
+        </div> 
+        </div></center>
+     
+    
         <div class="input-group mb-3">
              &ensp; &ensp; &ensp; &ensp;
             <input type="text" class="sombras_input form-control col-4" placeholder="Escuela" name="escuela" required>
             &ensp; &ensp; &ensp; &ensp;
         </div>
+
         <br>
         <center>
         <button class="btn sombras registrarme" id="registrarme" name="registrar" type="submit">Registrarme</button>
         </center>
     </form>
+<?php
+
+    if(isset($_GET['registrarme'])){
+
+ $consulta="INSERT INTO datos_pers_user (id_registro, nombre, apellido_pat, apellido_mat, correo, edad, genero, telefono) VALUES('$id','$nombre','$paterno','$materno','$correo','$edad','$genero','$telefono')";
+ $ejecutar=mysqli_query($conexion,$consulta);
+
+ if(empty($re)){
+
+  $consulta="INSERT INTO datos_pers_user (id_registro, nombre, apellido_pat, apellido_mat, correo, edad, genero, telefono) VALUES('$id','$nombre','$paterno','$materno','$correo','$edad','$genero','$telefono')";
+   $consulta-> ejecutar($consulta);
+
+
+ //obtener el id del cliente
+ $cadena="SELECT clientes_datos_personales.id_cliente from  clientes_datos_personales, clientes WHERE clientes.id_client=clientes_datos_personales.id_cliente and clientes.user_clien='$nom_us'";
+
+ $id=$query -> seleccionar($cadena);
+
+ foreach($id as $all)
+ $id_c=$all->id_cliente;
+
+ echo "<div class='alert alert-success'> Cliente Registrado </div>";
+ /*Registro exitoso y despues se dirige a la pagina principal*/
+ header("refresh:3; ../../registro/login.php");
+ }
+ else{
+   echo "<div class='alert alert-success'> Este nombre de usuario ya existe </div>";
+ }
+}
+
+?>
 </main>
 <br><br>
 </div>
