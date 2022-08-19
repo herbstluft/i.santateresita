@@ -9,7 +9,7 @@ error_reporting(E_ERROR | E_PARSE);
 session_start();
 
 $obj =new Select();
-$var = "select * from  productos inner JOIN categoria on productos.id_cat=categoria.id_cat WHERE categoria.categoria='Bienestar sexual'";
+$var = "select * from  productos inner JOIN categoria on productos.id_cat=categoria.id_cat WHERE productos.estado=0 and categoria.categoria='Bienestar sexual'";
 $filas=$obj -> seleccionar($var);
 
 ?>

@@ -12,14 +12,14 @@ error_reporting(E_ERROR | E_PARSE);
 
 session_start();
 
-$produ=$query->seleccionar("SELECT * FROM `productos`");
+$produ=$query->seleccionar("SELECT * FROM `productos` where productos.estado='0'");
 
 
 if($_GET){
-  $id=$_GET['eliminar'];
+  $id=$_GET['restaurar'];
  
-
-  $sql="update productos set estado='1' where id_producto=".$id;
+  //borrar producto
+  $sql="update productos set estado='0' where id_producto=".$id;
   $insert->ejecutar($sql);
   
 }
@@ -142,7 +142,7 @@ if($_GET){
 <?php
 
                
-$SQL="SELECT id_producto, nom_producto,imagen,descripcion,precio,formula from productos where estado=0";
+$SQL="SELECT id_producto, nom_producto,imagen,descripcion,precio,formula from productos where estado=1";
 $con=$query->seleccionar($SQL);
 
 if(!empty($con)){
@@ -159,9 +159,9 @@ if(!empty($con)){
 
 <td>
     <div class="d-grid gap-2 d-md-block">
-    <a href="index_buscar.php?eliminar=<?php echo $fila->id_producto ?>"> <!--Enviar id de producto -->
+    <a href="prod_eliminados.php?restaurar=<?php echo $fila->id_producto ?>"> <!--Enviar id de producto -->
            <button class="btn sombras br_btn" id="registrarme" type="button">
-           <img src="https://img.icons8.com/material-outlined/24/000000/trash--v1.png"/> Eliminar
+           <img src="https://img.icons8.com/material-outlined/24/000000/trash--v1.png"/> Restaurar
            </button>
     </a>
     </div>

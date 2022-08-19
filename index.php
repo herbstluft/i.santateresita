@@ -4,7 +4,7 @@
             
             $query = new Select();
 
-            $cadena = "SELECT * from productos";
+            $cadena = "SELECT * from productos where estado=0";
 //Ejecutar consulta
             $productos = $query->seleccionar($cadena);
 

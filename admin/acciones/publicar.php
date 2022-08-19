@@ -215,7 +215,7 @@ if($num==0){
   move_uploaded_file($imagen_temporal,"../imagenes/".$imagen);
 
 
-  $insert="INSERT INTO `productos` (`nom_producto`,`imagen`,`precio`,`unidad`,`id_cat`,`formula`,`descripcion`) VALUES ('$nom','$imagen','$precio','$unidad','$categoria','$formula','$desc')";
+  $insert="INSERT INTO `productos` (`nom_producto`,`imagen`,`precio`,`unidad`,`id_cat`,`formula`,`descripcion`,`estado`) VALUES ('$nom','$imagen','$precio','$unidad','$categoria','$formula','$desc','0')";
   $res=$obj->ejecutar($insert);
   print_r($res);
   echo $insert;

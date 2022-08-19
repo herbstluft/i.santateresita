@@ -11,7 +11,7 @@ $insert = new ejecuta();
 
 session_start();
 
-$productos=$query->seleccionar("SELECT * FROM `productos`");
+$productos=$query->seleccionar("SELECT * FROM `productos` where estado=0 ");
 ?>
 
 
@@ -144,7 +144,7 @@ $productos=$query->seleccionar("SELECT * FROM `productos`");
 <?php
 
                
-$SQL="SELECT id_producto, nom_producto,imagen,descripcion,precio,formula from productos";
+$SQL="SELECT id_producto, nom_producto,imagen,descripcion,precio,formula from productos where productos.estado=0";
 $con=$query->seleccionar($SQL);
 
 if(!empty($con)){

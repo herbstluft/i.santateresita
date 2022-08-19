@@ -9,7 +9,7 @@ use MyApp\query\Select;
 require("../../vendor/autoload.php");
 session_start();
 $query = new Select();
-$productos=$query->seleccionar("select * from  productos inner JOIN categoria on productos.id_cat=categoria.id_cat WHERE categoria.categoria='Vitaminas y minerales';");
+$productos=$query->seleccionar("select * from  productos inner JOIN categoria on productos.id_cat=categoria.id_cat WHERE productos.estado=0 and categoria.categoria='Vitaminas y minerales';");
 ?>
 
 <!doctype html>
