@@ -11,14 +11,13 @@ $insert = new ejecuta();
 
 session_start();
 
-$reporte="SELECT KV.id_orden as VENTA, KV.nombre as Cliente, KV.tiempo as Fecha, SUM(KV.CantidadProd)as Cantidad, 
-SUM(KV.Total)as Total from (select orden.id_orden ,clientes_datos_personales.nombre, productos.nom_producto, orden.tiempo, 
+$reporte="SELECT RTY.VENTA, RTY.Cliente, RTY.Fecha, RTY.Cantidad, RTY.subtotal, RTY.IVA, (RTY.subtotal + RTY.IVA)as TOTAL FROM (SELECT GY.VENTA, GY.Cliente, GY.Fecha, GY.Cantidad, GY.subtotal, (GY.subtotal * 0.16)as IVA FROM (SELECT KV.id_orden as VENTA, KV.nombre as Cliente, KV.tiempo as Fecha, SUM(KV.CantidadProd)as Cantidad, 
+SUM(KV.Total)as subtotal from (select orden.id_orden ,clientes_datos_personales.nombre, productos.nom_producto, orden.tiempo, 
 sum(detalle_orden.cantidad)as CantidadProd, sum(productos.precio * detalle_orden.cantidad)as Total from clientes_datos_personales 
 inner join clientes on clientes_datos_personales.id_cliente = clientes.id_reg inner join detalle_orden 
 on detalle_orden.cliente = clientes.user_clien inner join orden on orden.id_orden = detalle_orden.id_orden 
-inner join productos on productos.id_producto = detalle_orden.id_producto where detalle_orden.estatus 
-and detalle_orden.id_orden=orden.id_orden= 1 group by clientes_datos_personales.nombre, orden.id_orden, 
-productos.nom_producto, orden.tiempo)as KV group by KV.nombre;";
+inner join productos on productos.id_producto = detalle_orden.id_producto group by clientes_datos_personales.nombre, orden.id_orden, 
+productos.nom_producto, orden.tiempo)as KV group by KV.id_orden)as GY)as RTY;";
 $productos=$query->seleccionar($reporte);
 
 
@@ -105,8 +104,8 @@ $productos=$query->seleccionar($reporte);
       <th scope="col">Cliente</th>
       <th scope="col">Fecha</th>
       <th scope="col">Cantidad</th>
-      <th scope="col">IVA</th>
       <th scope="col">SUBTOTAL</th>
+      <th scope="col">IVA</th>
       <th scope="col">Total</th>
     </tr>
   </thead>
@@ -121,9 +120,9 @@ foreach($productos as $prod) {
       <td><?php echo $prod->Cliente?></td>
       <td><?php echo $prod->Fecha?></td>
       <td><?php echo $prod->Cantidad?></td>
-      <td><?php echo "IVA"?></td>
-      <td><?php echo "SUBTOTAL"?></td>
-      <td><?php echo "$".number_format($prod->Total,2,'.','.')?></td>
+      <td><?php echo "$".number_format($prod->subtotal,2,'.','.')?></td>
+      <td><?php echo "$".number_format($prod->IVA,2,'.','.')?></td>
+      <td><?php echo "$".number_format($prod->TOTAL,2,'.','.')?></td>
 
     </tr>
    
