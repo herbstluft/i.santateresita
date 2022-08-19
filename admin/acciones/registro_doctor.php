@@ -1,3 +1,48 @@
+          <?php
+          use MyApp\data\Database;
+          use MyApp\query\ejecuta;
+          use MyApp\query\Select;
+          
+session_start();
+          require("../../vendor/autoload.php");
+
+          $query = new Select();
+          $insert = new ejecuta();
+          ?>
+
+<?php
+
+
+    if(isset($_POST['registrar'])){
+      extract($_POST);
+
+//Insertar datos del doctor//
+  $consulta="INSERT INTO datos_pers_user (nombre, apellido_pat, apellido_mat, correo, edad, genero, telefono) VALUES('$nom','$ap','$am','$corr','$edad','$gen','$tel')";
+  $insert->ejecutar($consulta);
+  //Imprimir los datos del doctor""
+  $doc="SELECT datos_pers_user.id_registro from datos_pers_user where datos_pers_user.nombre='$nom'";
+  $id=$query->seleccionar($doc);
+  foreach($id as $bolo)
+  $id_doc=$bolo->id_registro;
+
+//insertar datos del doc a tabla usuarios//
+  $doct="INSERT INTO usuarios (usuario,contrasena,tipo_usuario,id_reg) VALUES ('$user','$contra','3','$id_doc')";
+  $insert->ejecutar($doct);
+
+  //traemos los datos del doctor//
+  $docc="SELECT usuarios.id_usuario from usuarios where usuarios.usuario='$user'";
+  $id_user=$query->seleccionar($docc);
+  foreach($id_user as $usur)
+  $id_ser=$usur->id_usuario;
+
+
+//insertar datos del doctor en tabla doctores//
+$doc_i="INSERT INTO `doctores` (`id_doc`, `id_usuarios`, `cedula`, `especialidad`, `universidad`) VALUES (NULL, '$id_ser', '$cedula', '$especialidad', '$escuela')";
+$insert->ejecutar($doc_i);
+
+    }
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -52,10 +97,23 @@
         </ul>
         <form class="d-flex" role="search">
           <br><br>
-          
+            <?php
+            if(isset($_SESSION['admin'])){
+          ?>
            &ensp; &ensp;  &ensp; &ensp;  
           <button class="btn sombras iniciar" type="submit">
+            <a class="a" href="doctores/doc.html">  Atras   </a></button>
+            <?php 
+
+            }
+            else{
+            ?>
+ &ensp; &ensp;  &ensp; &ensp;  
+          <button class="btn sombras iniciar" type="submit">
             <a class="a" href="login.php">  Iniciar Session   </a></button>
+            <?php
+            }
+            ?>
         </form>
       </div>
     </div>
@@ -75,7 +133,7 @@
       <p style="font-size: 18px;">Registra a un nuevo Doctor.</p>
     </center>
     
-    <form action="../src/scripts/registrar_doctor.php" method="post">
+    <form action="registro_doctor.php" method="post">
 
     <br>
         <div class="input-group mb-3">
@@ -96,9 +154,9 @@
 
         <div class="input-group mb-3">
             &ensp; &ensp; &ensp; &ensp;
-            <input type="text" class="sombras_input form-control col-4" placeholder="Especialidad" name="edad"  minlength="10" required>
+            <input type="text" class="sombras_input form-control col-4" placeholder="Especialidad" name="especialidad"  minlength="10" required>
             &ensp;
-            <input type="text" class="sombras_input form-control col-4" placeholder="Cedula" name="edad" required>
+            <input type="text" class="sombras_input form-control col-4" placeholder="Cedula" name="cedula" required>
             &ensp; &ensp;
             <input type="number" class="sombras_input form-control col-4" placeholder="Edad" name="edad" maxlength="2" required>
             &ensp;
@@ -125,7 +183,7 @@
         &ensp; &ensp; &ensp; &ensp;
         </div>
         <div>
-        <input type="text" class="sombras_input form-control col-4" placeholder="Contraseña" name="contra" required>
+        <input type="password" class="sombras_input form-control col-4" placeholder="Contraseña" name="contra" required>
         &ensp; &ensp; &ensp; &ensp;
         </div> 
         </div></center>
@@ -142,37 +200,7 @@
         <button class="btn sombras registrarme" id="registrarme" name="registrar" type="submit">Registrarme</button>
         </center>
     </form>
-<?php
 
-    if(isset($_GET['registrarme'])){
-
- $consulta="INSERT INTO datos_pers_user (id_registro, nombre, apellido_pat, apellido_mat, correo, edad, genero, telefono) VALUES('$id','$nombre','$paterno','$materno','$correo','$edad','$genero','$telefono')";
- $ejecutar=mysqli_query($conexion,$consulta);
-
- if(empty($re)){
-
-  $consulta="INSERT INTO datos_pers_user (id_registro, nombre, apellido_pat, apellido_mat, correo, edad, genero, telefono) VALUES('$id','$nombre','$paterno','$materno','$correo','$edad','$genero','$telefono')";
-   $consulta-> ejecutar($consulta);
-
-
- //obtener el id del cliente
- $cadena="SELECT clientes_datos_personales.id_cliente from  clientes_datos_personales, clientes WHERE clientes.id_client=clientes_datos_personales.id_cliente and clientes.user_clien='$nom_us'";
-
- $id=$query -> seleccionar($cadena);
-
- foreach($id as $all)
- $id_c=$all->id_cliente;
-
- echo "<div class='alert alert-success'> Cliente Registrado </div>";
- /*Registro exitoso y despues se dirige a la pagina principal*/
- header("refresh:3; ../../registro/login.php");
- }
- else{
-   echo "<div class='alert alert-success'> Este nombre de usuario ya existe </div>";
- }
-}
-
-?>
 </main>
 <br><br>
 </div>
