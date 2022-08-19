@@ -144,14 +144,16 @@ foreach($productos as $prod) {
 ?>
 </table>
 <?php
+if(isset($_POST['buscar'])){
 if(empty($productos)){
   
   ?>
   <div class="alert sombras text-center" style="width:50%;margin-left:auto; margin-right:auto; margin-top:5%" role="alert">
-  <h4 style="color:#00FFCD">Lo sentimos no se encontraron resultados! </h4>
+  <h4 style="color:red">Lo sentimos no se encontraron resultados! </h4>
 </div>
 <?php
 
+}
 }
 if(!isset($_POST['buscar'])){
   ?>
