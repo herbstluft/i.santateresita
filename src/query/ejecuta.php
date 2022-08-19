@@ -1,10 +1,10 @@
 <?php
 
-namespace MyApp\Data;
+namespace MyApp\data;
 namespace MyApp\query;
 use PDO;
 use PDOException;
-use MyApp\Data\Database;
+use MyApp\data\Database;
 
 class ejecuta
 {
