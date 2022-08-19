@@ -121,22 +121,28 @@ if(isset($_SESSION['cliente'])){
 
               $nombre_cliente= $res->nombre ." ". $res->app ." ". $res->apm;
            echo  "<center><h1> Bienvenido $nombre_cliente</h1></center>";
-              
-            }
+
+           $docs = "SELECT doctores.id_doc, datos_pers_user.nombre, datos_pers_user.apellido_pat, datos_pers_user.apellido_mat from datos_pers_user 
+           inner join usuarios on usuarios.id_reg = datos_pers_user.id_registro inner join doctores on doctores.id_usuarios = usuarios.id_usuario";
+
+           $iddoc=$query->seleccionar($docs);
+
+              foreach($iddoc as $doc) {
+
+                $idr = $doc->id_doc
+            
           ?>
           
-          </option>
-        </select>
+          
         <br><br>
     
         <h4>Doctor</h4>
        <select class="form-select sombras" aria-label="Disabled select example"  name="doctor" >
-          <option value="1">Fernando Molino Villa Lobos (Default)</option>
-          <option value="2">Edwin Fraire Mascorro</option>
-          <option value="3">Julia Delgado Molina</option>
+       <option value="<?php echo $idr?>"><?php echo $doc->nombre . " " .$doc->apellido_pat. " " . $doc->apellido_mat?></option>
+         
         </select><br>
 
- 
+ <?php }?>
         <!--Calendarios de citas -->
         <?php
         date_default_timezone_set('America/Mexico_City');
@@ -200,6 +206,6 @@ if(isset($_GET['generar'])){
 
   }
 
-  }
+  } }
           
 ?>
