@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 use MyApp\data\Database;
 use MyApp\query\ejecuta;
 use MyApp\query\Select;
@@ -122,6 +121,16 @@ if(isset($_SESSION['cliente'])){
               $nombre_cliente= $res->nombre ." ". $res->app ." ". $res->apm;
            echo  "<center><h1> Bienvenido $nombre_cliente</h1></center>";
 
+           ?>
+          
+          
+           <br><br>
+       
+           <h4>Doctor</h4>
+          <select class="form-select sombras" aria-label="Disabled select example"  name="doctor">
+
+          <?php 
+
            $docs = "SELECT doctores.id_doc, datos_pers_user.nombre, datos_pers_user.apellido_pat, datos_pers_user.apellido_mat from datos_pers_user 
            inner join usuarios on usuarios.id_reg = datos_pers_user.id_registro inner join doctores on doctores.id_usuarios = usuarios.id_usuario";
 
@@ -129,20 +138,14 @@ if(isset($_SESSION['cliente'])){
 
               foreach($iddoc as $doc) {
 
-                $idr = $doc->id_doc
+                $idr = $doc->id_doc ?>
             
-          ?>
-          
-          
-        <br><br>
-    
-        <h4>Doctor</h4>
-       <select class="form-select sombras" aria-label="Disabled select example"  name="doctor" >
-       <option value="<?php echo $idr?>"><?php echo $doc->nombre . " " .$doc->apellido_pat. " " . $doc->apellido_mat?></option>
          
+       <option value="<?php echo $idr?>"><?php echo $doc->nombre . " " .$doc->apellido_pat. " " . $doc->apellido_mat?></option>
+       <?php }?>
         </select><br>
 
- <?php }?>
+
         <!--Calendarios de citas -->
         <?php
         date_default_timezone_set('America/Mexico_City');
@@ -155,7 +158,7 @@ if(isset($_SESSION['cliente'])){
         
                <!--BOTON DE CITA-->
         <center> <input type="submit" class="fadeIn fourth" value="Generar cita" name="generar"></center>
-          <a href="index_citas.php"><button type="button" class="btn" style="background-color: #CC7272; color:white">Ver mis citas</button>
+          <a href="mis_citas.php?iddoctor=<?php echo $idr?>"><button type="button" class="btn" style="background-color: #CC7272; color:white">Ver mis citas</button>
           <br><br>
                                                     
       

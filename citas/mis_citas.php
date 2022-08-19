@@ -25,7 +25,7 @@ FROM citas
 inner  join clientes on clientes.id_client=citas.id_cliente
 inner join doctores on citas.id_doc=doctores.id_doc
 inner join usuarios on usuarios.id_usuario=doctores.id_usuarios
-inner JOIN datos_pers_user on datos_pers_user.id_registro=usuarios.id_reg) as todo WHERE todo.cliente='juanii'");
+inner JOIN datos_pers_user on datos_pers_user.id_registro=usuarios.id_reg) as todo WHERE todo.cliente='".$_SESSION['cliente']."'");
 ?>
 
 <?php
@@ -155,7 +155,7 @@ if(isset($_SESSION['cliente'])){
    
           </form>
             <?php
-            if($_GET){
+            if(isset($_GET['borrar'])){
 
               $id=$_GET['borrar'];
               //borrar registro de cita
