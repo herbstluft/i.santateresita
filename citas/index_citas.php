@@ -150,11 +150,21 @@ if(isset($_SESSION['cliente'])){
         <?php
         date_default_timezone_set('America/Mexico_City');
         $fecha_actual=date("Y-m-d   H:i");
+        date_default_timezone_set('America/Mexico_City');
+        //fecha actual del sistema
+        $fe=date("Y-m-d");
+
+        $mod_date = strtotime($fe."+ 50 days");
+        $fecha_maxima = date("Y-m-d",$mod_date);
+
+        $hra = date('H:i:s');
+
+
         ?>
-        <label>Fecha: <br><input type="date" class="sombras" name="fecha" min="2022-08-18" max="2022-09-15" required></label><br>
+        <label>Fecha: <br><input type="date" class="sombras" name="fecha" min="<?php echo $fe ?>" max="<?php echo $fecha_maxima?>" required></label><br>
         <label>Hora:</label><br>
         <form action="https://www.anerbarrena.com/demos/2014/002-time-input-html5.php" name="formulario">
-	      <input type="time" class="sombras" name="hora" value="11:45:00" min="10:00:00"  max="22:30:00" step="1" required>
+	      <input type="time" class="sombras" name="hora"  min="12:00:00"  max="22:00:00" step="1" required>
         
                <!--BOTON DE CITA-->
         <center> <input type="submit" class="fadeIn fourth" value="Generar cita" name="generar"></center>
@@ -183,59 +193,101 @@ else{
 
 
 <?php
+
 if(isset($_GET['generar'])){
 
-$num_citas="SELECT clientes.user_clien as cliente from citas INNER JOIN clientes on clientes.id_client=citas.id_cliente WHERE clientes.user_clien='".$_SESSION['cliente']."' and citas.realizadas=0";
-$res=$query->seleccionar($num_citas);
 
-if(empty($res)){
+  if($_GET['hora'] > $hra){
 
 
-  $doctor=$_GET['doctor'];
-  $hora=$_GET['hora'];
-  $fecha=$_GET['fecha'];
-  
-  //obtener id del cliente
-  $cliente_id="SELECT clientes.id_client from clientes where clientes.user_clien='$_SESSION[cliente]'";
-  $id=$query->seleccionar($cliente_id);
-  //convertir resultado a entero
-  if (!empty($id)) {
-    foreach ($id as $id_cliente) {
-      
-        $insert_cita="INSERT INTO citas (id_cliente,id_doc,hora, fecha, realizadas) VALUES ($id_cliente->id_client,$doctor,'$hora','$fecha',0)";
-        $insert->ejecutar($insert_cita);  
-    } 
-    echo "
-    <style>
-    a{
-      text-decoration:none;
-    }
-    </style>
-    <div class='container'>
-    <div class='alert alert-success' role='alert'>
-    <center> Su cita ha sido generada con exito! </center>
-  </div>
-  <div>
-  ";
+  //confirmar el dia
+  $sql="SELECT * from citas WHERE citas.fecha='".$_GET['fecha']."' and realizadas=0";
+  $f=$query->seleccionar($sql);
+  if(empty($f)){
 
-  }
+      $num_citas="SELECT clientes.user_clien as cliente from citas INNER JOIN clientes on clientes.id_client=citas.id_cliente WHERE clientes.user_clien='".$_SESSION['cliente']."' and citas.realizadas=0";
+      $res=$query->seleccionar($num_citas);
+
+        if(empty($res)){
+
+
+          $doctor=$_GET['doctor'];
+          $hora=$_GET['hora'];
+          $fecha=$_GET['fecha'];
+          
+          //obtener id del cliente
+          $cliente_id="SELECT clientes.id_client from clientes where clientes.user_clien='$_SESSION[cliente]'";
+          $id=$query->seleccionar($cliente_id);
+          //convertir resultado a entero
+            if (!empty($id)) {
+                    foreach ($id as $id_cliente) {
+                      
+                        $insert_cita="INSERT INTO citas (id_cliente,id_doc,hora, fecha, realizadas) VALUES ($id_cliente->id_client,$doctor,'$hora','$fecha',0)";
+                        $insert->ejecutar($insert_cita);  
+                    } 
+                    echo "
+                    <style>
+                    a{
+                      text-decoration:none;
+                    }
+                    </style>
+                    <div class='container'>
+                    <div class='alert alert-success' role='alert'>
+                    <center> Su cita ha sido generada con exito! </center>
+                  </div>
+                  <div>
+                  ";
+            }
+          }
+
+      else{
+        echo "
+        <style>
+        a{
+          text-decoration:none;
+        }
+        </style>
+        <div class='container'>
+        <div class='alert alert-warning' role='alert'>
+        <center> Lo sentimos, ya has generado una cita anteriormente! </center>
+      </div>
+      <div>
+      ";
+      } 
+
 }
 
 else{
   echo "
-  <style>
-  a{
-    text-decoration:none;
-  }
-  </style>
-  <div class='container'>
-  <div class='alert alert-warning' role='alert'>
-  <center> Lo sentimos, ya has generado una cita anteriormente! </center>
-</div>
-<div>
-";
-} 
+        <style>
+        a{
+          text-decoration:none;
+        }
+        </style>
+        <div class='container'>
+        <div class='alert alert-warning' role='alert'>
+        <center> Lo sentimos este dia se encuentra ocupado, intenta agendarla otro dia! </center>
+      </div>
+      <div>
+      ";
+}
+}
+else{
+  echo "
+        <style>
+        a{
+          text-decoration:none;
+        }
+        </style>
+        <div class='container'>
+        <div class='alert alert-warning' role='alert'>
+        <center> Lo sentimos esta hora ya ha pasado </center>
+      </div>
+      <div>
+      ";
+}
 
-}
-}
+
+
+}}
 ?>
