@@ -90,8 +90,8 @@ error_reporting(E_ERROR | E_PARSE);
 
 
 <div class="container">
-
-  <table class="table text-center sombras" id="tabla">
+<div class="table-responsive">
+  <table class="table text-center table-responsive sombras" id="tabla">
   <thead>
     <tr>
       
@@ -141,6 +141,7 @@ foreach($productos as $prod) {
 
 ?>
 </table>
+</div>
 <?php
 if(isset($_POST['buscar'])){
 if(empty($productos)){

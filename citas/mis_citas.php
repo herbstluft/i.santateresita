@@ -14,7 +14,7 @@ session_start();
 
 
 $citas=$query->seleccionar("SELECT todo.nombre, todo.app, todo.apm, todo.genero, todo.edad, todo.especialidad,todo.cedula, todo.universidad, todo.telefono, todo.correo, todo.id_cita, todo.hora, todo.fecha from
-(SELECT citas.id_cita as id_cita, citas.id_doc, citas.hora as hora, citas.fecha as fecha,
+(SELECT citas.id_cita as id_cita, citas.realizadas as estado, citas.id_doc, citas.hora as hora, citas.fecha as fecha,
 datos_pers_user.nombre as nombre, datos_pers_user.apellido_pat as app, datos_pers_user.apellido_mat as apm, datos_pers_user.correo as correo,
 datos_pers_user.edad as edad, datos_pers_user.telefono as telefono, datos_pers_user.genero as genero,
 doctores.especialidad as especialidad, doctores.cedula as cedula, doctores.universidad as universidad,
@@ -25,7 +25,7 @@ FROM citas
 inner  join clientes on clientes.id_client=citas.id_cliente
 inner join doctores on citas.id_doc=doctores.id_doc
 inner join usuarios on usuarios.id_usuario=doctores.id_usuarios
-inner JOIN datos_pers_user on datos_pers_user.id_registro=usuarios.id_reg) as todo WHERE todo.cliente='".$_SESSION['cliente']."'");
+inner JOIN datos_pers_user on datos_pers_user.id_registro=usuarios.id_reg) as todo WHERE todo.cliente='".$_SESSION['cliente']."' and todo.estado=0");
 ?>
 
 <?php
@@ -117,7 +117,15 @@ if(isset($_SESSION['cliente'])){
 
   <!--Contenido de la pagina-->
 <div class="container">
-    
+    <?php 
+    if(empty($citas)){
+      ?>
+<div class="alert sombras text-center" style="width:50%;margin-left:auto; margin-right:auto; margin-top:10%" role="alert">
+  <h4 style="color:#A3A800">No tienes cita por el momento </h4>
+</div>
+      <?php
+    }
+    ?>
 
 <div class="row row-cols-1 row-cols-md-12 row-cols-lg-3 mb-3 text-center">
   <?php foreach($citas as $cita) { ?>

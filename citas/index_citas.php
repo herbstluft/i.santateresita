@@ -151,14 +151,14 @@ if(isset($_SESSION['cliente'])){
         date_default_timezone_set('America/Mexico_City');
         $fecha_actual=date("Y-m-d   H:i");
         ?>
-        <label>Fecha: <br><input type="date" class="sombras" name="fecha" min="2022-08-18" max="2022-09-15"></label><br>
+        <label>Fecha: <br><input type="date" class="sombras" name="fecha" min="2022-08-18" max="2022-09-15" required></label><br>
         <label>Hora:</label><br>
         <form action="https://www.anerbarrena.com/demos/2014/002-time-input-html5.php" name="formulario">
-	      <input type="time" class="sombras" name="hora" value="11:45:00" min="10:00:00"  max="22:30:00" step="1">
+	      <input type="time" class="sombras" name="hora" value="11:45:00" min="10:00:00"  max="22:30:00" step="1" required>
         
                <!--BOTON DE CITA-->
         <center> <input type="submit" class="fadeIn fourth" value="Generar cita" name="generar"></center>
-          <a href="mis_citas.php?iddoctor=<?php echo $idr?>"><button type="button" class="btn" style="background-color: #CC7272; color:white">Ver mis citas</button>
+          <a href="mis_citas.php?iddoctor=<?php echo $idr?>"><button type="button" class="btn" style="background-color: #CC7272; color:white">Ver mi cita</button>
           <br><br>
                                                     
       
@@ -185,6 +185,12 @@ else{
 <?php
 if(isset($_GET['generar'])){
 
+$num_citas="SELECT clientes.user_clien as cliente from citas INNER JOIN clientes on clientes.id_client=citas.id_cliente WHERE clientes.user_clien='".$_SESSION['cliente']."' and citas.realizadas=0";
+$res=$query->seleccionar($num_citas);
+
+if(empty($res)){
+
+
   $doctor=$_GET['doctor'];
   $hora=$_GET['hora'];
   $fecha=$_GET['fecha'];
@@ -200,6 +206,11 @@ if(isset($_GET['generar'])){
         $insert->ejecutar($insert_cita);  
     } 
     echo "
+    <style>
+    a{
+      text-decoration:none;
+    }
+    </style>
     <div class='container'>
     <div class='alert alert-success' role='alert'>
     <center> Su cita ha sido generada con exito! </center>
@@ -208,7 +219,23 @@ if(isset($_GET['generar'])){
   ";
 
   }
+}
 
-  } }
-          
+else{
+  echo "
+  <style>
+  a{
+    text-decoration:none;
+  }
+  </style>
+  <div class='container'>
+  <div class='alert alert-warning' role='alert'>
+  <center> Lo sentimos, ya has generado una cita anteriormente! </center>
+</div>
+<div>
+";
+} 
+
+}
+}
 ?>

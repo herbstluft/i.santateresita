@@ -117,7 +117,7 @@ $productos=$query->seleccionar("SELECT * FROM `productos` where estado=0 ");
 </form>
 
 
-
+<div class="table-responsive">
 <table id="tabla" class="sombras table table-borderless table_id table align-middle text-center " style="width:100%; border:0px;">
 
                    
@@ -189,7 +189,7 @@ if(!empty($con)){
 
 ?>
 </table>
-
+</div>
 
 </div>
 </main>

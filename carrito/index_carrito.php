@@ -30,8 +30,7 @@ if(isset($_GET['newcompra']))
 
 if (isset($_GET['agregar']) || isset($_GET['newcompra']) ){
   //comprobar si existe un producto
-    $consulta="select * from detalle_orden where detalle_orden.cliente='".$_SESSION['cliente']."' and 
-    detalle_orden.id_producto='".$_GET['agregar']."' and detalle_orden.id_orden = '$or'";
+    $consulta="select * from detalle_orden where detalle_orden.cliente='juanii' and detalle_orden.id_producto='".$_GET['agregar']."' and estatus=0;";
     $res=$query->seleccionar($consulta);
 
 
@@ -62,9 +61,8 @@ if(empty($res)){
   else{
     include '../src/data/conexion_sqli.php';
     $consult="select * from detalle_orden where detalle_orden.cliente='".$_SESSION['cliente']."' and 
-    detalle_orden.id_producto='".$_GET['agregar']."'";
+    detalle_orden.id_producto='".$_GET['agregar']."' and estatus=0";
     $resultados=mysqli_query($conexion,$consult);
-    $num=mysqli_num_rows($resultados);
 
     $fila=mysqli_fetch_array($resultados);
     $cantidad=$fila['cantidad'];
@@ -228,7 +226,7 @@ if(isset($_SESSION['cliente'])){
 <div class="sombras, tabcar">
 
 
-
+<div class="table-responsive">
       <table class="table">
         <thead  class="text-center">
           <tr>
@@ -281,7 +279,7 @@ if(isset($_SESSION['cliente'])){
             //hacer aparecer o no el boton del ticket
               if(!empty($resultados)){
             ?>
-            <td><a href="index_carrito.php?regenerarcarrito=1" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Vacias carrito</a></td>
+            <td><a href="index_carrito.php?regenerarcarrito=1" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Vaciar carrito</a></td>
 
             <?php
               }
@@ -306,6 +304,7 @@ if(isset($_SESSION['cliente'])){
         </tr>
     </tfoot>
     </table>
+    </div>
     </div>
 
 
