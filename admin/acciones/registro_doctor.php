@@ -84,13 +84,13 @@ $insert->ejecutar($doc_i);
             <a class="nav-link fonts" aria-current="page" href="../index.php">Inicio</a>
           </li>
           <li class="nav-item i">
-            <a class="nav-link fonts" href="../cliente/categorias.php">Categorias</a>
+            <a class="nav-link fonts" href="../../cliente/categorias.php">Categorias</a>
           </li>
           <li class="nav-item i">
             <a class="nav-link fonts" href="#">Cita</a>
           </li>
           <li class="nav-item i">
-            <a class="nav-link fonts" href="../cliente/nosotros.php">Nosotros</a>
+            <a class="nav-link fonts" href="../../cliente/nosotros.php">Nosotros</a>
           </li>
           </b>
         </center> &ensp; &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;  &ensp; &ensp;
