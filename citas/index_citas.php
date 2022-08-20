@@ -104,7 +104,7 @@ if(isset($_SESSION['cliente'])){
 
     <div class="sombras"> <!--Inicio-->
       <br>
-      <center><h1>Citas </h1> </center> 
+      <center><h1>Citas De (12:00 PM A 10:00 PM)</h1> </center> 
   
       <form class="form1" method="get" action="index_citas.php">
       
