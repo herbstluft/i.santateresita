@@ -65,7 +65,7 @@ error_reporting(E_ERROR | E_PARSE);
       
       
       <br><br>
-      <form action="citas_real.php" method="post" style="width:100%; position:relative;">
+      <form action="" method="post" style="width:100%; position:relative;">
       <!--Buscar-->
 
     
@@ -102,7 +102,8 @@ error_reporting(E_ERROR | E_PARSE);
       <th scope="col">RFC</th>
       <th scope="col">Correo</th>
       <th scope="col">Fecha</th>
-      <th scope="col">Hora</th>
+     <th scope="col">Hora</th>
+     <th scope="col">Estado</th> 
     </tr>
   </thead>
   <?php 
@@ -131,6 +132,7 @@ foreach($productos as $prod) {
       <td><?php echo $prod->correo?></td>
       <td><?php echo $prod->fecha?></td>
       <td><?php echo $prod->hora?></td>
+      <td style="color: #c9b500"><?php echo $prod->estado?></td>
       
     </tr>
    

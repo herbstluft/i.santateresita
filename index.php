@@ -1,14 +1,13 @@
 <?php 
     use MyApp\query\Select;
+    use MyApp\query\ejecuta;
             require("vendor/autoload.php");
-            
+            $insert= new ejecuta();
             $query = new Select();
 
             $cadena = "SELECT * from productos where estado=0";
 //Ejecutar consulta
             $productos = $query->seleccionar($cadena);
-
-
 session_start();
 //ocultar warnings
 error_reporting(E_ERROR | E_PARSE);
@@ -23,6 +22,9 @@ $new=0;
 if (isset($_GET['newcompra'])){
   $new=1;
 }
+
+
+
 ?>
 
 <!doctype html>
@@ -82,8 +84,8 @@ if (isset($_GET['newcompra'])){
   left:-10px;
 }
 .c{
-  background-color: rgba(191, 191, 191, 0.996);
-  backdrop-filter: blur(100px);
+  background-color: rgba(242, 242, 242, 0.79);
+  backdrop-filter: blur(1800px);
   margin-top:10px;
   
 }
@@ -293,10 +295,8 @@ else{}
     <div class="boton">
       <input type="checkbox" id="btn-mas">
       <div class="redes">
-          <a href="#"><img src="https://img.icons8.com/material-outlined/25/FFFFFF/facebook-new.png"/></a>
-          <a href="#"><img src="https://img.icons8.com/material-outlined/25/FFFFFF/whatsapp--v1.png"/></a>
+ 
           <a href="cliente/buscar/index_buscar.php" ><img src="https://img.icons8.com/ios-glyphs/25/FFFFFF/search--v1.png"/></a>
-          <a href="cliente/mis_compras.php"><img src="https://img.icons8.com/material-outlined/25/FFFFFF/whatsapp--v1.png"/></a>
         </div>
 
         <div class=" btn-mas">

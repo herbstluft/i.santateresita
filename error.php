@@ -19,7 +19,7 @@ body {
 
 h1 {
   font-family: 'Lato', sans-serif;
-  font-weight:300;
+  font-weight:400;
   letter-spacing: 2px;
   font-size:48px;
 }
@@ -27,14 +27,14 @@ p {
   font-family: 'Lato', sans-serif;
   letter-spacing: 1px;
   font-size:14px;
-  color: #333333;
+  color: #030303;
 }
 
 .header {
   position:relative;
   text-align:center;
   backdrop-filter: blur(15px);
-  color:white;
+  color:rgba(0, 0, 0, 0.651);
 }
 .logo {
   width:50px;
@@ -180,7 +180,7 @@ of Simple CSS Waves-->
     <div class="inner-header flex">
     <!--Just the logo.. Don't mind this-->
     
-    <h1>Lo sentimos ha habido un error.</h1>
+    <h1>Lo sentimos ha ocurrido un error.</h1>
 
     </div>
     <a href="registro/login.php" class="boton">Iniciar Sesion</a>
