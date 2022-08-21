@@ -10,13 +10,14 @@ require("../vendor/autoload.php");
 $query = new Select();
 $obj = new ejecuta();
 session_start();
+error_reporting(E_ERROR | E_PARSE);
 
 
 
 $citas=$query->seleccionar("SELECT todo.cliente, todo.edad, todo.gen, todo.tel, todo.id, todo.rfc, todo.correo, todo.fecha, todo.hora from
 (SELECT datos_pers_user.nombre, datos_pers_user.apellido_pat, datos_pers_user.apellido_mat, usuarios.usuario, citas.id_cliente, citas.id_cita as id, concat(clientes_datos_personales.nombre,' ', clientes_datos_personales.apellido_pat,' ',clientes_datos_personales.apellido_mat) as cliente, 
-  clientes_datos_personales.edad as edad, clientes_datos_personales.genero as gen, clientes_datos_personales.RFC as rfc, clientes_datos_personales.telefono as tel, clientes_datos_personales.correo as correo, citas.realizadas as estado, citas.hora, citas.fecha from datos_pers_user 
-  inner join usuarios on usuarios.id_reg = datos_pers_user.id_registro INNER JOIN doctores on doctores.id_usuarios = usuarios.id_usuario INNER JOIN citas on doctores.id_doc = citas.id_doc INNER JOIN clientes on clientes.id_client = citas.id_cliente inner join clientes_datos_personales on clientes.id_reg=clientes_datos_personales.id_cliente) as todo  WHERE todo.estado=0
+  clientes_datos_personales.edad as edad, clientes_datos_personales.genero as gen, clientes_datos_personales.RFC as rfc, clientes_datos_personales.telefono as tel, clientes_datos_personales.correo as correo, citas.estado as estado, citas.hora, citas.fecha from datos_pers_user 
+  inner join usuarios on usuarios.id_reg = datos_pers_user.id_registro INNER JOIN doctores on doctores.id_usuarios = usuarios.id_usuario INNER JOIN citas on doctores.id_doc = citas.id_doc INNER JOIN clientes on clientes.id_client = citas.id_cliente inner join clientes_datos_personales on clientes.id_reg=clientes_datos_personales.id_cliente) as todo  WHERE todo.estado='Pendiente'
   and todo.usuario='".$_SESSION['doctor']."'");
 ?>
 
@@ -210,9 +211,8 @@ else{
 
   
 if(isset($_GET['real'])){
-  foreach ($citas as $cita)
-  $gft = $cita->id;
-  $ti ="UPDATE citas set realizadas = '1' where id_cita = '$gft' ";
+
+  $ti ="UPDATE citas set estado = 'Realizada' where id_cita = '".$_GET['real']."' ";
   $trc = $obj->ejecutar($ti);
 }
           

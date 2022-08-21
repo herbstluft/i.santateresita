@@ -80,7 +80,7 @@
     <br>
         <div class="input-group mb-3">
             &ensp; &ensp; &ensp; &ensp;
-            <input type="text" class="sombras_input form-control col-4 " placeholder="Nombre" name="nom" minlength="10" maxlength="25" required > 
+            <input type="text" class="sombras_input form-control col-4 " placeholder="Nombre" name="nom"  maxlength="25" required > 
             &ensp; &ensp;
             <input type="text" class="sombras_input form-control col-4 " placeholder="Apellido Paterno" name="ap"  maxlength="20" required>
             &ensp; &ensp; &ensp; &ensp;

@@ -197,15 +197,13 @@ else{
 if(isset($_GET['generar'])){
 
 
-  if($_GET['hora'] > $hra){
-
 
   //confirmar el dia
-  $sql="SELECT * from citas WHERE citas.fecha='".$_GET['fecha']."' and realizadas=0";
+  $sql="SELECT * from citas WHERE citas.fecha='".$_GET['fecha']."' and estado='Pendiente'";
   $f=$query->seleccionar($sql);
   if(empty($f)){
 
-      $num_citas="SELECT clientes.user_clien as cliente from citas INNER JOIN clientes on clientes.id_client=citas.id_cliente WHERE clientes.user_clien='".$_SESSION['cliente']."' and citas.realizadas=0";
+      $num_citas="SELECT clientes.user_clien as cliente from citas INNER JOIN clientes on clientes.id_client=citas.id_cliente WHERE clientes.user_clien='".$_SESSION['cliente']."' and citas.estado='Pendiente'";
       $res=$query->seleccionar($num_citas);
 
         if(empty($res)){
@@ -222,7 +220,7 @@ if(isset($_GET['generar'])){
             if (!empty($id)) {
                     foreach ($id as $id_cliente) {
                       
-                        $insert_cita="INSERT INTO citas (id_cliente,id_doc,hora, fecha, realizadas) VALUES ($id_cliente->id_client,$doctor,'$hora','$fecha',0)";
+                        $insert_cita="INSERT INTO citas (id_cliente,id_doc,hora, fecha, estado) VALUES ($id_cliente->id_client,$doctor,'$hora','$fecha','Pendiente')";
                         $insert->ejecutar($insert_cita);  
                     } 
                     echo "
@@ -272,22 +270,8 @@ else{
       ";
 }
 }
-else{
-  echo "
-        <style>
-        a{
-          text-decoration:none;
-        }
-        </style>
-        <div class='container'>
-        <div class='alert alert-warning' role='alert'>
-        <center> Lo sentimos esta hora ya ha pasado </center>
-      </div>
-      <div>
-      ";
+
+
+
 }
-
-
-
-}}
 ?>

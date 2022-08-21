@@ -190,10 +190,10 @@ if($_SESSION['admin']){
 
   <div class="col-12 col-xs-5 col-md-12 col-lg-5 offset-2 sombras text-center space">
         <br>
-        <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://images.vexels.com/media/users/3/151869/isolated/preview/767ca771755f4675d4063c03e17c8595-icono-de-lista-de-verificacion-medica.png" alt="">
+        <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="https://img.icons8.com/fluency/100/000000/alarm-clock--v2.png" alt="">
         <br><br>
         <h2 class="fw-normal">Citas Perdidas</h2> <br>
-        <p><a class="btn sombras" id="registrarme" href="acciones/citas/citas_real.php">Ir &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="acciones/citas/citas_perdidas.php">Ir &raquo;</a></p>
       </div>
  
  
@@ -217,7 +217,7 @@ if($_SESSION['admin']){
         <p><a class="btn sombras" id="registrarme" href="acciones/categoria.php">Ir &raquo;</a></p>
       </div>
 
-      
+
   </div>
    
 </div>
