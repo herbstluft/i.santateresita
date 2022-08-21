@@ -93,11 +93,10 @@ $productos=$query->seleccionar($reporte);
 
 
 <div class="container">
-
+<div class="table-responsive">
   <table class="table text-center sombras" id="tabla">
   <thead>
     <tr>
-      <th scope="col">CODIGO</th>
       <th scope="col">PRODUCTO</th>
       <th scope="col">Precio</th>
       <th scope="col">Cantidad</th>
@@ -112,7 +111,7 @@ foreach($productos as $prod) {
   ?>
   <tbody>
     <tr>
-      <th> <?php echo $prod->id_producto?></th>
+  
       <td><?php echo $prod->nom_producto?></td>
       <td><?php echo "$".number_format($prod->precio,2,'.','.')?></td>
       <td><?php echo $prod->cantidad?></td>
@@ -127,6 +126,7 @@ foreach($productos as $prod) {
 }
 ?>
 </table>
+</div>
 
 </div>
 

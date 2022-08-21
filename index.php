@@ -118,9 +118,12 @@ if (isset($_GET['newcompra'])){
           <li class="nav-item i">
             <a class="nav-link fonts" href="cliente/categorias.php">Categorias</a>
           </li>
+          <?php if (isset($_SESSION['admin'])){}
+          else{  ?>
           <li class="nav-item i">
             <a class="nav-link fonts" href="citas/index_citas.php">Cita</a>
           </li>
+          <?php  } ?>
           <li class="nav-item i">
             <a class="nav-link fonts" href="cliente/nosotros.php">Nosotros</a>
           </li>

@@ -73,9 +73,12 @@ session_start();
         <li class="nav-item i">
           <a class="nav-link fonts active" href="categorias.php">Categorias</a>
         </li>
-        <li class="nav-item i">
-          <a class="nav-link fonts" href="../citas/index_citas.php">Cita</a>
-        </li>
+        <?php if (isset($_SESSION['admin'])){}
+          else{  ?>
+          <li class="nav-item i">
+            <a class="nav-link fonts" href="../citas/index_citas.php">Cita</a>
+          </li>
+          <?php  } ?>
         <li class="nav-item i">
           <a class="nav-link fonts" href="nosotros.php">Nosotros</a>
         </li>

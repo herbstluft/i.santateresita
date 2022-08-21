@@ -102,7 +102,7 @@ $insert->ejecutar($doc_i);
           ?>
            &ensp; &ensp;  &ensp; &ensp;  
           <button class="btn sombras iniciar" type="submit">
-            <a class="a" href="doctores/doc.html">  Atras   </a></button>
+            <a class="a" href="doctores/doc.php">  Atras   </a></button>
             <?php 
 
             }

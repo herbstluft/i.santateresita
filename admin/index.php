@@ -142,7 +142,7 @@ if($_SESSION['admin']){
         <br><br>
         <h2 class="fw-normal">Doctores</h2> <br>
         <h5>Ver los doctores que atienden.</h5><br>
-        <p><a class="btn sombras" id="registrarme" href="acciones/doctores/doc.html">Ir &raquo;</a></p>
+        <p><a class="btn sombras" id="registrarme" href="acciones/doctores/doc.php">Ir &raquo;</a></p>
       </div>
   </div>
   

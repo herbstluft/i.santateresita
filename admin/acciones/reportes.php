@@ -119,7 +119,7 @@ sum(detalle_orden.cantidad)as CantidadProd, sum(productos.precio * detalle_orden
 inner join clientes on clientes_datos_personales.id_cliente = clientes.id_reg inner join detalle_orden 
 on detalle_orden.cliente = clientes.user_clien inner join orden on orden.id_orden = detalle_orden.id_orden 
 inner join productos on productos.id_producto = detalle_orden.id_producto group by clientes_datos_personales.nombre, orden.id_orden, 
-productos.nom_producto, orden.tiempo)as KV group by KV.id_orden)as GY)as RTY where month(RTY.Fecha)='$buscar';";
+productos.nom_producto, orden.tiempo)as KV group by KV.id_orden)as GY)as RTY where RTY.Cliente like '%$buscar%' or month(RTY.Fecha)='$buscar' ";
 $productos=$query->seleccionar($reporte);
 
 foreach($productos as $prod) {
@@ -148,6 +148,7 @@ foreach($productos as $prod) {
 </div>
 <?php
 if(isset($_POST['buscar'])){
+  
 if(empty($productos)){
   
   ?>
@@ -161,7 +162,7 @@ if(empty($productos)){
 if(!isset($_POST['buscar'])){
   ?>
   <div class="alert sombras text-center" style="width:50%;margin-left:auto; margin-right:auto; margin-top:5%" role="alert">
-  <h4 style="color:#0d6efd">Filtra un mes para ver los resultados! </h4>
+  <h4 style="color:#0d6efd">Filtre un mes o un nombre para ver los resultados! </h4>
 </div>
 <?php
 }

@@ -12,16 +12,20 @@ session_start();
 error_reporting(E_ERROR | E_PARSE);
 
 $rr=0;
-$DateAndTime = date('Y-m-d h:i:s a', time()); 
+
+date_default_timezone_set('America/Mexico_City');
+ $fe= date("Y-m-d h:i:s a"); 
+
+
 
 if(isset($_GET['newcompra']))
 {
   
 
     
-  $fecha = "INSERT INTO orden (`id_orden`, `tiempo`) VALUES (NULL ,'$DateAndTime')";
+  $fecha = "INSERT INTO orden (`id_orden`, `tiempo`) VALUES (NULL ,'$fe')";
   $f=$ejecuta->ejecutar($fecha);
-  $q = "SELECT * FROM orden where orden.tiempo ='$DateAndTime'";
+  $q = "SELECT * FROM orden where orden.tiempo ='$fe'";
   $resi = $query->seleccionar($q);
   foreach ($resi as $sam)
   $or = $sam->id_orden;
@@ -30,7 +34,7 @@ if(isset($_GET['newcompra']))
 
 if (isset($_GET['agregar']) || isset($_GET['newcompra']) ){
   //comprobar si existe un producto
-    $consulta="select * from detalle_orden where detalle_orden.cliente='juanii' and detalle_orden.id_producto='".$_GET['agregar']."' and estatus=0;";
+    $consulta="select * from detalle_orden where detalle_orden.cliente='".$_SESSION['cliente']."' and detalle_orden.id_producto='".$_GET['agregar']."' and estatus=0;";
     $res=$query->seleccionar($consulta);
 
 

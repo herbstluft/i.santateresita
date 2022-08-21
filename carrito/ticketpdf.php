@@ -53,9 +53,11 @@ if(isset($_GET['g_orden'])){
         # Recuerda que este arreglo puede venir de cualquier lugar; aquí lo defino manualmente para simplificar
         # Puedes obtenerlo de una base de datos, por ejemplo: https://parzibyte.me/blog/2019/07/17/php-bases-de-datos-ejemplos-tutoriales-conexion/
 
-    
+        
+        date_default_timezone_set('America/Mexico_City');
+ $fe= date("Y-m-d h:i:s a"); 
         //Sacar la orden
-        $DateAndTime = date('Y-m-d h:i:s a', time()); 
+
 
         $ordii = "SELECT * FROM orden";
         $sre = $query->seleccionar($ordii);
@@ -102,7 +104,7 @@ if (!empty($ord))
 else{}
 ?>
 <p> <b> Cliente: </b> <?php echo $nombre_cliente?></p>
-        <h6><?php echo $DateAndTime ?></h6>
+        <h6><?php echo $fe ?></h6>
         <table>
         <thead>
                 
