@@ -164,7 +164,7 @@ if(isset($_SESSION['cliente'])){
         <label>Fecha: <br><input type="date" class="sombras" name="fecha" min="<?php echo $fe ?>" max="<?php echo $fecha_maxima?>" required></label><br>
         <label>Hora:</label><br>
         <form action="https://www.anerbarrena.com/demos/2014/002-time-input-html5.php" name="formulario">
-	      <input type="time" class="sombras" name="hora"  min="12:00:00"  max="22:00:00" step="1" required>
+	      <input type="time" class="sombras" name="hora"  min="08:00:00"  max="22:00:00" step="1" required>
         
                <!--BOTON DE CITA-->
         <center> <input type="submit" class="fadeIn fourth" value="Generar cita" name="generar"></center>

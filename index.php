@@ -5,7 +5,7 @@
             $insert= new ejecuta();
             $query = new Select();
 
-            $cadena = "SELECT * from productos where estado=0";
+            $cadena = "SELECT * from productos where estado=0 LIMIT 6";
 //Ejecutar consulta
             $productos = $query->seleccionar($cadena);
 session_start();
@@ -29,6 +29,7 @@ if (isset($_GET['newcompra'])){
 
 <!doctype html>
 <html lang="en">
+  
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -206,12 +207,20 @@ else{
 
     <!--Contenido de la pagina-->
   <main>
-
+    <br><br>
+<div>
+ <div class="sombras"><br><br>
+ <h1 class="text-center" style="color:#353535">Bienvenido a Santateresita</h1>
+ <p class="text-center" style="font-size:20px;" >Lo mejor lo puedes encontrar solo aqui.</p>
+  <img src="bootstrap/img/inicio.png" alt="" style="border-radius:10%;">
   
+<br>
+ </div>
+ <br><br>
 
 
 
-  
+
   <div class="row row-cols-1 row-cols-md-12 row-cols-lg-3 mb-3 text-center">
     <!-- Capturar productos en el foreach (carrito) -->
   <?php foreach($productos as $producto) { ?>  <!-- Datos de la consulta -->
@@ -233,6 +242,7 @@ else{
         <b> Precio: </b> <?php echo "$".number_format($producto->precio,2, '.', '.');?> 
         </center>
         <br><br>
+       
         <?php 
 if(isset($_SESSION['cliente'])){
 ?>
@@ -315,6 +325,8 @@ else{}
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <script type="module" src="bootstrap/js/background.js"></script>
   <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
   </body>
 </html>
 
