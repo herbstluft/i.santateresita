@@ -112,39 +112,53 @@ error_reporting(E_ERROR | E_PARSE);
 
 
  
-
-$reporte="SELECT todo.cliente, todo.edad, todo.gen, todo.tel, todo.rfc, todo.correo, todo.fecha, todo.hora, todo.estado from
+//seleccionar las citas que ya pasaron de la fecha y que esten en estado pendiente
+$rep="SELECT todo.cliente, todo.edad, todo.gen, todo.tel, todo.rfc, todo.correo, todo.fecha, todo.hora, todo.estado from
 (SELECT datos_pers_user.nombre, datos_pers_user.apellido_pat, datos_pers_user.apellido_mat, usuarios.usuario, citas.id_cliente, concat(clientes_datos_personales.nombre,' ', clientes_datos_personales.apellido_pat,' ',clientes_datos_personales.apellido_mat) as cliente, 
   clientes_datos_personales.edad as edad, clientes_datos_personales.genero as gen, clientes_datos_personales.RFC as rfc, clientes_datos_personales.telefono as tel, clientes_datos_personales.correo as correo, citas.estado as estado, citas.hora, citas.fecha from datos_pers_user 
-  inner join usuarios on usuarios.id_reg = datos_pers_user.id_registro INNER JOIN doctores on doctores.id_usuarios = usuarios.id_usuario INNER JOIN citas on doctores.id_doc = citas.id_doc INNER JOIN clientes on clientes.id_client = citas.id_cliente inner join clientes_datos_personales on clientes.id_reg=clientes_datos_personales.id_cliente) as todo  WHERE  todo.fecha<=CURRENT_DATE and todo.hora<=CURRENT_TIME AND estado='Pendiente'";
+  inner join usuarios on usuarios.id_reg = datos_pers_user.id_registro INNER JOIN doctores on doctores.id_usuarios = usuarios.id_usuario INNER JOIN citas on doctores.id_doc = citas.id_doc INNER JOIN clientes on clientes.id_client = citas.id_cliente inner join clientes_datos_personales on clientes.id_reg=clientes_datos_personales.id_cliente) as todo  WHERE  todo.fecha<=CURRENT_DATE and todo.hora<=CURRENT_TIME";
 
-$productos=$query->seleccionar($reporte);
+$productos=$query->seleccionar($rep);
+
+//si los resultado no son vacios
+if(!empty($productos)){
+
+  //actualizar estado a "Perdidas" de las 
+  $update ="update citas set estado='Perdida' where estado='Pendiente' and fecha<=CURRENT_DATE and hora<=CURRENT_TIME";
+  $insert->ejecutar($update);
+
+  $cita="SELECT todo.cliente, todo.edad, todo.gen, todo.tel, todo.rfc, todo.correo, todo.fecha, todo.hora, todo.estado from
+  (SELECT datos_pers_user.nombre, datos_pers_user.apellido_pat, datos_pers_user.apellido_mat, usuarios.usuario, citas.id_cliente, concat(clientes_datos_personales.nombre,' ', clientes_datos_personales.apellido_pat,' ',clientes_datos_personales.apellido_mat) as cliente, 
+    clientes_datos_personales.edad as edad, clientes_datos_personales.genero as gen, clientes_datos_personales.RFC as rfc, clientes_datos_personales.telefono as tel, clientes_datos_personales.correo as correo, citas.estado as estado, citas.hora, citas.fecha from datos_pers_user 
+    inner join usuarios on usuarios.id_reg = datos_pers_user.id_registro INNER JOIN doctores on doctores.id_usuarios = usuarios.id_usuario INNER JOIN citas on doctores.id_doc = citas.id_doc INNER JOIN clientes on clientes.id_client = citas.id_cliente inner join clientes_datos_personales on clientes.id_reg=clientes_datos_personales.id_cliente) as todo  WHERE  todo.fecha<=CURRENT_DATE and todo.hora<=CURRENT_TIME and todo.estado='Perdida'and todo.cliente like '%$buscar%'";
+  $resultado=$query->seleccionar($cita);
 
 
-if(empty($productos)){
+  foreach($resultado as $prod) {
+    ?>
+    <tbody>
+      <tr>
+        <th> <?php echo $prod->cliente?></th>
+        <td><?php echo $prod->edad?></td>
+        <td><?php echo $prod->gen?></td>
+        <td><?php echo $prod->tel?></td>
+        <td><?php echo $prod->rfc?></td>
+        <td><?php echo $prod->correo?></td>
+        <td style="color: red;"><?php echo $prod->fecha?></td>
+        <td style="color: red;"><?php echo $prod->hora?></td>
+        <td style="color: red;"><?php echo $prod->estado?></td>
+        
+      </tr>
+     
   
+      
+    </tbody>
+    <?php
 }
 
-foreach($productos as $prod) {
-  ?>
-  <tbody>
-    <tr>
-      <th> <?php echo $prod->cliente?></th>
-      <td><?php echo $prod->edad?></td>
-      <td><?php echo $prod->gen?></td>
-      <td><?php echo $prod->tel?></td>
-      <td><?php echo $prod->rfc?></td>
-      <td><?php echo $prod->correo?></td>
-      <td style="color: red;"><?php echo $prod->fecha?></td>
-      <td style="color: red;"><?php echo $prod->hora?></td>
-      <td style="color: red;"><?php echo $prod->estado?></td>
-      
-    </tr>
-   
-
-    
-  </tbody>
-  <?php
+}
+else{
+  
 }
 
 ?>
